@@ -1,5 +1,12 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v1.7 — 2026-02-08
+
+- **FEATURE**: Carrossel de Flash Cards com auto-play, navegação por setas e dots, e barra de progresso.
+- **FEATURE**: Timeline de Projeto com status visual de cada um dos 4 eixos.
+- **FEATURE**: Seção de Boas-Vindas redesenhada com destaques visuais para termos-chave.
+- **FEATURE**: Avisos elegantes com ícones SVG e cores contextuais.
+
 ## v1.6 — 2026-02-08
 
 - **FEATURE**: Redesign premium v7.0 do interior do portal.
