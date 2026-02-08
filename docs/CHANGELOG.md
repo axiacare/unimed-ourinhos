@@ -1,5 +1,15 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v1.4 — 08/02/2026
+
+- **Redesign Visual Completo (v5.0):**
+  - **Contraste Ativo/Inativo:** Cards de eixo agora têm distinção visual clara (borda colorida, sombra, badge vs. opacidade, grayscale).
+  - **Ícones Profissionais:** Ícones genéricos substituídos por SVGs contextuais para cada eixo.
+  - **Toggle de Senha:** Adicionado ícone de olho no campo de senha para melhorar a usabilidade.
+  - **Refinamentos Visuais:** Badges de status, tipografia, espaçamentos e footer aprimorados.
+  - **Otimização Mobile:** Layout refinado em 4 breakpoints (desktop, 768px, 480px, 360px).
+
+
 ## Versão 1.3 (2026-02-08)
 
 Esta atualização corrige um **erro crítico de informação sobre o período dos dados** em múltiplos artefatos.

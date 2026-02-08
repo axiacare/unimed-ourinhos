@@ -35,7 +35,7 @@
 
     <style>
         /* ========================================
-           Design Tokens — AxiaCare Portal v4.0
+           Design Tokens — AxiaCare Portal v5.0
            ======================================== */
 
         :root {
@@ -46,6 +46,7 @@
             --teal-hover: #6aada0;
             --teal-light: rgba(127,191,178,0.12);
             --verde-unimed: #00A859;
+            --verde-unimed-light: rgba(0,168,89,0.08);
             --amarelo-aviso: #f59e0b;
             --cinza-900: #111827;
             --cinza-700: #374151;
@@ -62,6 +63,7 @@
             --raio-xs: 6px;
             --sombra-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
             --sombra-card-hover: 0 4px 16px rgba(0,0,0,0.08), 0 12px 40px rgba(0,0,0,0.06);
+            --sombra-card-active: 0 2px 8px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.08);
             --sombra-xl: 0 16px 48px rgba(0,0,0,0.12);
             --transicao: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -216,7 +218,7 @@
         }
 
         /* ========================================
-           Notices — overlapping header
+           Notices
            ======================================== */
 
         .notices {
@@ -238,11 +240,13 @@
         }
 
         .notice-icon {
-            font-size: 16px;
             flex-shrink: 0;
-            margin-top: 2px;
-            width: 22px;
-            text-align: center;
+            margin-top: 1px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .notice-info {
@@ -291,7 +295,7 @@
         }
 
         /* ========================================
-           Eixo Cards — Premium Design
+           Eixo Cards — Redesign v5.0
            ======================================== */
 
         .eixo-grid {
@@ -303,52 +307,60 @@
         .eixo-card {
             background: var(--branco);
             border-radius: var(--raio);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 16px rgba(0,0,0,0.04);
-            padding: 36px 32px;
+            padding: 32px 28px;
             transition: all var(--transicao);
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(0,0,0,0.04);
             position: relative;
             overflow: hidden;
         }
 
-        .eixo-card:not(.disabled):hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 16px 48px rgba(0,0,0,0.08);
-            transform: translateY(-3px);
-            border-color: rgba(0,0,0,0.06);
+        /* --- ACTIVE card --- */
+        .eixo-card.active {
+            border: 1px solid rgba(0,168,89,0.2);
+            box-shadow: var(--sombra-card-active);
         }
 
-        .eixo-card::before {
+        .eixo-card.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--verde-unimed);
+            transition: width var(--transicao);
+        }
+
+        .eixo-card.active:hover {
+            box-shadow: var(--sombra-card-hover);
+            transform: translateY(-3px);
+            border-color: rgba(0,168,89,0.35);
+        }
+
+        .eixo-card.active:hover::before {
+            width: 6px;
+        }
+
+        /* --- DISABLED card --- */
+        .eixo-card.disabled {
+            border: 1px solid var(--cinza-100);
+            box-shadow: none;
+            opacity: 0.55;
+            pointer-events: none;
+            filter: grayscale(0.3);
+        }
+
+        .eixo-card.disabled::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 3px;
             height: 100%;
-            transition: width var(--transicao);
-        }
-
-        .eixo-card.eixo-01::before { background: var(--azul-axiacare); }
-        .eixo-card.eixo-02::before { background: #059669; }
-        .eixo-card.eixo-03::before { background: #d97706; }
-        .eixo-card.eixo-04::before { background: #7c3aed; }
-
-        .eixo-card:not(.disabled):hover {
-            box-shadow: var(--sombra-card-hover);
-            transform: translateY(-2px);
-            border-color: transparent;
-        }
-
-        .eixo-card:not(.disabled):hover::before {
-            width: 5px;
-        }
-
-        .eixo-card.disabled {
-            opacity: 0.45;
-            pointer-events: none;
+            background: var(--cinza-300);
         }
 
         .eixo-top {
@@ -365,26 +377,34 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
         }
 
-        .i-01 { background: rgba(27,94,159,0.08); color: var(--azul-axiacare); }
-        .i-02 { background: rgba(5,150,105,0.08); color: #059669; }
-        .i-03 { background: rgba(217,119,6,0.08); color: #d97706; }
-        .i-04 { background: rgba(124,58,237,0.08); color: #7c3aed; }
+        .eixo-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Active icon backgrounds */
+        .eixo-card.active .i-01 { background: rgba(27,94,159,0.1); color: var(--azul-axiacare); }
+        .eixo-card.active .i-02 { background: rgba(5,150,105,0.1); color: #059669; }
+        .eixo-card.active .i-03 { background: rgba(217,119,6,0.1); color: #d97706; }
+        .eixo-card.active .i-04 { background: rgba(124,58,237,0.1); color: #7c3aed; }
+
+        /* Disabled icon backgrounds */
+        .eixo-card.disabled .eixo-icon { background: var(--cinza-100); color: var(--cinza-400); }
 
         .eixo-status {
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 700;
-            padding: 5px 12px;
+            padding: 5px 14px;
             border-radius: 20px;
         }
 
-        .st-preliminar {
-            background: rgba(245,158,11,0.1);
-            color: #b45309;
+        .st-disponivel {
+            background: rgba(0,168,89,0.1);
+            color: #047857;
         }
 
         .st-elaboracao {
@@ -425,15 +445,15 @@
 
         .eixo-link {
             font-size: 13px;
-            color: var(--azul-axiacare);
+            color: var(--verde-unimed);
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             transition: gap var(--transicao);
         }
 
-        .eixo-card:hover .eixo-link { gap: 8px; }
+        .eixo-card.active:hover .eixo-link { gap: 10px; }
 
         /* ========================================
            Flash Cards
@@ -676,7 +696,7 @@
         }
 
         /* ========================================
-           Footer Institucional Padr&atilde;o v4.0
+           Footer Institucional Padr&atilde;o v5.0
            ======================================== */
 
         .footer {
@@ -851,11 +871,14 @@
             letter-spacing: 0.2px;
         }
 
-        .auth-field { margin-bottom: 16px; }
+        .auth-field {
+            margin-bottom: 16px;
+            position: relative;
+        }
 
         .auth-input {
             width: 100%;
-            padding: 14px 20px;
+            padding: 14px 48px 14px 20px;
             border: 1.5px solid var(--cinza-200);
             border-radius: var(--raio-sm);
             font-size: 15px;
@@ -885,6 +908,26 @@
             box-shadow: 0 0 0 3px rgba(239,68,68,0.08);
             animation: authShake 0.4s ease;
         }
+
+        .auth-toggle-pw {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--cinza-400);
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+
+        .auth-toggle-pw:hover { color: var(--cinza-600); }
+
+        .auth-toggle-pw svg { width: 20px; height: 20px; }
 
         @keyframes authShake {
             0%, 100% { transform: translateX(0); }
@@ -983,7 +1026,7 @@
 
             .fc-thumb { aspect-ratio: 3/4; }
 
-            /* Lightbox mobile: nav dentro da imagem */
+            /* Lightbox mobile */
             .lb-nav.prev { left: 8px; }
             .lb-nav.next { right: 8px; }
             .lb-nav { width: 40px; height: 40px; font-size: 16px; }
@@ -1037,14 +1080,13 @@
 
             .container { padding: 0 16px; }
 
-            /* Eixo cards mobile */
             .eixo-card { padding: 20px; }
             .eixo-title { font-size: 15px; }
             .eixo-desc { font-size: 12.5px; line-height: 1.6; }
-            .eixo-icon { width: 42px; height: 42px; font-size: 18px; border-radius: 12px; }
+            .eixo-icon { width: 42px; height: 42px; border-radius: 12px; }
+            .eixo-icon svg { width: 20px; height: 20px; }
             .eixo-footer { flex-direction: column; gap: 10px; align-items: flex-start; }
 
-            /* Flash cards mobile: coluna única, mais compacto */
             .fc-grid {
                 grid-template-columns: 1fr;
                 max-width: 360px;
@@ -1058,7 +1100,6 @@
             .fc-actions { padding: 0 16px 16px; }
             .fc-btn { padding: 10px 14px; font-size: 12px; min-height: 42px; }
 
-            /* Lightbox mobile: fullscreen-like */
             .lightbox { padding: 12px; }
             .lb-wrap { max-width: 100vw; }
             .lb-wrap img { max-height: 65vh; border-radius: 8px; }
@@ -1068,7 +1109,6 @@
             .lb-close { top: -36px; right: -4px; font-size: 24px; }
             .lb-meta .lb-dl { padding: 10px 24px; font-size: 12px; min-height: 42px; }
 
-            /* Footer mobile */
             .footer-inner { padding: 28px 18px 24px; }
             .footer-logos img.fl-unimed { height: 36px; }
             .footer-logos img.fl-icds { height: 28px; }
@@ -1076,7 +1116,6 @@
             .footer-links { gap: 16px; flex-wrap: wrap; }
             .footer-links a { font-size: 11px; }
 
-            /* Auth mobile */
             .auth-card {
                 padding: 36px 24px 28px;
                 border-radius: 18px;
@@ -1125,6 +1164,12 @@
             <form id="authForm" onsubmit="return handleAuth(event)">
                 <div class="auth-field">
                     <input type="password" class="auth-input" id="authInput" placeholder="Senha de acesso" autocomplete="off" autofocus>
+                    <button type="button" class="auth-toggle-pw" id="togglePw" onclick="togglePassword()" aria-label="Mostrar senha">
+                        <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
                 </div>
                 <button type="submit" class="auth-btn">Acessar</button>
                 <div class="auth-error-msg" id="authError"></div>
@@ -1167,11 +1212,15 @@
         <!-- Notices -->
         <div class="notices">
             <div class="notice notice-info">
-                <span class="notice-icon">&#9432;</span>
+                <span class="notice-icon">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                </span>
                 <div>O conte&uacute;do deste portal &eacute; publicado sob curadoria do respons&aacute;vel t&eacute;cnico do projeto e destina-se exclusivamente aos stakeholders envolvidos na consultoria.</div>
             </div>
             <div class="notice notice-warn">
-                <span class="notice-icon">&#9888;</span>
+                <span class="notice-icon">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                </span>
                 <div><strong>Entregas parciais.</strong> Os documentos aqui disponibilizados representam entregas em andamento, sujeitas &agrave; revis&atilde;o, complementa&ccedil;&atilde;o e valida&ccedil;&atilde;o ao longo do projeto. N&atilde;o devem ser interpretados como relat&oacute;rios finais ou conclusivos.</div>
             </div>
         </div>
@@ -1185,13 +1234,22 @@
 
             <div class="eixo-grid">
 
-                <!-- Eixo 01 -->
-                <a href="entregas/eixo-01/index.html" class="eixo-card eixo-01">
+                <!-- Eixo 01 — ATIVO -->
+                <a href="entregas/eixo-01/index.html" class="eixo-card active eixo-01">
                     <div class="eixo-top">
                         <div class="eixo-icon i-01">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                            <!-- Rede assistencial: n&oacute;s conectados -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="5" cy="6" r="2.5"/>
+                                <circle cx="19" cy="6" r="2.5"/>
+                                <circle cx="12" cy="18" r="2.5"/>
+                                <circle cx="12" cy="11" r="1.8"/>
+                                <line x1="7.2" y1="7" x2="10.5" y2="9.8"/>
+                                <line x1="16.8" y1="7" x2="13.5" y2="9.8"/>
+                                <line x1="12" y1="12.8" x2="12" y2="15.5"/>
+                            </svg>
                         </div>
-                        <span class="eixo-status st-preliminar">Vers&atilde;o preliminar</span>
+                        <span class="eixo-status st-disponivel">Dispon&iacute;vel</span>
                     </div>
                     <div class="eixo-title">Eixo 01 &mdash; Leitura da Rede Assistencial</div>
                     <div class="eixo-desc">Mapeamento completo da rede assistencial, incluindo distribui&ccedil;&atilde;o de custos por tipo de rede, setor, tipo de atendimento e procedimento. An&aacute;lise de concentra&ccedil;&atilde;o e identifica&ccedil;&atilde;o de direcionadores de despesa.</div>
@@ -1201,11 +1259,20 @@
                     </div>
                 </a>
 
-                <!-- Eixo 02 -->
-                <div class="eixo-card eixo-02 disabled">
+                <!-- Eixo 02 — INATIVO -->
+                <div class="eixo-card disabled eixo-02">
                     <div class="eixo-top">
                         <div class="eixo-icon i-02">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                            <!-- Variabilidade: gr&aacute;fico com dispers&atilde;o -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 20 3 4"/>
+                                <polyline points="3 20 21 20"/>
+                                <circle cx="8" cy="14" r="1.5" fill="currentColor" stroke="none" opacity="0.4"/>
+                                <circle cx="11" cy="9" r="1.5" fill="currentColor" stroke="none" opacity="0.6"/>
+                                <circle cx="15" cy="12" r="1.5" fill="currentColor" stroke="none" opacity="0.5"/>
+                                <circle cx="18" cy="7" r="1.5" fill="currentColor" stroke="none" opacity="0.7"/>
+                                <path d="M6 16 L10 10 L14 13 L19 6" stroke-dasharray="3 2" opacity="0.5"/>
+                            </svg>
                         </div>
                         <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
                     </div>
@@ -1216,11 +1283,18 @@
                     </div>
                 </div>
 
-                <!-- Eixo 03 -->
-                <div class="eixo-card eixo-03 disabled">
+                <!-- Eixo 03 — INATIVO -->
+                <div class="eixo-card disabled eixo-03">
                     <div class="eixo-top">
                         <div class="eixo-icon i-03">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            <!-- Internaliza&ccedil;&atilde;o: hospital com seta para dentro -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="8" width="16" height="13" rx="2"/>
+                                <path d="M4 8 L12 3 L20 8"/>
+                                <line x1="12" y1="12" x2="12" y2="17"/>
+                                <line x1="10" y1="14.5" x2="14" y2="14.5"/>
+                                <polyline points="9 10 12 13 15 10" stroke-width="1.5"/>
+                            </svg>
                         </div>
                         <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
                     </div>
@@ -1231,11 +1305,19 @@
                     </div>
                 </div>
 
-                <!-- Eixo 04 -->
-                <div class="eixo-card eixo-04 disabled">
+                <!-- Eixo 04 — INATIVO -->
+                <div class="eixo-card disabled eixo-04">
                     <div class="eixo-top">
                         <div class="eixo-icon i-04">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                            <!-- Leitura integrada: ponte entre dois elementos -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="6" width="7" height="5" rx="1.5"/>
+                                <rect x="15" y="6" width="7" height="5" rx="1.5"/>
+                                <path d="M9 8.5 L15 8.5" stroke-dasharray="2 1.5"/>
+                                <line x1="5.5" y1="11" x2="5.5" y2="18"/>
+                                <line x1="18.5" y1="11" x2="18.5" y2="18"/>
+                                <path d="M5.5 15 C5.5 13 18.5 13 18.5 15" stroke-width="1.5"/>
+                            </svg>
                         </div>
                         <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
                     </div>
@@ -1364,10 +1446,11 @@
 
     <!-- ====== SCRIPTS ====== -->
     <script>
+    /* Flash Cards Lightbox */
     const fcCards = [
-      { src: 'entregas/flash-cards/FC-01-001-v2.png', title: 'Análise da Rede Assistencial' },
-      { src: 'entregas/flash-cards/FC-01-002-v1.png', title: 'Variabilidade de Preços entre Setores' },
-      { src: 'entregas/flash-cards/FC-01-003-v2.png', title: 'Pontos de Atenção e Próximos Eixos' }
+      { src: 'entregas/flash-cards/FC-01-001-v2.png', title: 'An\u00e1lise da Rede Assistencial' },
+      { src: 'entregas/flash-cards/FC-01-002-v1.png', title: 'Variabilidade de Pre\u00e7os entre Setores' },
+      { src: 'entregas/flash-cards/FC-01-003-v2.png', title: 'Pontos de Aten\u00e7\u00e3o e Pr\u00f3ximos Eixos' }
     ];
     let fcIdx = 0;
 
@@ -1407,7 +1490,7 @@
       if (e.target === this) closeLightbox();
     });
 
-    // ====== AUTH ======
+    /* ====== AUTH ====== */
     const AUTH_HASH = '83a40f6323d76084faabc155ce8dd7874f8c75dc1caac8b9bd2a6a2d57ce7d01';
     const AUTH_KEY = 'axiacare_portal_auth';
 
@@ -1440,6 +1523,19 @@
         input.focus();
       }
       return false;
+    }
+
+    /* ====== PASSWORD TOGGLE ====== */
+    function togglePassword() {
+      const input = document.getElementById('authInput');
+      const icon = document.getElementById('eyeIcon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+      } else {
+        input.type = 'password';
+        icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+      }
     }
     </script>
 </body>
