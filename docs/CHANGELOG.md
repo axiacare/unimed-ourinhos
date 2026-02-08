@@ -1,5 +1,22 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## Versão 1.3 (2026-02-08)
+
+Esta atualização corrige um **erro crítico de informação sobre o período dos dados** em múltiplos artefatos.
+
+### Correção Crítica
+
+- **Período de dados corrigido**: Todos os documentos e flash cards afirmavam incorretamente que o período era "Faturamento: Abr/2020 a Ago/2025". O banco de dados não possui data de faturamento. As datas são de **atendimento**. O período de competência financeira dos arquivos recebidos é **Janeiro/2024 a Agosto/2025** (agosto parcial).
+- **Flash Cards FC-01-001 e FC-01-003**: Geradas versões v2 com período corrigido. Versões v1 marcadas como obsoletas.
+- **Relatório Eixo 01**: Período corrigido no HTML.
+- **Portal e Galeria de Flash Cards**: Referências atualizadas para v2.
+
+### Documentação
+
+- Criada `NOTA_TECNICA_PERIODO_DADOS.md` no repositório analytics como referência obrigatória.
+
+---
+
 ## Versão 1.2 (2026-02-08)
 
 Esta atualização foca em **OpenGraph otimizado para WhatsApp** e **otimização avançada de mobile**.
