@@ -1,5 +1,26 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## Versão 1.2 (2026-02-08)
+
+Esta atualização foca em **OpenGraph otimizado para WhatsApp** e **otimização avançada de mobile**.
+
+### OpenGraph
+
+- **Imagem OG redesenhada**: Nova imagem `og_unimed_ourinhos.png` (v3) otimizada para o formato compacto de preview do WhatsApp. Logo Unimed Ourinhos em destaque, "Portal de Entregas" em fonte grande, logos ICDS e AxiaCare na parte inferior.
+- **Versão full-size**: Nova imagem `og_unimed_ourinhos_full.png` com layout editorial (duas colunas) para uso em apresentações e documentação.
+- **Meta tags aprimoradas**: Adicionadas tags `og:image:width`, `og:image:height` e `og:image:type` para otimizar a leitura pelos crawlers. Cache-busting via parâmetro `?v=3`.
+
+### Otimização Mobile
+
+- **Breakpoint 360px**: Novo breakpoint para smartphones pequenos (Galaxy S, iPhone SE), com ajustes de padding, fontes e logos.
+- **Flash Cards mobile**: Aspect-ratio ajustado para 3:4 em tablets, coluna única com largura máxima de 360px em smartphones.
+- **Lightbox mobile**: Navegação reposicionada para dentro da viewport, botões de toque maiores (min-height 42px), imagem com max-height adaptativo.
+- **Touch targets**: Botões de ação dos flash cards com min-height de 42px para conformidade com padrões de acessibilidade mobile.
+- **Footer mobile**: Flex-wrap nos links para evitar overflow horizontal em telas estreitas.
+- **Auth mobile**: Card de autenticação com margens laterais e botão com min-height de 48px.
+
+---
+
 ## Versão 1.1 (2026-02-08)
 
 Esta atualização foca em **consistência visual, usabilidade e correções de bugs** em todas as páginas do portal.

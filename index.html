@@ -13,7 +13,10 @@
     <!-- OpenGraph -->
     <meta property="og:title" content="Unimed Ourinhos | Portal de Entregas AxiaCare&reg;">
     <meta property="og:description" content="Entregas t&eacute;cnicas do projeto de consultoria em efici&ecirc;ncia assistencial e otimiza&ccedil;&atilde;o de custos, conduzido pela AxiaCare (Grupo CSV) sob contrata&ccedil;&atilde;o do ICDS.">
-    <meta property="og:image" content="https://unimed167.axcare.com.br/assets/og_unimed_ourinhos.png">
+    <meta property="og:image" content="https://unimed167.axcare.com.br/assets/og_unimed_ourinhos.png?v=3">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
     <meta property="og:url" content="https://unimed167.axcare.com.br">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
@@ -23,7 +26,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Unimed Ourinhos | Portal de Entregas AxiaCare&reg;">
     <meta name="twitter:description" content="Entregas t&eacute;cnicas do projeto de consultoria em efici&ecirc;ncia assistencial e otimiza&ccedil;&atilde;o de custos.">
-    <meta name="twitter:image" content="https://unimed167.axcare.com.br/assets/og_unimed_ourinhos.png">
+    <meta name="twitter:image" content="https://unimed167.axcare.com.br/assets/og_unimed_ourinhos.png?v=3">
 
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -927,6 +930,7 @@
            Responsive — Mobile First
            ======================================== */
 
+        /* ---- Tablet (768px) ---- */
         @media (max-width: 768px) {
             .header-nav {
                 flex-direction: column;
@@ -952,7 +956,7 @@
             }
 
             .header-hero h1 { font-size: 28px; }
-            .header-hero .subtitle { font-size: 14px; }
+            .header-hero .subtitle { font-size: 14px; line-height: 1.7; }
 
             .header-meta {
                 flex-direction: column;
@@ -970,15 +974,22 @@
             }
 
             .eixo-card { padding: 24px; }
+            .eixo-desc { font-size: 13px; }
 
             .fc-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 14px;
             }
 
-            .lb-nav.prev { left: 4px; }
-            .lb-nav.next { right: 4px; }
-            .lb-nav { width: 38px; height: 38px; font-size: 16px; }
+            .fc-thumb { aspect-ratio: 3/4; }
+
+            /* Lightbox mobile: nav dentro da imagem */
+            .lb-nav.prev { left: 8px; }
+            .lb-nav.next { right: 8px; }
+            .lb-nav { width: 40px; height: 40px; font-size: 16px; }
+            .lb-close { top: -40px; }
+            .lb-wrap { max-width: 95vw; }
+            .lb-wrap img { max-height: 70vh; }
 
             .footer-inner { padding: 36px 24px 28px; }
 
@@ -1010,6 +1021,7 @@
             }
         }
 
+        /* ---- Mobile (480px) ---- */
         @media (max-width: 480px) {
             .header-nav { padding: 16px 18px; }
             .header-left img.logo-unimed { height: 40px; }
@@ -1020,36 +1032,84 @@
 
             .header-hero { padding: 8px 18px 36px; }
             .header-hero h1 { font-size: 24px; }
-            .header-hero .subtitle { font-size: 13px; }
+            .header-hero .subtitle { font-size: 13px; line-height: 1.65; }
             .header-meta { font-size: 11px; }
 
-            .container { padding: 0 18px; }
+            .container { padding: 0 16px; }
+
+            /* Eixo cards mobile */
             .eixo-card { padding: 20px; }
             .eixo-title { font-size: 15px; }
+            .eixo-desc { font-size: 12.5px; line-height: 1.6; }
             .eixo-icon { width: 42px; height: 42px; font-size: 18px; border-radius: 12px; }
+            .eixo-footer { flex-direction: column; gap: 10px; align-items: flex-start; }
 
+            /* Flash cards mobile: coluna única, mais compacto */
             .fc-grid {
                 grid-template-columns: 1fr;
-                max-width: 320px;
+                max-width: 360px;
                 margin: 0 auto;
             }
 
+            .fc-thumb { aspect-ratio: 3/4; }
             .fc-body { padding: 14px 16px 8px; }
+            .fc-body h4 { font-size: 13.5px; }
+            .fc-body p { font-size: 12px; }
             .fc-actions { padding: 0 16px 16px; }
+            .fc-btn { padding: 10px 14px; font-size: 12px; min-height: 42px; }
 
+            /* Lightbox mobile: fullscreen-like */
+            .lightbox { padding: 12px; }
+            .lb-wrap { max-width: 100vw; }
+            .lb-wrap img { max-height: 65vh; border-radius: 8px; }
+            .lb-nav.prev { left: 4px; }
+            .lb-nav.next { right: 4px; }
+            .lb-nav { width: 36px; height: 36px; font-size: 15px; }
+            .lb-close { top: -36px; right: -4px; font-size: 24px; }
+            .lb-meta .lb-dl { padding: 10px 24px; font-size: 12px; min-height: 42px; }
+
+            /* Footer mobile */
             .footer-inner { padding: 28px 18px 24px; }
             .footer-logos img.fl-unimed { height: 36px; }
             .footer-logos img.fl-icds { height: 28px; }
             .footer-logos img.fl-axia { height: 28px; }
-            .footer-links { gap: 16px; }
+            .footer-links { gap: 16px; flex-wrap: wrap; }
             .footer-links a { font-size: 11px; }
 
+            /* Auth mobile */
             .auth-card {
-                padding: 40px 28px 32px;
+                padding: 36px 24px 28px;
                 border-radius: 18px;
+                margin: 0 16px;
             }
             .auth-logo { height: 48px; }
             .auth-title { font-size: 18px; }
+            .auth-subtitle { font-size: 12px; }
+            .auth-btn { min-height: 48px; font-size: 14px; }
+        }
+
+        /* ---- Small mobile (360px) ---- */
+        @media (max-width: 360px) {
+            .header-nav { padding: 14px 14px; }
+            .header-left img.logo-unimed { height: 36px; }
+            .header-left img.logo-icds { height: 26px; }
+            .header-right img.logo-axia { height: 26px; }
+            .logo-sep { height: 20px; }
+            .header-badge { font-size: 8px; padding: 4px 10px; }
+
+            .header-hero h1 { font-size: 22px; }
+            .header-hero .subtitle { font-size: 12px; }
+
+            .container { padding: 0 14px; }
+            .eixo-card { padding: 18px; }
+            .eixo-title { font-size: 14px; }
+
+            .fc-grid { max-width: 300px; }
+            .fc-body h4 { font-size: 13px; }
+
+            .footer-logos img.fl-unimed { height: 32px; }
+            .footer-logos img.fl-icds { height: 24px; }
+            .footer-logos img.fl-axia { height: 24px; }
         }
     </style>
 </head>
