@@ -1,35 +1,45 @@
-# Unimed Ourinhos — Entregas de Consultoria
+# Unimed Ourinhos | Portal de Entregas AxiaCare
 
-**Cliente:** Unimed Ourinhos — Cooperativa de Trabalho Médico de Ourinhos/SP (Código ANS 167)  
-**Consultoria:** AxiaCare — Grupo CSV (Cuidados em Saúde com Valor)  
-**Contratante:** ICDS — Instituto de Cooperação para o Desenvolvimento da Saúde
-
----
-
-## Sobre este Repositório
-
-Este repositório é o **canal oficial de entregas** do projeto de consultoria conduzido pela AxiaCare para a Unimed Ourinhos. Ele contém relatórios técnicos, análises e documentos produzidos ao longo do projeto, organizados por eixo de trabalho.
-
-### O que este repositório é
-
-- Repositório institucional de entregas parciais e finais
-- Publicado sob curadoria humana do responsável técnico do projeto
-- Acessível via [unimed167.axcare.com.br](https://unimed167.axcare.com.br)
-
-### O que este repositório não é
-
-- Não é um motor analítico ou ambiente de processamento de dados
-- Não possui automação, dependência ou acoplamento técnico com outros repositórios
-- Não contém dados brutos, código-fonte ou infraestrutura de banco de dados
-- Não representa roadmap, compromisso futuro ou escopo além do publicado
+**Operadora:** Unimed Ourinhos — Cooperativa de Trabalho Medico de Ourinhos/SP (Registro ANS 31.129-4)
+**Contratante:** ICDS — Instituto de Cooperacao para o Desenvolvimento da Saude
+**Consultoria:** AxiaCare — Grupo CSV (Cuidados em Saude com Valor)
 
 ---
 
-## Relação com o Projeto de Dados
+## Sobre este Repositorio
 
-As análises publicadas neste repositório são produzidas a partir do projeto de dados `axiacare/analytics`, que é o repositório técnico interno da consultoria. Os artefatos aqui presentes são versões finalizadas e curadas, destinadas à leitura executiva e à tomada de decisão.
+Este repositorio e o canal oficial de entregas do projeto de consultoria conduzido pela AxiaCare (Grupo CSV) para a Unimed Ourinhos, sob contratacao do ICDS. Ele reune relatorios tecnicos, analises e documentos produzidos ao longo do projeto, organizados por eixo de trabalho.
 
-A decisão sobre o que é publicado, quando e em que formato, é exclusivamente do responsável técnico do projeto.
+O conteudo e publicado sob curadoria do responsavel tecnico do projeto e destina-se exclusivamente aos stakeholders envolvidos na consultoria.
+
+### Hierarquia de contratacao
+
+A Unimed Ourinhos contratou o ICDS (Instituto de Cooperacao para o Desenvolvimento da Saude). O ICDS, por sua vez, contratou a AxiaCare (Grupo CSV) para conduzir as analises tecnicas e entregas de consultoria.
+
+### O que este repositorio e
+
+- Repositorio institucional de entregas parciais e finais
+- Publicado sob curadoria humana do responsavel tecnico do projeto
+- Acessivel via [unimed167.axcare.com.br](https://unimed167.axcare.com.br)
+
+### O que este repositorio nao e
+
+- Nao e um motor analitico ou ambiente de processamento de dados
+- Nao possui automacao, dependencia ou acoplamento tecnico com outros repositorios
+- Nao contem dados brutos, codigo-fonte ou infraestrutura de banco de dados
+- Nao representa roadmap, compromisso futuro ou escopo alem do publicado
+
+### Entregas parciais
+
+Os documentos aqui disponibilizados representam entregas em andamento, sujeitas a revisao, complementacao e validacao ao longo do projeto. Nao devem ser interpretados como relatorios finais ou conclusivos.
+
+---
+
+## Relacao com o Projeto de Dados
+
+As analises publicadas neste repositorio sao produzidas a partir do projeto de dados `axiacare/analytics`, que e o repositorio tecnico interno da consultoria. Os artefatos aqui presentes sao versoes finalizadas e curadas, destinadas a leitura executiva e a tomada de decisao.
+
+A decisao sobre o que e publicado, quando e em que formato, e exclusivamente do responsavel tecnico do projeto.
 
 ---
 
@@ -37,32 +47,40 @@ A decisão sobre o que é publicado, quando e em que formato, é exclusivamente 
 
 ```
 unimed-ourinhos/
-├── index.html                  # Página inicial de navegação
-├── CNAME                       # Configuração de domínio customizado
+├── index.html                  # Pagina inicial de navegacao
+├── CNAME                       # Configuracao de dominio customizado
 ├── README.md                   # Este arquivo
-├── docs/                       # Documentação de governança
-│   └── SEGURANCA.md            # Avaliação de segurança e limitações
+├── robots.txt                  # Solicita nao-indexacao por buscadores
+├── .nojekyll                   # Servir estaticos sem Jekyll
+├── docs/                       # Documentacao de governanca
+│   └── SEGURANCA.md            # Avaliacao de seguranca e limitacoes
 ├── entregas/                   # Entregas organizadas por eixo
-│   └── eixo-01/                # Eixo 1: Análise de Rede Assistencial
+│   └── eixo-01/                # Eixo 1: Analise de Rede Assistencial
 └── assets/                     # Recursos visuais do site
+    ├── favicon.ico             # Favicon padrao AxiaCare
+    ├── og_unimed_ourinhos.png  # Imagem OpenGraph (WhatsApp/redes)
+    ├── unimed_ourinhos_logo.png
+    ├── icds_horizontal_positivo.png
+    ├── axiacare_horizontal.png
+    └── axiacare_logo.png
 ```
 
 ---
 
 ## Eixos de Trabalho
 
-| Eixo | Título | Status |
+| Eixo | Titulo | Status |
 |------|--------|--------|
 | 01 | Leitura da Rede Assistencial | Publicado |
-| 02 | Análise de Variabilidade de Custos | Em elaboração |
-| 03 | Oportunidades de Internalização | Em elaboração |
-| 04 | Leitura Integrada Operadora-Hospital | Em elaboração |
+| 02 | Analise de Variabilidade de Custos | Em elaboracao |
+| 03 | Oportunidades de Internalizacao | Em elaboracao |
+| 04 | Leitura Integrada Operadora-Hospital | Em elaboracao |
 
 ---
 
 ## Acesso
 
-Este repositório é publicado via GitHub Pages no domínio:
+Este repositorio e publicado via GitHub Pages no dominio:
 
 > **[unimed167.axcare.com.br](https://unimed167.axcare.com.br)**
 
@@ -70,9 +88,9 @@ Este repositório é publicado via GitHub Pages no domínio:
 
 ## Contato
 
-- **Responsável Técnico:** Dr. Guilherme C. Thomé — AxiaCare / Grupo CSV
-- **Contratante:** ICDS — Instituto de Cooperação para o Desenvolvimento da Saúde
+- **Responsavel Tecnico:** Dr. Guilherme C. Thome — AxiaCare / Grupo CSV
+- **Contratante:** ICDS — Instituto de Cooperacao para o Desenvolvimento da Saude
 
 ---
 
-*Cuidado em Saúde com Valor, na prática.*
+*Cuidado em Saude com Valor, na pratica.*
