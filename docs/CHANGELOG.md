@@ -1,5 +1,14 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v2.0 — 2026-02-08
+
+- **FIX (CRÍTICO)**: Removidas previsões de datas inventadas nos cards dos Eixos 02, 03 e 04 ("Previsão: Mar/2026", "Abr/2026", "Mai/2026"). Essas datas nunca foram acordadas com o cliente.
+- **FIX**: Tagline corrigida de "Cuidado em Saúde com Valor, na prática." para "Cuidados em Saúde com Valor" (acrônimo oficial CSV) em todas as 3 páginas.
+- **FIX**: Status dos Eixos 03 e 04 corrigidos de "Pendente" para "Em Desenvolvimento" no roadmap e nos cards.
+- **FIX**: Status dos Eixos 02, 03 e 04 corrigidos de "Em elaboração" para "Em Desenvolvimento" nos cards.
+- **FEATURE**: Card do Eixo 02 agora possui visual intermediário (classe `in-progress`), mais "aceso" que os Eixos 03/04 (opacity 0.68 vs 0.45, grayscale 20% vs 80%).
+- **DOCS**: Criada `REGRA_NAO_SUPOR_DADOS.md` no repositório analytics como padrão obrigatório.
+
 ## v1.9 — 2026-02-08
 
 - **REFINEMENT (UX/CX)**: Realizada revisão completa de contraste e legibilidade em todas as páginas do portal (login, portal, eixo-01, flash-cards).

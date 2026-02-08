@@ -527,6 +527,15 @@
 
         .eixo-card.disabled:hover { opacity: 0.52; }
 
+        .eixo-card.in-progress {
+            opacity: 0.68;
+            filter: grayscale(20%);
+            cursor: default;
+            border-color: rgba(27,94,159,0.08);
+        }
+
+        .eixo-card.in-progress:hover { opacity: 0.78; }
+
         .eixo-card-inner {
             padding: 28px;
             position: relative;
@@ -594,7 +603,8 @@
         }
 
         .st-parcial { background: rgba(127,191,178,0.12); color: #0d7377; }
-        .st-elaboracao { background: var(--cinza-100); color: var(--cinza-400); }
+        .st-dev { background: rgba(27,94,159,0.08); color: var(--azul-axiacare); }
+        .st-pending { background: var(--cinza-100); color: var(--cinza-400); }
 
         .eixo-title {
             font-size: 17px;
@@ -1550,7 +1560,7 @@
                     <div class="tl-content-mobile">
                         <div class="tl-label">Eixo 02</div>
                         <div class="tl-title">An&aacute;lise de Variabilidade</div>
-                        <span class="tl-status tl-st-dev">Em desenvolvimento</span>
+                        <span class="tl-status tl-st-dev">Em Desenvolvimento</span>
                     </div>
                 </div>
 
@@ -1559,7 +1569,7 @@
                     <div class="tl-content-mobile">
                         <div class="tl-label">Eixo 03</div>
                         <div class="tl-title">Oportunidades de Internaliza&ccedil;&atilde;o</div>
-                        <span class="tl-status tl-st-pending">Pendente</span>
+                        <span class="tl-status tl-st-dev">Em Desenvolvimento</span>
                     </div>
                 </div>
 
@@ -1568,7 +1578,7 @@
                     <div class="tl-content-mobile">
                         <div class="tl-label">Eixo 04</div>
                         <div class="tl-title">Leitura Integrada Operadora-Hospital</div>
-                        <span class="tl-status tl-st-pending">Pendente</span>
+                        <span class="tl-status tl-st-dev">Em Desenvolvimento</span>
                     </div>
                 </div>
             </div>
@@ -1610,8 +1620,8 @@
                     </div>
                 </a>
 
-                <!-- Eixo 02 — INATIVO -->
-                <div class="eixo-card disabled">
+                <!-- Eixo 02 — EM DESENVOLVIMENTO -->
+                <div class="eixo-card in-progress">
                     <div class="eixo-card-inner">
                         <div class="eixo-top">
                             <div class="eixo-icon i-02">
@@ -1619,13 +1629,13 @@
                             </div>
                             <div class="eixo-badges">
                                 <span class="eixo-num">Eixo 02</span>
-                                <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
+                                <span class="eixo-status st-dev">Em Desenvolvimento</span>
                             </div>
                         </div>
                         <div class="eixo-title">An&aacute;lise de Variabilidade</div>
                         <div class="eixo-desc">Estudo de variabilidade de custos entre prestadores e quantifica&ccedil;&atilde;o de oportunidades de economia por padroniza&ccedil;&atilde;o.</div>
                         <div class="eixo-footer">
-                            <span class="eixo-tag">Previs&atilde;o: Mar/2026</span>
+                        
                         </div>
                     </div>
                 </div>
@@ -1639,13 +1649,13 @@
                             </div>
                             <div class="eixo-badges">
                                 <span class="eixo-num">Eixo 03</span>
-                                <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
+                                <span class="eixo-status st-dev">Em Desenvolvimento</span>
                             </div>
                         </div>
                         <div class="eixo-title">Oportunidades de Internaliza&ccedil;&atilde;o</div>
                         <div class="eixo-desc">Avalia&ccedil;&atilde;o de impacto financeiro da internaliza&ccedil;&atilde;o de servi&ccedil;os e procedimentos de alto custo.</div>
                         <div class="eixo-footer">
-                            <span class="eixo-tag">Previs&atilde;o: Abr/2026</span>
+                        
                         </div>
                     </div>
                 </div>
@@ -1659,13 +1669,13 @@
                             </div>
                             <div class="eixo-badges">
                                 <span class="eixo-num">Eixo 04</span>
-                                <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
+                                <span class="eixo-status st-dev">Em Desenvolvimento</span>
                             </div>
                         </div>
                         <div class="eixo-title">Leitura Integrada Operadora-Hospital</div>
                         <div class="eixo-desc">Relat&oacute;rio de &ldquo;fuga&rdquo; de servi&ccedil;os e an&aacute;lise integrada entre operadora e hospital pr&oacute;prio.</div>
                         <div class="eixo-footer">
-                            <span class="eixo-tag">Previs&atilde;o: Mai/2026</span>
+                        
                         </div>
                     </div>
                 </div>
@@ -1805,7 +1815,7 @@
             <div class="footer-bottom">
                 <div class="footer-brand">
                     <span class="brand-name">AxiaCare&reg; &mdash; Grupo CSV</span>
-                    <span class="brand-tagline">Cuidado em Sa&uacute;de com Valor, na pr&aacute;tica.</span>
+                    <span class="brand-tagline">Cuidados em Sa&uacute;de com Valor</span>
                 </div>
                 <div class="footer-copy">&copy; 2026 Grupo CSV. Todos os direitos reservados.</div>
             </div>
