@@ -35,7 +35,7 @@
 
     <style>
         /* ========================================
-           Design Tokens — AxiaCare Portal v5.0
+           Design Tokens — AxiaCare Portal v6.0
            ======================================== */
 
         :root {
@@ -44,7 +44,8 @@
             --azul-profundo: #081F3E;
             --teal: #7FBFB2;
             --teal-hover: #6aada0;
-            --teal-light: rgba(127,191,178,0.12);
+            --teal-light: rgba(127,191,178,0.10);
+            --teal-bg: rgba(127,191,178,0.06);
             --verde-unimed: #00A859;
             --verde-unimed-light: rgba(0,168,89,0.08);
             --amarelo-aviso: #f59e0b;
@@ -61,8 +62,8 @@
             --raio: 16px;
             --raio-sm: 10px;
             --raio-xs: 6px;
-            --sombra-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
-            --sombra-card-hover: 0 4px 16px rgba(0,0,0,0.08), 0 12px 40px rgba(0,0,0,0.06);
+            --sombra-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 14px rgba(0,0,0,0.04);
+            --sombra-card-hover: 0 8px 28px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.04);
             --sombra-card-active: 0 2px 8px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.08);
             --sombra-xl: 0 16px 48px rgba(0,0,0,0.12);
             --transicao: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -81,7 +82,7 @@
         }
 
         /* ========================================
-           Header — NOT fixed, flows with content
+           Header — Gradient hero
            ======================================== */
 
         .header {
@@ -130,15 +131,8 @@
             gap: 20px;
         }
 
-        .header-left img.logo-unimed {
-            height: 52px;
-            object-fit: contain;
-        }
-
-        .header-left img.logo-icds {
-            height: 42px;
-            object-fit: contain;
-        }
+        .header-left img.logo-unimed { height: 52px; object-fit: contain; }
+        .header-left img.logo-icds { height: 42px; object-fit: contain; }
 
         .logo-sep {
             width: 1px;
@@ -153,11 +147,7 @@
             gap: 16px;
         }
 
-        .header-right img.logo-axia {
-            height: 44px;
-            object-fit: contain;
-            opacity: 0.9;
-        }
+        .header-right img.logo-axia { height: 44px; object-fit: contain; opacity: 0.9; }
 
         .header-badge {
             font-size: 10px;
@@ -218,32 +208,32 @@
         }
 
         /* ========================================
-           Notices
+           Notices — Refined v6.0
            ======================================== */
 
         .notices {
-            margin-top: 32px;
-            margin-bottom: 48px;
+            margin-top: 36px;
+            margin-bottom: 52px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .notice {
-            border-radius: var(--raio-sm);
-            padding: 18px 24px;
+            border-radius: var(--raio);
+            padding: 20px 24px;
             display: flex;
             align-items: flex-start;
-            gap: 14px;
+            gap: 16px;
             font-size: 13.5px;
-            line-height: 1.65;
+            line-height: 1.7;
         }
 
         .notice-icon {
             flex-shrink: 0;
-            margin-top: 1px;
-            width: 20px;
-            height: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -256,33 +246,55 @@
             box-shadow: var(--sombra-card);
         }
 
-        .notice-info .notice-icon { color: var(--azul-axiacare); }
+        .notice-info .notice-icon {
+            background: rgba(27,94,159,0.08);
+            color: var(--azul-axiacare);
+        }
 
         .notice-warn {
-            background: #fffbeb;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
             border: 1px solid #fde68a;
             color: #78350f;
         }
 
-        .notice-warn .notice-icon { color: var(--amarelo-aviso); }
+        .notice-warn .notice-icon {
+            background: rgba(245,158,11,0.12);
+            color: var(--amarelo-aviso);
+        }
 
         /* ========================================
-           Section Headers
+           Section Headers — v6.0
            ======================================== */
 
-        .section { margin-bottom: 56px; }
+        .section { margin-bottom: 60px; }
 
         .section-header {
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
 
-        .section-line {
-            flex-grow: 1;
-            height: 1px;
-            background: var(--cinza-200);
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .section-icon svg { width: 20px; height: 20px; }
+
+        .section-icon.si-relatorios {
+            background: rgba(27,94,159,0.08);
+            color: var(--azul-axiacare);
+        }
+
+        .section-icon.si-flashcards {
+            background: var(--teal-light);
+            color: var(--teal);
         }
 
         .section-label {
@@ -294,8 +306,14 @@
             white-space: nowrap;
         }
 
+        .section-line {
+            flex-grow: 1;
+            height: 1px;
+            background: var(--cinza-200);
+        }
+
         /* ========================================
-           Eixo Cards — Redesign v5.0
+           Eixo Cards — Redesign v6.0
            ======================================== */
 
         .eixo-grid {
@@ -319,7 +337,7 @@
 
         /* --- ACTIVE card --- */
         .eixo-card.active {
-            border: 1px solid rgba(0,168,89,0.2);
+            border: 1px solid rgba(27,94,159,0.18);
             box-shadow: var(--sombra-card-active);
         }
 
@@ -330,14 +348,14 @@
             left: 0;
             width: 4px;
             height: 100%;
-            background: var(--verde-unimed);
+            background: linear-gradient(180deg, var(--azul-axiacare), var(--teal));
             transition: width var(--transicao);
         }
 
         .eixo-card.active:hover {
             box-shadow: var(--sombra-card-hover);
             transform: translateY(-3px);
-            border-color: rgba(0,168,89,0.35);
+            border-color: rgba(27,94,159,0.3);
         }
 
         .eixo-card.active:hover::before {
@@ -348,9 +366,9 @@
         .eixo-card.disabled {
             border: 1px solid var(--cinza-100);
             box-shadow: none;
-            opacity: 0.55;
+            opacity: 0.45;
             pointer-events: none;
-            filter: grayscale(0.3);
+            filter: grayscale(0.4);
         }
 
         .eixo-card.disabled::before {
@@ -371,18 +389,15 @@
         }
 
         .eixo-icon {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .eixo-icon svg {
-            width: 24px;
-            height: 24px;
-        }
+        .eixo-icon svg { width: 26px; height: 26px; }
 
         /* Active icon backgrounds */
         .eixo-card.active .i-01 { background: rgba(27,94,159,0.1); color: var(--azul-axiacare); }
@@ -393,6 +408,13 @@
         /* Disabled icon backgrounds */
         .eixo-card.disabled .eixo-icon { background: var(--cinza-100); color: var(--cinza-400); }
 
+        .eixo-badges {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+        }
+
         .eixo-status {
             font-size: 10px;
             text-transform: uppercase;
@@ -402,9 +424,9 @@
             border-radius: 20px;
         }
 
-        .st-disponivel {
-            background: rgba(0,168,89,0.1);
-            color: #047857;
+        .st-parcial {
+            background: rgba(27,94,159,0.1);
+            color: var(--azul-axiacare);
         }
 
         .st-elaboracao {
@@ -445,7 +467,7 @@
 
         .eixo-link {
             font-size: 13px;
-            color: var(--verde-unimed);
+            color: var(--azul-axiacare);
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -456,13 +478,19 @@
         .eixo-card.active:hover .eixo-link { gap: 10px; }
 
         /* ========================================
-           Flash Cards
+           Flash Cards Section — v6.0
            ======================================== */
+
+        .fc-section-bg {
+            background: linear-gradient(180deg, var(--cinza-50) 0%, var(--teal-bg) 40%, var(--cinza-50) 100%);
+            padding: 52px 0 60px;
+            margin-top: -8px;
+        }
 
         .fc-intro {
             font-size: 14px;
             color: var(--cinza-500);
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             max-width: 640px;
             line-height: 1.7;
         }
@@ -478,7 +506,7 @@
             border-radius: var(--raio);
             box-shadow: var(--sombra-card);
             overflow: hidden;
-            border: 1px solid var(--cinza-100);
+            border: 1px solid var(--cinza-200);
             transition: all var(--transicao);
             display: flex;
             flex-direction: column;
@@ -486,7 +514,8 @@
 
         .fc-card:hover {
             box-shadow: var(--sombra-card-hover);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            border-color: var(--cinza-300);
         }
 
         .fc-thumb {
@@ -509,7 +538,7 @@
         .fc-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(8,31,62,0.5);
+            background: linear-gradient(180deg, rgba(8,31,62,0.2) 0%, rgba(8,31,62,0.65) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -530,6 +559,7 @@
             font-family: inherit;
             cursor: pointer;
             letter-spacing: 0.3px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
         .fc-body {
@@ -661,16 +691,9 @@
         .lb-nav.prev { left: -60px; }
         .lb-nav.next { right: -60px; }
 
-        .lb-meta {
-            margin-top: 20px;
-            text-align: center;
-        }
+        .lb-meta { margin-top: 20px; text-align: center; }
 
-        .lb-meta .lb-title {
-            color: #fff;
-            font-weight: 600;
-            font-size: 15px;
-        }
+        .lb-meta .lb-title { color: #fff; font-weight: 600; font-size: 15px; }
 
         .lb-meta .lb-dl {
             display: inline-flex;
@@ -696,11 +719,10 @@
         }
 
         /* ========================================
-           Footer Institucional Padr&atilde;o v5.0
+           Footer Institucional v6.0
            ======================================== */
 
         .footer {
-            margin-top: 72px;
             background: linear-gradient(160deg, var(--azul-profundo) 0%, var(--azul-escuro) 60%, #14466b 100%);
             color: rgba(255,255,255,0.65);
             position: relative;
@@ -736,21 +758,9 @@
             gap: 24px;
         }
 
-        .footer-logos img.fl-unimed {
-            height: 48px;
-            object-fit: contain;
-        }
-
-        .footer-logos img.fl-icds {
-            height: 38px;
-            object-fit: contain;
-        }
-
-        .footer-logos img.fl-axia {
-            height: 40px;
-            object-fit: contain;
-            opacity: 0.85;
-        }
+        .footer-logos img.fl-unimed { height: 48px; object-fit: contain; }
+        .footer-logos img.fl-icds { height: 38px; object-fit: contain; }
+        .footer-logos img.fl-axia { height: 40px; object-fit: contain; opacity: 0.85; }
 
         .footer-logos .fl-sep {
             width: 1px;
@@ -787,25 +797,13 @@
             gap: 3px;
         }
 
-        .footer-brand .brand-name {
-            color: var(--teal);
-            font-weight: 600;
-            font-size: 13px;
-        }
+        .footer-brand .brand-name { color: var(--teal); font-weight: 600; font-size: 13px; }
+        .footer-brand .brand-tagline { font-style: italic; color: rgba(255,255,255,0.3); font-size: 11px; }
 
-        .footer-brand .brand-tagline {
-            font-style: italic;
-            color: rgba(255,255,255,0.3);
-            font-size: 11px;
-        }
-
-        .footer-copy {
-            font-size: 11px;
-            color: rgba(255,255,255,0.2);
-        }
+        .footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); }
 
         /* ========================================
-           Auth Overlay
+           Auth Overlay — v6.0
            ======================================== */
 
         .auth-wall {
@@ -838,7 +836,7 @@
             background: rgba(255,255,255,0.97);
             border-radius: 24px;
             padding: 52px 48px 44px;
-            max-width: 400px;
+            max-width: 420px;
             width: 90%;
             box-shadow: 0 24px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.08);
             text-align: center;
@@ -850,18 +848,9 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .auth-logo {
-            height: 56px;
-            margin-bottom: 12px;
-            object-fit: contain;
-        }
+        .auth-logo { height: 56px; margin-bottom: 12px; object-fit: contain; }
 
-        .auth-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--cinza-900);
-            margin-bottom: 4px;
-        }
+        .auth-title { font-size: 20px; font-weight: 700; color: var(--cinza-900); margin-bottom: 4px; }
 
         .auth-subtitle {
             font-size: 12.5px;
@@ -871,10 +860,7 @@
             letter-spacing: 0.2px;
         }
 
-        .auth-field {
-            margin-bottom: 16px;
-            position: relative;
-        }
+        .auth-field { margin-bottom: 16px; position: relative; }
 
         .auth-input {
             width: 100%;
@@ -891,11 +877,7 @@
             letter-spacing: 2px;
         }
 
-        .auth-input::placeholder {
-            letter-spacing: 0;
-            color: var(--cinza-400);
-            font-size: 13px;
-        }
+        .auth-input::placeholder { letter-spacing: 0; color: var(--cinza-400); font-size: 13px; }
 
         .auth-input:focus {
             border-color: var(--azul-axiacare);
@@ -926,7 +908,6 @@
         }
 
         .auth-toggle-pw:hover { color: var(--cinza-600); }
-
         .auth-toggle-pw svg { width: 20px; height: 20px; }
 
         @keyframes authShake {
@@ -969,6 +950,21 @@
             line-height: 1.6;
         }
 
+        .auth-mailto {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            font-size: 11.5px;
+            color: var(--azul-axiacare);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .auth-mailto:hover { color: var(--azul-escuro); }
+        .auth-mailto svg { width: 14px; height: 14px; }
+
         .auth-logos {
             display: flex;
             align-items: center;
@@ -978,22 +974,14 @@
             padding-top: 20px;
             border-top: 1px solid rgba(0,0,0,0.08);
         }
-        .auth-logos img {
-            opacity: 0.55;
-            transition: opacity 0.3s ease;
-        }
-        .auth-logos img:hover {
-            opacity: 0.85;
-        }
-        .auth-logos .auth-logo-icds {
-            height: 28px;
-        }
-        .auth-logos .auth-logo-axia {
-            height: 30px;
-        }
+
+        .auth-logos img { opacity: 0.55; transition: opacity 0.3s ease; }
+        .auth-logos img:hover { opacity: 0.85; }
+        .auth-logos .auth-logo-icds { height: 28px; }
+        .auth-logos .auth-logo-axia { height: 30px; }
 
         /* ========================================
-           Responsive — Mobile First
+           Responsive — Mobile
            ======================================== */
 
         /* ---- Tablet (768px) ---- */
@@ -1004,12 +992,7 @@
                 padding: 18px 24px;
             }
 
-            .header-left {
-                gap: 14px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
+            .header-left { gap: 14px; flex-wrap: wrap; justify-content: center; }
             .header-left img.logo-unimed { height: 44px; }
             .header-left img.logo-icds { height: 34px; }
             .logo-sep { height: 28px; }
@@ -1017,39 +1000,28 @@
             .header-right { gap: 12px; }
             .header-right img.logo-axia { height: 36px; }
 
-            .header-hero {
-                padding: 12px 24px 48px;
-            }
-
+            .header-hero { padding: 12px 24px 48px; }
             .header-hero h1 { font-size: 28px; }
             .header-hero .subtitle { font-size: 14px; line-height: 1.7; }
 
-            .header-meta {
-                flex-direction: column;
-                gap: 4px;
-                align-items: center;
-            }
+            .header-meta { flex-direction: column; gap: 4px; align-items: center; }
 
             .container { padding: 0 24px; }
             .notices { margin-top: 24px; margin-bottom: 36px; }
             .notice { padding: 16px 18px; font-size: 13px; }
+            .notice-icon { width: 32px; height: 32px; border-radius: 8px; }
 
-            .eixo-grid {
-                grid-template-columns: 1fr;
-                gap: 14px;
-            }
+            .section-icon { width: 36px; height: 36px; }
+            .section-icon svg { width: 18px; height: 18px; }
 
+            .eixo-grid { grid-template-columns: 1fr; gap: 14px; }
             .eixo-card { padding: 24px; }
             .eixo-desc { font-size: 13px; }
 
-            .fc-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 14px;
-            }
-
+            .fc-section-bg { padding: 40px 0 48px; }
+            .fc-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
             .fc-thumb { aspect-ratio: 3/4; }
 
-            /* Lightbox mobile */
             .lb-nav.prev { left: 8px; }
             .lb-nav.next { right: 8px; }
             .lb-nav { width: 40px; height: 40px; font-size: 16px; }
@@ -1058,33 +1030,13 @@
             .lb-wrap img { max-height: 70vh; }
 
             .footer-inner { padding: 36px 24px 28px; }
-
-            .footer-top {
-                flex-direction: column;
-                gap: 24px;
-                text-align: center;
-            }
-
-            .footer-logos {
-                gap: 18px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
+            .footer-top { flex-direction: column; gap: 24px; text-align: center; }
+            .footer-logos { gap: 18px; flex-wrap: wrap; justify-content: center; }
             .footer-logos img.fl-unimed { height: 40px; }
             .footer-logos img.fl-icds { height: 32px; }
             .footer-logos img.fl-axia { height: 34px; }
-
-            .footer-links {
-                justify-content: center;
-                gap: 20px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
+            .footer-links { justify-content: center; gap: 20px; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
         }
 
         /* ---- Mobile (480px) ---- */
@@ -1106,16 +1058,16 @@
             .eixo-card { padding: 20px; }
             .eixo-title { font-size: 15px; }
             .eixo-desc { font-size: 12.5px; line-height: 1.6; }
-            .eixo-icon { width: 42px; height: 42px; border-radius: 12px; }
-            .eixo-icon svg { width: 20px; height: 20px; }
+            .eixo-icon { width: 44px; height: 44px; border-radius: 12px; }
+            .eixo-icon svg { width: 22px; height: 22px; }
             .eixo-footer { flex-direction: column; gap: 10px; align-items: flex-start; }
 
+            .fc-section-bg { padding: 32px 0 40px; }
             .fc-grid {
                 grid-template-columns: 1fr;
                 max-width: 360px;
                 margin: 0 auto;
             }
-
             .fc-thumb { aspect-ratio: 3/4; }
             .fc-body { padding: 14px 16px 8px; }
             .fc-body h4 { font-size: 13.5px; }
@@ -1139,11 +1091,7 @@
             .footer-links { gap: 16px; flex-wrap: wrap; }
             .footer-links a { font-size: 11px; }
 
-            .auth-card {
-                padding: 36px 24px 28px;
-                border-radius: 18px;
-                margin: 0 16px;
-            }
+            .auth-card { padding: 36px 24px 28px; border-radius: 18px; margin: 0 16px; }
             .auth-logo { height: 48px; }
             .auth-title { font-size: 18px; }
             .auth-subtitle { font-size: 12px; }
@@ -1197,6 +1145,10 @@
                 <button type="submit" class="auth-btn">Acessar</button>
                 <div class="auth-error-msg" id="authError"></div>
             </form>
+            <a href="mailto:contato@grupocsv.com?subject=Solicita%C3%A7%C3%A3o%20de%20Acesso%20%E2%80%93%20Portal%20Unimed%20Ourinhos" class="auth-mailto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
+                Solicitar acesso
+            </a>
             <div class="auth-footer-text">
                 Conte&uacute;do sob curadoria do respons&aacute;vel t&eacute;cnico.<br>
                 AxiaCare&reg; &mdash; Grupo CSV
@@ -1208,7 +1160,7 @@
         </div>
     </div>
 
-    <!-- ====== HEADER (not fixed) ====== -->
+    <!-- ====== HEADER ====== -->
     <header class="header">
         <nav class="header-nav">
             <div class="header-left">
@@ -1255,17 +1207,19 @@
         <!-- Relat&oacute;rios T&eacute;cnicos -->
         <div class="section">
             <div class="section-header">
+                <div class="section-icon si-relatorios">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
                 <span class="section-label">Relat&oacute;rios T&eacute;cnicos</span>
                 <div class="section-line"></div>
             </div>
 
             <div class="eixo-grid">
 
-                <!-- Eixo 01 — ATIVO -->
+                <!-- Eixo 01 — ATIVO (Entrega Parcial) -->
                 <a href="entregas/eixo-01/index.html" class="eixo-card active eixo-01">
                     <div class="eixo-top">
                         <div class="eixo-icon i-01">
-                            <!-- Rede assistencial: n&oacute;s conectados -->
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="5" cy="6" r="2.5"/>
                                 <circle cx="19" cy="6" r="2.5"/>
@@ -1276,7 +1230,9 @@
                                 <line x1="12" y1="12.8" x2="12" y2="15.5"/>
                             </svg>
                         </div>
-                        <span class="eixo-status st-disponivel">Dispon&iacute;vel</span>
+                        <div class="eixo-badges">
+                            <span class="eixo-status st-parcial">Entrega Parcial</span>
+                        </div>
                     </div>
                     <div class="eixo-title">Eixo 01 &mdash; Leitura da Rede Assistencial</div>
                     <div class="eixo-desc">Mapeamento completo da rede assistencial, incluindo distribui&ccedil;&atilde;o de custos por tipo de rede, setor, tipo de atendimento e procedimento. An&aacute;lise de concentra&ccedil;&atilde;o e identifica&ccedil;&atilde;o de direcionadores de despesa.</div>
@@ -1290,7 +1246,6 @@
                 <div class="eixo-card disabled eixo-02">
                     <div class="eixo-top">
                         <div class="eixo-icon i-02">
-                            <!-- Variabilidade: gr&aacute;fico com dispers&atilde;o -->
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="3 20 3 4"/>
                                 <polyline points="3 20 21 20"/>
@@ -1314,7 +1269,6 @@
                 <div class="eixo-card disabled eixo-03">
                     <div class="eixo-top">
                         <div class="eixo-icon i-03">
-                            <!-- Internaliza&ccedil;&atilde;o: hospital com seta para dentro -->
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="4" y="8" width="16" height="13" rx="2"/>
                                 <path d="M4 8 L12 3 L20 8"/>
@@ -1336,7 +1290,6 @@
                 <div class="eixo-card disabled eixo-04">
                     <div class="eixo-top">
                         <div class="eixo-icon i-04">
-                            <!-- Leitura integrada: ponte entre dois elementos -->
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="6" width="7" height="5" rx="1.5"/>
                                 <rect x="15" y="6" width="7" height="5" rx="1.5"/>
@@ -1358,76 +1311,83 @@
             </div>
         </div>
 
-        <!-- Flash Cards -->
-        <div class="section">
-            <div class="section-header">
-                <span class="section-label">Flash Cards</span>
-                <div class="section-line"></div>
-            </div>
-            <p class="fc-intro">
-                S&iacute;nteses visuais de alta densidade para acompanhamento din&acirc;mico do projeto. Micro entregas que condensam os principais achados de cada eixo de an&aacute;lise.
-            </p>
+    </main>
 
-            <div class="fc-grid">
+    <!-- ====== FLASH CARDS (background section) ====== -->
+    <div class="fc-section-bg">
+        <div class="container">
+            <div class="section" style="margin-bottom:0;">
+                <div class="section-header">
+                    <div class="section-icon si-flashcards">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <span class="section-label">Flash Cards</span>
+                    <div class="section-line"></div>
+                </div>
+                <p class="fc-intro">
+                    S&iacute;nteses visuais de alta densidade para acompanhamento din&acirc;mico do projeto. Micro entregas que condensam os principais achados de cada eixo de an&aacute;lise.
+                </p>
 
-                <!-- FC-01-001 -->
-                <div class="fc-card">
-                    <div class="fc-thumb" onclick="openLightbox(0)">
-                        <img src="entregas/flash-cards/FC-01-001-v2.png" alt="Flash Card &mdash; An&aacute;lise da Rede Assistencial" loading="lazy">
-                        <div class="fc-overlay">
-                            <button class="fc-overlay-btn">Visualizar em tela cheia</button>
+                <div class="fc-grid">
+
+                    <!-- FC-01-001 -->
+                    <div class="fc-card">
+                        <div class="fc-thumb" onclick="openLightbox(0)">
+                            <img src="entregas/flash-cards/FC-01-001-v2.png" alt="Flash Card &mdash; An&aacute;lise da Rede Assistencial" loading="lazy">
+                            <div class="fc-overlay">
+                                <button class="fc-overlay-btn">Visualizar em tela cheia</button>
+                            </div>
+                        </div>
+                        <div class="fc-body">
+                            <h4>An&aacute;lise da Rede Assistencial</h4>
+                            <p>Distribui&ccedil;&atilde;o por camada operacional, setores de maior representatividade e principais achados.</p>
+                        </div>
+                        <div class="fc-actions">
+                            <button class="fc-btn fc-btn-view" onclick="openLightbox(0)">Visualizar</button>
+                            <a href="entregas/flash-cards/FC-01-001-v2.png" download class="fc-btn fc-btn-dl">Download</a>
                         </div>
                     </div>
-                    <div class="fc-body">
-                        <h4>An&aacute;lise da Rede Assistencial</h4>
-                        <p>Distribui&ccedil;&atilde;o por camada operacional, setores de maior representatividade e principais achados.</p>
-                    </div>
-                    <div class="fc-actions">
-                        <button class="fc-btn fc-btn-view" onclick="openLightbox(0)">Visualizar</button>
-                        <a href="entregas/flash-cards/FC-01-001-v2.png" download class="fc-btn fc-btn-dl">Download</a>
-                    </div>
-                </div>
 
-                <!-- FC-01-002 -->
-                <div class="fc-card">
-                    <div class="fc-thumb" onclick="openLightbox(1)">
-                        <img src="entregas/flash-cards/FC-01-002-v1.png" alt="Flash Card &mdash; Variabilidade de Pre&ccedil;os" loading="lazy">
-                        <div class="fc-overlay">
-                            <button class="fc-overlay-btn">Visualizar em tela cheia</button>
+                    <!-- FC-01-002 -->
+                    <div class="fc-card">
+                        <div class="fc-thumb" onclick="openLightbox(1)">
+                            <img src="entregas/flash-cards/FC-01-002-v1.png" alt="Flash Card &mdash; Variabilidade de Pre&ccedil;os" loading="lazy">
+                            <div class="fc-overlay">
+                                <button class="fc-overlay-btn">Visualizar em tela cheia</button>
+                            </div>
+                        </div>
+                        <div class="fc-body">
+                            <h4>Variabilidade de Pre&ccedil;os entre Setores</h4>
+                            <p>Nota de outlier identificado. Varia&ccedil;&otilde;es de at&eacute; 72,4x entre setores da mesma operadora.</p>
+                        </div>
+                        <div class="fc-actions">
+                            <button class="fc-btn fc-btn-view" onclick="openLightbox(1)">Visualizar</button>
+                            <a href="entregas/flash-cards/FC-01-002-v1.png" download class="fc-btn fc-btn-dl">Download</a>
                         </div>
                     </div>
-                    <div class="fc-body">
-                        <h4>Variabilidade de Pre&ccedil;os entre Setores</h4>
-                        <p>Nota de outlier identificado. Varia&ccedil;&otilde;es de at&eacute; 72,4x entre setores da mesma operadora.</p>
-                    </div>
-                    <div class="fc-actions">
-                        <button class="fc-btn fc-btn-view" onclick="openLightbox(1)">Visualizar</button>
-                        <a href="entregas/flash-cards/FC-01-002-v1.png" download class="fc-btn fc-btn-dl">Download</a>
-                    </div>
-                </div>
 
-                <!-- FC-01-003 -->
-                <div class="fc-card">
-                    <div class="fc-thumb" onclick="openLightbox(2)">
-                        <img src="entregas/flash-cards/FC-01-003-v2.png" alt="Flash Card &mdash; Pontos de Aten&ccedil;&atilde;o" loading="lazy">
-                        <div class="fc-overlay">
-                            <button class="fc-overlay-btn">Visualizar em tela cheia</button>
+                    <!-- FC-01-003 -->
+                    <div class="fc-card">
+                        <div class="fc-thumb" onclick="openLightbox(2)">
+                            <img src="entregas/flash-cards/FC-01-003-v2.png" alt="Flash Card &mdash; Pontos de Aten&ccedil;&atilde;o" loading="lazy">
+                            <div class="fc-overlay">
+                                <button class="fc-overlay-btn">Visualizar em tela cheia</button>
+                            </div>
+                        </div>
+                        <div class="fc-body">
+                            <h4>Pontos de Aten&ccedil;&atilde;o e Pr&oacute;ximos Eixos</h4>
+                            <p>Limita&ccedil;&otilde;es da base de dados, achados que requerem verifica&ccedil;&atilde;o e trilhas para os pr&oacute;ximos eixos.</p>
+                        </div>
+                        <div class="fc-actions">
+                            <button class="fc-btn fc-btn-view" onclick="openLightbox(2)">Visualizar</button>
+                            <a href="entregas/flash-cards/FC-01-003-v2.png" download class="fc-btn fc-btn-dl">Download</a>
                         </div>
                     </div>
-                    <div class="fc-body">
-                        <h4>Pontos de Aten&ccedil;&atilde;o e Pr&oacute;ximos Eixos</h4>
-                        <p>Limita&ccedil;&otilde;es da base de dados, achados que requerem verifica&ccedil;&atilde;o e trilhas para os pr&oacute;ximos eixos.</p>
-                    </div>
-                    <div class="fc-actions">
-                        <button class="fc-btn fc-btn-view" onclick="openLightbox(2)">Visualizar</button>
-                        <a href="entregas/flash-cards/FC-01-003-v2.png" download class="fc-btn fc-btn-dl">Download</a>
-                    </div>
-                </div>
 
+                </div>
             </div>
         </div>
-
-    </main>
+    </div>
 
     <!-- ====== LIGHTBOX ====== -->
     <div class="lightbox" id="lightbox">

@@ -1,5 +1,11 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v1.5 — 2026-02-08
+
+- **FEATURE**: Redesign completo da parte interna (pós-login) com hero section, cards de eixo com barra lateral, fundos de seção alternados, e refinamentos visuais gerais.
+- **FEATURE**: Adicionado badge "ENTREGA PARCIAL" no card do Eixo 01 para comunicar status com mais clareza.
+- **FEATURE**: Adicionado botão "Solicitar Acesso" (mailto) na tela de login.
+
 ## v1.4 — 08/02/2026
 
 - **Redesign Visual Completo (v5.0):**
