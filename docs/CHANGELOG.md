@@ -1,5 +1,12 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v1.8 — 2026-02-08
+
+- **FEATURE**: Adicionada assinatura `Spectra™ • Inteligência Clínica para Operadoras de Saúde` em todas as páginas (login, portal, relatório Eixo 01, galeria de flash cards).
+- **FEATURE**: A assinatura é clicável e direciona para `spectra.thera.tech`.
+- **REFINEMENT**: O posicionamento da assinatura foi projetado para ser sutil e elegante, garantindo consistência visual e profissionalismo em todas as telas.
+- **DOCS**: O padrão da assinatura foi documentado no `frontend_institucional.md` como v9.0 para replicação futura.
+
 ## v1.7 — 2026-02-08
 
 - **FEATURE**: Carrossel de Flash Cards com auto-play, navegação por setas e dots, e barra de progresso.

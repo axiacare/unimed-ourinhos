@@ -1064,6 +1064,62 @@
         .brand-tagline { font-size: 11px; color: rgba(255,255,255,0.25); font-style: italic; }
         .footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); }
 
+        /* Spectra Signature */
+        .spectra-sig {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            transition: opacity var(--transicao);
+        }
+        .spectra-sig:hover { opacity: 1 !important; }
+        .spectra-sig-name {
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .spectra-sig-tm {
+            font-size: 0.6em;
+            vertical-align: super;
+            opacity: 0.6;
+            font-weight: 400;
+        }
+        .spectra-sig-dot { opacity: 0.35; }
+        .spectra-sig-tagline {
+            font-weight: 400;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* Spectra no Auth */
+        .auth-spectra {
+            margin-top: 14px;
+            text-align: center;
+        }
+        .auth-spectra .spectra-sig {
+            font-size: 10px;
+            color: var(--cinza-400);
+            opacity: 0.55;
+            justify-content: center;
+        }
+        .auth-spectra .spectra-sig-name { color: var(--azul-axiacare); }
+        .auth-spectra .spectra-sig:hover { opacity: 0.85; }
+
+        /* Spectra no Footer */
+        .footer-spectra {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .footer-spectra .spectra-sig {
+            font-size: 11px;
+            color: rgba(255,255,255,0.25);
+            opacity: 0.7;
+            justify-content: center;
+        }
+        .footer-spectra .spectra-sig-name { color: var(--teal); opacity: 0.7; }
+        .footer-spectra .spectra-sig:hover .spectra-sig-name { opacity: 1; }
+
         /* ========================================
            Auth Overlay — v8.0
            ======================================== */
@@ -1406,6 +1462,13 @@
                 <a href="https://icds.org.br" target="_blank" rel="noopener"><img src="assets/icds_horizontal_positivo.png" alt="ICDS" class="auth-logo-icds"></a>
                 <a href="https://axcare.com.br" target="_blank" rel="noopener"><img src="assets/axiacare_horizontal.png" alt="AxiaCare" class="auth-logo-axia"></a>
             </div>
+            <div class="auth-spectra">
+                <a href="https://spectra.thera.tech" target="_blank" rel="noopener" class="spectra-sig">
+                    <span class="spectra-sig-name">Spectra<span class="spectra-sig-tm">&trade;</span></span>
+                    <span class="spectra-sig-dot">&bull;</span>
+                    <span class="spectra-sig-tagline">Intelig&ecirc;ncia Cl&iacute;nica para Operadoras de Sa&uacute;de</span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -1745,6 +1808,13 @@
                     <span class="brand-tagline">Cuidado em Sa&uacute;de com Valor, na pr&aacute;tica.</span>
                 </div>
                 <div class="footer-copy">&copy; 2026 Grupo CSV. Todos os direitos reservados.</div>
+            </div>
+            <div class="footer-spectra">
+                <a href="https://spectra.thera.tech" target="_blank" rel="noopener" class="spectra-sig">
+                    <span class="spectra-sig-name">Spectra<span class="spectra-sig-tm">&trade;</span></span>
+                    <span class="spectra-sig-dot">&bull;</span>
+                    <span class="spectra-sig-tagline">Intelig&ecirc;ncia Cl&iacute;nica para Operadoras de Sa&uacute;de</span>
+                </a>
             </div>
         </div>
     </footer>

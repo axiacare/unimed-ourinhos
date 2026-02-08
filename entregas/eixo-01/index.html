@@ -308,8 +308,44 @@ footer::before {
   font-size: 11px;
 }
 .footer-copy {
-  font-size: 11px;
-  color: rgba(255,255,255,0.2);
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+}
+.footer-spectra {
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+}
+.footer-spectra .spectra-sig {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+.footer-spectra .spectra-sig:hover { opacity: 1; }
+.footer-spectra .spectra-sig-name {
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #7FBFB2;
+    opacity: 0.7;
+}
+.footer-spectra .spectra-sig:hover .spectra-sig-name { opacity: 1; }
+.footer-spectra .spectra-sig-tm {
+    font-size: 0.6em;
+    vertical-align: super;
+    opacity: 0.6;
+    font-weight: 400;
+}
+.footer-spectra .spectra-sig-dot { opacity: 0.35; }
+.footer-spectra .spectra-sig-tagline {
+    font-weight: 400;
+    font-style: italic;
+    opacity: 0.8;
 }
 
 /* RESPONSIVE - MOBILE */
@@ -734,6 +770,13 @@ footer::before {
             <span class="brand-tagline">Cuidado em Sa&uacute;de com Valor, na pr&aacute;tica.</span>
         </div>
         <div class="footer-copy">&copy; 2026 Grupo CSV. Todos os direitos reservados.</div>
+    </div>
+    <div class="footer-spectra">
+        <a href="https://spectra.thera.tech" target="_blank" rel="noopener" class="spectra-sig">
+            <span class="spectra-sig-name">Spectra<span class="spectra-sig-tm">&trade;</span></span>
+            <span class="spectra-sig-dot">&bull;</span>
+            <span class="spectra-sig-tagline">Intelig&ecirc;ncia Cl&iacute;nica para Operadoras de Sa&uacute;de</span>
+        </a>
     </div>
 </div>
 </footer>
