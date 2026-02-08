@@ -1,5 +1,11 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v1.6 — 2026-02-08
+
+- **FEATURE**: Redesign premium v7.0 do interior do portal.
+- **FEATURE**: Alinhamento visual completo do relatório Eixo 01 com o padrão do portal.
+- **FIX**: Texto do footer do card de login atualizado conforme solicitação.
+
 ## v1.5 — 2026-02-08
 
 - **FEATURE**: Redesign completo da parte interna (pós-login) com hero section, cards de eixo com barra lateral, fundos de seção alternados, e refinamentos visuais gerais.
