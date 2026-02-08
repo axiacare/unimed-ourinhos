@@ -283,6 +283,7 @@
         }
 
         .status-publicado { background: #d1fae5; color: #065f46; }
+        .status-preliminar { background: #fef3c7; color: #92400e; }
         .status-elaboracao { background: var(--cinza-100); color: var(--cinza-500); }
 
         .card-title {
@@ -321,6 +322,218 @@
 
         .card-footer .card-link:hover { text-decoration: underline; }
         .card.disabled { opacity: 0.55; pointer-events: none; }
+
+        /* ========================================
+           Flash Cards Section
+           ======================================== */
+
+        .fc-section {
+            margin-top: 8px;
+            margin-bottom: 40px;
+        }
+
+        .fc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .fc-card {
+            background: var(--branco);
+            border-radius: var(--raio);
+            box-shadow: var(--sombra-card);
+            overflow: hidden;
+            transition: box-shadow 0.2s, transform 0.2s;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .fc-card:hover {
+            box-shadow: var(--sombra-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .fc-thumb {
+            width: 100%;
+            aspect-ratio: 1142/2048;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            background: #f0f2f5;
+        }
+
+        .fc-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .fc-card:hover .fc-thumb img {
+            transform: scale(1.03);
+        }
+
+        .fc-thumb-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .fc-card:hover .fc-thumb-overlay { opacity: 1; }
+
+        .fc-thumb-overlay .fc-view-btn {
+            background: rgba(255,255,255,0.95);
+            color: var(--azul-axiacare);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .fc-info {
+            padding: 14px 16px;
+        }
+
+        .fc-info h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--cinza-900);
+            margin-bottom: 4px;
+        }
+
+        .fc-info p {
+            font-size: 12px;
+            color: var(--cinza-500);
+            line-height: 1.4;
+        }
+
+        .fc-actions {
+            padding: 0 16px 14px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .fc-btn {
+            flex: 1;
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            display: inline-block;
+        }
+
+        .fc-btn-view {
+            background: #f0f4f8;
+            color: var(--azul-axiacare);
+        }
+        .fc-btn-view:hover { background: #e0e8f0; }
+
+        .fc-btn-dl {
+            background: var(--azul-axiacare);
+            color: #fff;
+        }
+        .fc-btn-dl:hover { background: var(--azul-escuro); }
+
+        .fc-section-intro {
+            font-size: 14px;
+            color: var(--cinza-500);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 78vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        .lightbox-close:hover { opacity: 1; }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+        .lightbox-nav.prev { left: -60px; }
+        .lightbox-nav.next { right: -60px; }
+        .lightbox-meta {
+            margin-top: 16px;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+        }
+        .lightbox-meta .lb-title { color: #fff; font-weight: 600; font-size: 15px; }
+        .lightbox-meta .lb-dl {
+            display: inline-block;
+            margin-top: 10px;
+            background: #7FBFB2;
+            color: #0D3B66;
+            padding: 8px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .lightbox-meta .lb-dl:hover { background: #6aada0; }
+        .lightbox-meta .lb-counter {
+            margin-top: 6px;
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+        }
 
         /* ========================================
            Footer Institucional
@@ -465,6 +678,15 @@
                 gap: 16px;
             }
 
+            .fc-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .lightbox-nav.prev { left: -10px; }
+            .lightbox-nav.next { right: -10px; }
+            .lightbox-nav { width: 36px; height: 36px; font-size: 18px; }
+
             .info-banner,
             .disclaimer-banner {
                 padding: 16px;
@@ -515,6 +737,12 @@
 
             .card-description {
                 font-size: 13px;
+            }
+
+            .fc-grid {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin: 0 auto;
             }
         }
     </style>
@@ -573,7 +801,7 @@
                 <a href="entregas/eixo-01/index.html" class="card">
                     <div class="card-header">
                         <div class="card-icon eixo-01">&#9881;</div>
-                        <span class="card-status status-publicado">Publicado</span>
+                        <span class="card-status status-preliminar">Vers&atilde;o preliminar</span>
                     </div>
                     <div class="card-title">Eixo 01 &mdash; Leitura da Rede Assistencial</div>
                     <div class="card-description">
@@ -633,7 +861,87 @@
             </div>
         </div>
 
+        <!-- Flash Cards -->
+        <div class="fc-section">
+            <div class="section-title">Flash Cards</div>
+            <p class="fc-section-intro">
+                S&iacute;nteses visuais de alta densidade para acompanhamento din&acirc;mico do projeto. Micro entregas que condensam os principais achados de cada eixo de an&aacute;lise.
+            </p>
+            <div class="fc-grid">
+
+                <!-- FC-01-001 -->
+                <div class="fc-card">
+                    <div class="fc-thumb" onclick="openLightbox(0)">
+                        <img src="entregas/flash-cards/FC-01-001-v1.png" alt="Flash Card 01" loading="lazy">
+                        <div class="fc-thumb-overlay">
+                            <button class="fc-view-btn">Visualizar</button>
+                        </div>
+                    </div>
+                    <div class="fc-info">
+                        <h4>An&aacute;lise da Rede Assistencial</h4>
+                        <p>Distribui&ccedil;&atilde;o por camada operacional, setores de maior representatividade e principais achados.</p>
+                    </div>
+                    <div class="fc-actions">
+                        <button class="fc-btn fc-btn-view" onclick="openLightbox(0)">Visualizar</button>
+                        <a href="entregas/flash-cards/FC-01-001-v1.png" download class="fc-btn fc-btn-dl">Download</a>
+                    </div>
+                </div>
+
+                <!-- FC-01-002 -->
+                <div class="fc-card">
+                    <div class="fc-thumb" onclick="openLightbox(1)">
+                        <img src="entregas/flash-cards/FC-01-002-v1.png" alt="Flash Card 02" loading="lazy">
+                        <div class="fc-thumb-overlay">
+                            <button class="fc-view-btn">Visualizar</button>
+                        </div>
+                    </div>
+                    <div class="fc-info">
+                        <h4>Variabilidade de Pre&ccedil;os entre Setores</h4>
+                        <p>Nota de outlier identificado. Varia&ccedil;&otilde;es de at&eacute; 72,4x entre setores da mesma operadora.</p>
+                    </div>
+                    <div class="fc-actions">
+                        <button class="fc-btn fc-btn-view" onclick="openLightbox(1)">Visualizar</button>
+                        <a href="entregas/flash-cards/FC-01-002-v1.png" download class="fc-btn fc-btn-dl">Download</a>
+                    </div>
+                </div>
+
+                <!-- FC-01-003 -->
+                <div class="fc-card">
+                    <div class="fc-thumb" onclick="openLightbox(2)">
+                        <img src="entregas/flash-cards/FC-01-003-v1.png" alt="Flash Card 03" loading="lazy">
+                        <div class="fc-thumb-overlay">
+                            <button class="fc-view-btn">Visualizar</button>
+                        </div>
+                    </div>
+                    <div class="fc-info">
+                        <h4>Pontos de Aten&ccedil;&atilde;o e Pr&oacute;ximos Eixos</h4>
+                        <p>Limita&ccedil;&otilde;es da base de dados, achados que requerem verifica&ccedil;&atilde;o e trilhas para os pr&oacute;ximos eixos.</p>
+                    </div>
+                    <div class="fc-actions">
+                        <button class="fc-btn fc-btn-view" onclick="openLightbox(2)">Visualizar</button>
+                        <a href="entregas/flash-cards/FC-01-003-v1.png" download class="fc-btn fc-btn-dl">Download</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <button class="lightbox-nav prev" onclick="navLightbox(-1)">&#8249;</button>
+            <img id="lb-img" src="" alt="">
+            <button class="lightbox-nav next" onclick="navLightbox(1)">&#8250;</button>
+            <div class="lightbox-meta">
+                <div class="lb-title" id="lb-title"></div>
+                <a class="lb-dl" id="lb-dl" href="" download>Download em alta resolu&ccedil;&atilde;o</a>
+                <div class="lb-counter" id="lb-counter"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer Institucional -->
     <footer class="footer">
@@ -659,5 +967,43 @@
         </div>
     </footer>
 
+<script>
+const fcCards = [
+  { src: 'entregas/flash-cards/FC-01-001-v1.png', title: 'An\u00e1lise da Rede Assistencial' },
+  { src: 'entregas/flash-cards/FC-01-002-v1.png', title: 'Variabilidade de Pre\u00e7os entre Setores' },
+  { src: 'entregas/flash-cards/FC-01-003-v1.png', title: 'Pontos de Aten\u00e7\u00e3o e Pr\u00f3ximos Eixos' }
+];
+let fcIndex = 0;
+function openLightbox(i) {
+  fcIndex = i;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function navLightbox(d) {
+  fcIndex = (fcIndex + d + fcCards.length) % fcCards.length;
+  updateLightbox();
+}
+function updateLightbox() {
+  const c = fcCards[fcIndex];
+  document.getElementById('lb-img').src = c.src;
+  document.getElementById('lb-title').textContent = c.title;
+  document.getElementById('lb-dl').href = c.src;
+  document.getElementById('lb-counter').textContent = (fcIndex + 1) + ' de ' + fcCards.length;
+}
+document.addEventListener('keydown', function(e) {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') navLightbox(-1);
+  if (e.key === 'ArrowRight') navLightbox(1);
+});
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+</script>
 </body>
 </html>
