@@ -317,6 +317,49 @@ body {
 
 /* Footer */
 .footer {
+  margin-top: 72px;
+  background: linear-gradient(160deg, #081F3E 0%, #0D3B66 60%, #14466b 100%);
+  color: rgba(255,255,255,0.65);
+  position: relative;
+}
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #7FBFB2, #1B5E9F, #7FBFB2, transparent);
+}
+.footer-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 48px 40px 36px;
+}
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.footer-logos img.fl-unimed { height: 48px; object-fit: contain; }
+.footer-logos img.fl-icds { height: 38px; object-fit: contain; }
+.footer-logos img.fl-axia { height: 32px; object-fit: contain; opacity: 0.8; }
+.footer-logos .fl-sep { width: 1px; height: 32px; background: rgba(255,255,255,0.12); }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 12px; font-weight: 500; transition: color 0.3s ease; letter-spacing: 0.2px; margin: 0; }
+.footer-links a:hover { color: #7FBFB2; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 24px; }
+.footer-brand { display: flex; flex-direction: column; gap: 3px; }
+.footer-brand .brand-name { color: #7FBFB2; font-weight: 600; font-size: 13px; }
+.footer-brand .brand-tagline { font-style: italic; color: rgba(255,255,255,0.3); font-size: 11px; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 0; }
+/* OLD FOOTER OVERRIDDEN */
+.footer-old-unused {
   background: linear-gradient(135deg, #0D3B66 0%, #14466b 100%);
   padding: 32px;
   text-align: center;
@@ -482,22 +525,30 @@ body {
 
 <!-- Footer -->
 <footer class="footer">
-  <div class="footer-logos">
-    <img src="../../assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="logo-unimed">
-    <div class="sep"></div>
-    <img src="../../assets/icds_horizontal_negativo.png" alt="ICDS" class="logo-icds">
-    <div class="sep"></div>
-    <img src="../../assets/axiacare_horizontal_negativo.png" alt="AxiaCare" class="logo-axia">
-  </div>
-  <div class="footer-divider"></div>
-  <div class="footer-text">AxiaCare® — Grupo CSV</div>
-  <div class="footer-tagline">Cuidado em Saúde com Valor, na prática.</div>
-  <div class="footer-links">
-    <a href="https://axcare.com.br" target="_blank">axcare.com.br</a>
-    <a href="https://icds.org.br" target="_blank">icds.org.br</a>
-    <a href="../../">Portal de Entregas</a>
-  </div>
-  <div class="footer-copy">&copy; 2026 Grupo CSV. Todos os direitos reservados.</div>
+<div class="footer-inner">
+    <div class="footer-top">
+        <div class="footer-logos">
+            <img src="../../assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="fl-unimed">
+            <div class="fl-sep"></div>
+            <img src="../../assets/icds_horizontal_negativo.png" alt="ICDS" class="fl-icds">
+            <div class="fl-sep"></div>
+            <img src="../../assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="fl-axia">
+        </div>
+        <div class="footer-links">
+            <a href="https://axcare.com.br" target="_blank" rel="noopener">axcare.com.br</a>
+            <a href="https://grupocsv.com" target="_blank" rel="noopener">grupocsv.com</a>
+            <a href="https://icds.org.br" target="_blank" rel="noopener">icds.org.br</a>
+            <a href="../../">Portal de Entregas</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-brand">
+            <span class="brand-name">AxiaCare&reg; &mdash; Grupo CSV</span>
+            <span class="brand-tagline">Cuidado em Sa&uacute;de com Valor, na pr&aacute;tica.</span>
+        </div>
+        <div class="footer-copy">&copy; 2026 Grupo CSV. Todos os direitos reservados.</div>
+    </div>
+</div>
 </footer>
 
 <script>
