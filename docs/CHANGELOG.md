@@ -1,5 +1,12 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v1.9 — 2026-02-08
+
+- **REFINEMENT (UX/CX)**: Realizada revisão completa de contraste e legibilidade em todas as páginas do portal (login, portal, eixo-01, flash-cards).
+- **FIX**: Corrigido o contraste do texto "Cooperativa de Trabalho Médico de Ourinhos/SP" e "Registro ANS 31.129-4", que estava com opacidade muito baixa (rgba(255,255,255,0.3)) e agora está com opacidade adequada (rgba(255,255,255,0.6)).
+- **FIX**: Corrigido o contraste da assinatura Spectra™ em todas as páginas, que estava com opacidade muito baixa (rgba(255,255,255,0.25) e opacity: 0.7) e agora está com opacidade adequada (rgba(255,255,255,0.5) e opacity: 1).
+- **FIX**: Corrigido o contraste de diversos outros elementos de texto no footer e na tela de login, como o copyright, a tagline e os links.
+
 ## v1.8 — 2026-02-08
 
 - **FEATURE**: Adicionada assinatura `Spectra™ • Inteligência Clínica para Operadoras de Saúde` em todas as páginas (login, portal, relatório Eixo 01, galeria de flash cards).
