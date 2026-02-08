@@ -43,7 +43,11 @@ A decisao sobre o que e publicado, quando e em que formato, e exclusivamente do 
 
 ---
 
-## Estrutura
+## Documentação e Governança
+
+Este repositório segue os padrões de frontend institucional do Grupo CSV, documentados em `axiacare/analytics`. Para um registro detalhado das mudanças e atualizações neste portal, consulte o arquivo `docs/CHANGELOG.md`.
+
+### Estrutura
 
 ```
 unimed-ourinhos/
@@ -52,17 +56,14 @@ unimed-ourinhos/
 ├── README.md                   # Este arquivo
 ├── robots.txt                  # Solicita nao-indexacao por buscadores
 ├── .nojekyll                   # Servir estaticos sem Jekyll
-├── docs/                       # Documentacao de governanca
-│   └── SEGURANCA.md            # Avaliacao de seguranca e limitacoes
-├── entregas/                   # Entregas organizadas por eixo
+├── docs/
+│   └── CHANGELOG.md            # Registro de mudanças e versões do portal
+├── entregas/
 │   └── eixo-01/                # Eixo 1: Analise de Rede Assistencial
-└── assets/                     # Recursos visuais do site
-    ├── favicon.ico             # Favicon padrao AxiaCare
-    ├── og_unimed_ourinhos.png  # Imagem OpenGraph (WhatsApp/redes)
-    ├── unimed_ourinhos_logo.png
-    ├── icds_horizontal_positivo.png
-    ├── axiacare_horizontal.png
-    └── axiacare_logo.png
+└── assets/
+    ├── favicon.ico
+    ├── og_unimed_ourinhos.png
+    ├── ... (logos)
 ```
 
 ---

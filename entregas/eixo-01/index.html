@@ -6,7 +6,9 @@
 <title>Análise da Rede Assistencial | Unimed Ourinhos</title>
 <link rel="icon" href="https://axcare.com.br/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="https://axcare.com.br/favicon.ico" type="image/x-icon">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 :root {
@@ -21,7 +23,7 @@
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--cinza-escuro);
   background: var(--branco);
   line-height: 1.7;
@@ -51,7 +53,7 @@ nav {
   padding: 12px 0;
   position: sticky; top: 0; z-index: 100;
 }
-nav .container { display: flex; gap: 8px; flex-wrap: wrap; }
+nav .container { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 nav a {
   color: var(--azul-axia);
   text-decoration: none;
@@ -62,6 +64,30 @@ nav a {
   transition: background 0.2s;
 }
 nav a:hover { background: #dce8f5; }
+nav .btn-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--branco);
+  background: var(--azul-axia);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  margin-right: 8px;
+}
+nav .btn-voltar:hover {
+  background: #14466b;
+  transform: translateX(-2px);
+}
+nav .btn-voltar svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
 
 /* SECTIONS */
 section { padding: 48px 0; }
@@ -212,9 +238,9 @@ footer::before {
   object-fit: contain;
 }
 .footer-logos img.fl-axia {
-  height: 32px;
+  height: 40px;
   object-fit: contain;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 .footer-logos .fl-sep {
   width: 1px;
@@ -276,55 +302,7 @@ footer::before {
   .header-logos img { height: 36px; }
   nav .container { justify-content: center; }
   nav a { font-size: 12px; padding: 4px 8px; }
-  h2 { font-size: 20px; }
-  h3 { font-size: 17px; }
-  section { padding: 32px 0; }
-  .kpi-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .kpi-card { padding: 14px; }
-  .kpi-card .kpi-value { font-size: 22px; }
-  .kpi-card .kpi-label { font-size: 12px; }
-  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  thead th { padding: 8px 10px; font-size: 12px; }
-  tbody td { padding: 8px 10px; font-size: 13px; }
-  .chart-container { padding: 16px 8px; }
-  .chart-container canvas { max-height: 280px; }
-  .chart-title { font-size: 13px; }
-  .insight { padding: 12px 14px; }
-  .insight p { font-size: 14px; }
-  p { font-size: 15px; }
-  .footer-top { flex-direction: column; gap: 24px; text-align: center; }
-  .footer-logos { justify-content: center; flex-wrap: wrap; }
-  .footer-logos img.fl-unimed { height: 40px; }
-  .footer-logos img.fl-icds { height: 32px; }
-  .footer-logos img.fl-axia { height: 26px; }
-  .footer-links { justify-content: center; gap: 20px; }
-  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-}
-
-@media (max-width: 480px) {
-  .kpi-row { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .kpi-card .kpi-value { font-size: 20px; }
-  h2 { font-size: 18px; }
-  .header-text h1 { font-size: 16px; }
-  nav a { font-size: 11px; padding: 3px 6px; }
-}
-
-/* RESPONSIVE - MOBILE */
-@media (max-width: 768px) {
-  .container { padding: 0 16px; }
-  header { padding: 20px 0; }
-  .header-inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 12px;
-  }
-  .header-text { text-align: center; }
-  .header-text h1 { font-size: 18px; }
-  .header-text p { font-size: 12px; }
-  .header-logos { justify-content: center; }
-  .header-logos img { height: 36px; }
-  nav .container { justify-content: center; }
-  nav a { font-size: 12px; padding: 4px 8px; }
+  nav .btn-voltar { font-size: 11px; padding: 5px 12px; margin-right: 4px; }
   h2 { font-size: 20px; }
   h3 { font-size: 17px; }
   section { padding: 32px 0; }
@@ -342,18 +320,27 @@ footer::before {
   .insight p { font-size: 14px; }
   p { font-size: 15px; }
   .footer-inner { padding: 28px 18px 24px; }
-  .footer-logos img.fl-unimed { height: 36px; }
-  .footer-logos img.fl-icds { height: 28px; }
-  .footer-logos img.fl-axia { height: 22px; }
-  .footer-links { gap: 16px; }
-  .footer-links a { font-size: 11px; }
+  .footer-top { flex-direction: column; gap: 24px; text-align: center; }
+  .footer-logos { justify-content: center; flex-wrap: wrap; }
+  .footer-logos img.fl-unimed { height: 40px; }
+  .footer-logos img.fl-icds { height: 32px; }
+  .footer-logos img.fl-axia { height: 34px; }
+  .footer-links { justify-content: center; gap: 20px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
 }
+
 @media (max-width: 480px) {
   .kpi-row { grid-template-columns: 1fr 1fr; gap: 8px; }
   .kpi-card .kpi-value { font-size: 20px; }
   h2 { font-size: 18px; }
   .header-text h1 { font-size: 16px; }
   nav a { font-size: 11px; padding: 3px 6px; }
+  nav .btn-voltar { font-size: 10px; padding: 4px 10px; }
+  .footer-logos img.fl-unimed { height: 36px; }
+  .footer-logos img.fl-icds { height: 28px; }
+  .footer-logos img.fl-axia { height: 28px; }
+  .footer-links { gap: 16px; }
+  .footer-links a { font-size: 11px; }
 }
 
 /* PRINT */
@@ -383,6 +370,7 @@ footer::before {
 <!-- NAV -->
 <nav>
 <div class="container">
+  <a href="../../" class="btn-voltar"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Portal</a>
   <a href="#contexto">Contexto</a>
   <a href="#sumario">Sumário Executivo</a>
   <a href="#camadas">Distribuição por Camada</a>
@@ -696,11 +684,11 @@ footer::before {
 <div class="footer-inner">
     <div class="footer-top">
         <div class="footer-logos">
-            <img src="../../assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="fl-unimed">
+            <a href="https://www.unimedourinhos.com.br/" target="_blank" rel="noopener"><img src="../../assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="fl-unimed"></a>
             <div class="fl-sep"></div>
-            <img src="../../assets/icds_horizontal_negativo.png" alt="ICDS" class="fl-icds">
+            <a href="https://icds.org.br/" target="_blank" rel="noopener"><img src="../../assets/icds_horizontal_negativo.png" alt="ICDS" class="fl-icds"></a>
             <div class="fl-sep"></div>
-            <img src="../../assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="fl-axia">
+            <a href="https://axcare.com.br" target="_blank" rel="noopener"><img src="../../assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="fl-axia"></a>
         </div>
         <div class="footer-links">
             <a href="https://axcare.com.br" target="_blank" rel="noopener">axcare.com.br</a>
