@@ -28,11 +28,11 @@
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* ========================================
-           Design Tokens — AxiaCare Portal v3.0
+           Design Tokens — AxiaCare Portal v4.0
            ======================================== */
 
         :root {
@@ -41,10 +41,12 @@
             --azul-profundo: #081F3E;
             --teal: #7FBFB2;
             --teal-hover: #6aada0;
+            --teal-light: rgba(127,191,178,0.12);
             --verde-unimed: #00A859;
             --amarelo-aviso: #f59e0b;
             --cinza-900: #111827;
             --cinza-700: #374151;
+            --cinza-600: #4b5563;
             --cinza-500: #6b7280;
             --cinza-400: #9ca3af;
             --cinza-300: #d1d5db;
@@ -52,34 +54,33 @@
             --cinza-100: #f3f4f6;
             --cinza-50: #f9fafb;
             --branco: #ffffff;
-            --raio: 12px;
-            --raio-sm: 8px;
-            --sombra-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --sombra-md: 0 4px 16px rgba(0,0,0,0.06);
-            --sombra-lg: 0 8px 30px rgba(0,0,0,0.10);
+            --raio: 16px;
+            --raio-sm: 10px;
+            --raio-xs: 6px;
+            --sombra-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+            --sombra-card-hover: 0 4px 16px rgba(0,0,0,0.08), 0 12px 40px rgba(0,0,0,0.06);
             --sombra-xl: 0 16px 48px rgba(0,0,0,0.12);
-            --transicao: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transicao: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--cinza-50);
-            color: var(--cinza-700);
-            line-height: 1.6;
+            color: var(--cinza-600);
+            line-height: 1.65;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
         /* ========================================
-           Header — Hero Section
+           Header — NOT fixed, flows with content
            ======================================== */
 
         .header {
-            background: linear-gradient(160deg, var(--azul-profundo) 0%, var(--azul-escuro) 40%, var(--azul-axiacare) 100%);
+            background: linear-gradient(160deg, var(--azul-profundo) 0%, var(--azul-escuro) 45%, var(--azul-axiacare) 100%);
             color: var(--branco);
             position: relative;
             overflow: hidden;
@@ -88,11 +89,22 @@
         .header::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(127,191,178,0.08) 0%, transparent 70%);
+            top: -40%;
+            right: -15%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(127,191,178,0.06) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(27,94,159,0.08) 0%, transparent 65%);
             pointer-events: none;
         }
 
@@ -100,74 +112,82 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 32px;
+            padding: 24px 40px;
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
         }
 
-        .header-logos {
+        .header-left {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 20px;
         }
 
-        .header-logos img.logo-unimed {
-            height: 48px;
+        .header-left img.logo-unimed {
+            height: 52px;
             object-fit: contain;
         }
 
-        .header-logos img.logo-icds {
-            height: 40px;
+        .header-left img.logo-icds {
+            height: 42px;
             object-fit: contain;
-        }
-
-        .header-logos img.logo-axia {
-            height: 30px;
-            object-fit: contain;
-            opacity: 0.75;
         }
 
         .logo-sep {
             width: 1px;
             height: 36px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.18);
             flex-shrink: 0;
         }
 
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-right img.logo-axia {
+            height: 24px;
+            object-fit: contain;
+            opacity: 0.6;
+        }
+
         .header-badge {
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             color: var(--teal);
             font-weight: 600;
-            padding: 6px 16px;
-            border: 1px solid rgba(127,191,178,0.3);
-            border-radius: 20px;
+            padding: 7px 18px;
+            border: 1px solid rgba(127,191,178,0.25);
+            border-radius: 24px;
         }
 
         .header-hero {
             text-align: center;
-            padding: 24px 32px 56px;
-            max-width: 780px;
+            padding: 16px 40px 64px;
+            max-width: 720px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
         }
 
         .header-hero h1 {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 16px;
+            letter-spacing: -0.8px;
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
 
         .header-hero .subtitle {
-            font-size: 16px;
-            color: rgba(255,255,255,0.75);
-            line-height: 1.7;
-            max-width: 620px;
+            font-size: 15px;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 580px;
             margin: 0 auto;
         }
 
@@ -175,10 +195,11 @@
             display: flex;
             justify-content: center;
             gap: 32px;
-            margin-top: 24px;
-            font-size: 13px;
-            color: rgba(255,255,255,0.45);
+            margin-top: 28px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.35);
             font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
         /* ========================================
@@ -186,46 +207,46 @@
            ======================================== */
 
         .container {
-            max-width: 1200px;
+            max-width: 1120px;
             margin: 0 auto;
-            padding: 0 32px;
+            padding: 0 40px;
         }
 
         /* ========================================
-           Notices
+           Notices — overlapping header
            ======================================== */
 
         .notices {
-            margin-top: -32px;
-            margin-bottom: 40px;
+            margin-top: -28px;
+            margin-bottom: 48px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .notice {
-            border-radius: var(--raio);
+            border-radius: var(--raio-sm);
             padding: 18px 24px;
             display: flex;
             align-items: flex-start;
             gap: 14px;
-            font-size: 14px;
-            line-height: 1.6;
+            font-size: 13.5px;
+            line-height: 1.65;
         }
 
         .notice-icon {
-            font-size: 18px;
+            font-size: 16px;
             flex-shrink: 0;
-            margin-top: 1px;
-            width: 24px;
+            margin-top: 2px;
+            width: 22px;
             text-align: center;
         }
 
         .notice-info {
             background: var(--branco);
             border: 1px solid var(--cinza-200);
-            color: var(--cinza-700);
-            box-shadow: var(--sombra-sm);
+            color: var(--cinza-600);
+            box-shadow: var(--sombra-card);
         }
 
         .notice-info .notice-icon { color: var(--azul-axiacare); }
@@ -242,16 +263,13 @@
            Section Headers
            ======================================== */
 
-        .section {
-            margin-bottom: 48px;
-        }
+        .section { margin-bottom: 56px; }
 
         .section-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-            padding-top: 8px;
+            gap: 16px;
+            margin-bottom: 28px;
         }
 
         .section-line {
@@ -261,16 +279,16 @@
         }
 
         .section-label {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             color: var(--cinza-400);
             font-weight: 600;
             white-space: nowrap;
         }
 
         /* ========================================
-           Eixo Cards
+           Eixo Cards — Premium Design
            ======================================== */
 
         .eixo-grid {
@@ -282,14 +300,14 @@
         .eixo-card {
             background: var(--branco);
             border-radius: var(--raio);
-            box-shadow: var(--sombra-md);
-            padding: 28px;
-            transition: box-shadow var(--transicao), transform var(--transicao);
+            box-shadow: var(--sombra-card);
+            padding: 32px;
+            transition: all var(--transicao);
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(0,0,0,0.04);
+            border: 1px solid var(--cinza-100);
             position: relative;
             overflow: hidden;
         }
@@ -299,9 +317,9 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 3px;
             height: 100%;
-            border-radius: 4px 0 0 4px;
+            transition: width var(--transicao);
         }
 
         .eixo-card.eixo-01::before { background: var(--azul-axiacare); }
@@ -310,92 +328,103 @@
         .eixo-card.eixo-04::before { background: #7c3aed; }
 
         .eixo-card:not(.disabled):hover {
-            box-shadow: var(--sombra-lg);
-            transform: translateY(-3px);
+            box-shadow: var(--sombra-card-hover);
+            transform: translateY(-2px);
+            border-color: transparent;
+        }
+
+        .eixo-card:not(.disabled):hover::before {
+            width: 5px;
         }
 
         .eixo-card.disabled {
-            opacity: 0.5;
+            opacity: 0.45;
             pointer-events: none;
         }
 
         .eixo-top {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .eixo-icon {
             width: 48px;
             height: 48px;
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            flex-shrink: 0;
         }
 
-        .eixo-icon.i-01 { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: var(--azul-axiacare); }
-        .eixo-icon.i-02 { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #059669; }
-        .eixo-icon.i-03 { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #d97706; }
-        .eixo-icon.i-04 { background: linear-gradient(135deg, #ede9fe, #ddd6fe); color: #7c3aed; }
+        .i-01 { background: rgba(27,94,159,0.08); color: var(--azul-axiacare); }
+        .i-02 { background: rgba(5,150,105,0.08); color: #059669; }
+        .i-03 { background: rgba(217,119,6,0.08); color: #d97706; }
+        .i-04 { background: rgba(124,58,237,0.08); color: #7c3aed; }
 
         .eixo-status {
             font-size: 10px;
-            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
             padding: 5px 12px;
             border-radius: 20px;
-            white-space: nowrap;
         }
 
-        .st-preliminar { background: #fef3c7; color: #92400e; }
-        .st-elaboracao { background: var(--cinza-100); color: var(--cinza-400); }
+        .st-preliminar {
+            background: rgba(245,158,11,0.1);
+            color: #b45309;
+        }
+
+        .st-elaboracao {
+            background: var(--cinza-100);
+            color: var(--cinza-400);
+        }
 
         .eixo-title {
             font-size: 17px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--cinza-900);
-            margin-bottom: 8px;
-            line-height: 1.3;
+            margin-bottom: 10px;
+            line-height: 1.35;
         }
 
         .eixo-desc {
-            font-size: 14px;
+            font-size: 13.5px;
             color: var(--cinza-500);
-            line-height: 1.6;
+            line-height: 1.7;
             flex-grow: 1;
         }
 
         .eixo-footer {
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid var(--cinza-100);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 13px;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--cinza-100);
         }
 
         .eixo-tag {
+            font-size: 11px;
             color: var(--cinza-400);
             font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
         .eixo-link {
+            font-size: 13px;
             color: var(--azul-axiacare);
             font-weight: 600;
-            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             transition: gap var(--transicao);
         }
 
-        .eixo-card:hover .eixo-link { gap: 10px; }
+        .eixo-card:hover .eixo-link { gap: 8px; }
 
         /* ========================================
            Flash Cards
@@ -405,8 +434,8 @@
             font-size: 14px;
             color: var(--cinza-500);
             margin-bottom: 24px;
+            max-width: 640px;
             line-height: 1.7;
-            max-width: 680px;
         }
 
         .fc-grid {
@@ -418,23 +447,22 @@
         .fc-card {
             background: var(--branco);
             border-radius: var(--raio);
-            box-shadow: var(--sombra-md);
+            box-shadow: var(--sombra-card);
             overflow: hidden;
-            transition: box-shadow var(--transicao), transform var(--transicao);
-            border: 1px solid rgba(0,0,0,0.04);
+            border: 1px solid var(--cinza-100);
+            transition: all var(--transicao);
         }
 
         .fc-card:hover {
-            box-shadow: var(--sombra-lg);
-            transform: translateY(-3px);
+            box-shadow: var(--sombra-card-hover);
+            transform: translateY(-2px);
         }
 
         .fc-thumb {
-            width: 100%;
-            aspect-ratio: 9/16;
-            overflow: hidden;
             position: relative;
             cursor: pointer;
+            overflow: hidden;
+            aspect-ratio: 9/16;
             background: var(--cinza-100);
         }
 
@@ -445,68 +473,63 @@
             transition: transform 0.4s ease;
         }
 
-        .fc-card:hover .fc-thumb img {
-            transform: scale(1.04);
-        }
+        .fc-card:hover .fc-thumb img { transform: scale(1.03); }
 
         .fc-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.6) 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
+            background: rgba(8,31,62,0.5);
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
-            padding: 20px;
+            opacity: 0;
+            transition: opacity var(--transicao);
         }
 
-        .fc-card:hover .fc-overlay { opacity: 1; }
+        .fc-thumb:hover .fc-overlay { opacity: 1; }
 
         .fc-overlay-btn {
             background: rgba(255,255,255,0.95);
             color: var(--azul-escuro);
             border: none;
-            padding: 10px 28px;
+            padding: 10px 20px;
             border-radius: var(--raio-sm);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            cursor: pointer;
             font-family: inherit;
-            transition: background var(--transicao);
+            cursor: pointer;
+            letter-spacing: 0.3px;
         }
 
-        .fc-overlay-btn:hover { background: var(--branco); }
-
         .fc-body {
-            padding: 16px 20px;
+            padding: 18px 20px 12px;
         }
 
         .fc-body h4 {
             font-size: 14px;
             font-weight: 600;
             color: var(--cinza-900);
-            margin-bottom: 4px;
-            line-height: 1.3;
+            margin-bottom: 6px;
+            line-height: 1.4;
         }
 
         .fc-body p {
-            font-size: 13px;
+            font-size: 12.5px;
             color: var(--cinza-500);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .fc-actions {
             padding: 0 20px 18px;
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .fc-btn {
             flex: 1;
-            padding: 10px 16px;
-            border-radius: var(--raio-sm);
-            font-size: 13px;
+            padding: 9px 14px;
+            border-radius: var(--raio-xs);
+            font-size: 12px;
             font-weight: 600;
             text-align: center;
             cursor: pointer;
@@ -517,14 +540,15 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .fc-btn-view {
-            background: var(--cinza-100);
+            background: var(--cinza-50);
             color: var(--azul-axiacare);
+            border: 1px solid var(--cinza-200);
         }
-        .fc-btn-view:hover { background: var(--cinza-200); }
+        .fc-btn-view:hover { background: var(--cinza-100); border-color: var(--cinza-300); }
 
         .fc-btn-dl {
             background: var(--azul-axiacare);
@@ -562,7 +586,7 @@
         .lb-wrap img {
             max-width: 100%;
             max-height: 76vh;
-            border-radius: var(--raio);
+            border-radius: var(--raio-sm);
             box-shadow: 0 8px 48px rgba(0,0,0,0.5);
         }
 
@@ -572,8 +596,8 @@
             right: 0;
             background: none;
             border: none;
-            color: rgba(255,255,255,0.7);
-            font-size: 32px;
+            color: rgba(255,255,255,0.6);
+            font-size: 28px;
             cursor: pointer;
             transition: color var(--transicao);
             padding: 8px;
@@ -585,12 +609,12 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
             color: #fff;
-            font-size: 22px;
-            width: 48px;
-            height: 48px;
+            font-size: 20px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -600,9 +624,9 @@
             backdrop-filter: blur(8px);
         }
 
-        .lb-nav:hover { background: rgba(255,255,255,0.25); }
-        .lb-nav.prev { left: -64px; }
-        .lb-nav.next { right: -64px; }
+        .lb-nav:hover { background: rgba(255,255,255,0.2); }
+        .lb-nav.prev { left: -60px; }
+        .lb-nav.next { right: -60px; }
 
         .lb-meta {
             margin-top: 20px;
@@ -612,7 +636,7 @@
         .lb-meta .lb-title {
             color: #fff;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .lb-meta .lb-dl {
@@ -623,9 +647,9 @@
             background: var(--teal);
             color: var(--azul-profundo);
             padding: 10px 28px;
-            border-radius: var(--raio-sm);
+            border-radius: var(--raio-xs);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             transition: background var(--transicao);
         }
@@ -634,18 +658,18 @@
 
         .lb-meta .lb-counter {
             margin-top: 8px;
-            color: rgba(255,255,255,0.35);
-            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+            font-size: 11px;
         }
 
         /* ========================================
-           Footer Institucional Padr&atilde;o
+           Footer Institucional Padr&atilde;o v4.0
            ======================================== */
 
         .footer {
-            margin-top: 64px;
+            margin-top: 72px;
             background: linear-gradient(160deg, var(--azul-profundo) 0%, var(--azul-escuro) 60%, #14466b 100%);
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.65);
             position: relative;
         }
 
@@ -655,14 +679,14 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--teal), var(--azul-axiacare), var(--teal));
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--teal), var(--azul-axiacare), var(--teal), transparent);
         }
 
         .footer-inner {
-            max-width: 1200px;
+            max-width: 1120px;
             margin: 0 auto;
-            padding: 48px 32px 36px;
+            padding: 48px 40px 36px;
         }
 
         .footer-top {
@@ -670,48 +694,49 @@
             align-items: center;
             justify-content: space-between;
             padding-bottom: 32px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
 
         .footer-logos {
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 24px;
         }
 
         .footer-logos img.fl-unimed {
-            height: 44px;
+            height: 48px;
             object-fit: contain;
         }
 
         .footer-logos img.fl-icds {
-            height: 36px;
+            height: 38px;
             object-fit: contain;
         }
 
         .footer-logos img.fl-axia {
-            height: 28px;
+            height: 24px;
             object-fit: contain;
-            opacity: 0.7;
+            opacity: 0.65;
         }
 
         .footer-logos .fl-sep {
             width: 1px;
             height: 32px;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.12);
         }
 
         .footer-links {
             display: flex;
-            gap: 24px;
+            gap: 28px;
         }
 
         .footer-links a {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.4);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             transition: color var(--transicao);
+            letter-spacing: 0.2px;
         }
 
         .footer-links a:hover { color: var(--teal); }
@@ -726,157 +751,26 @@
         .footer-brand {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 3px;
         }
 
         .footer-brand .brand-name {
             color: var(--teal);
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .footer-brand .brand-tagline {
             font-style: italic;
-            color: rgba(255,255,255,0.4);
-            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+            font-size: 11px;
         }
 
         .footer-copy {
             font-size: 11px;
-            color: rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.2);
         }
 
-        /* ========================================
-           Responsive — Mobile Optimized
-           ======================================== */
-
-        @media (max-width: 1024px) {
-            .eixo-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-nav {
-                flex-direction: column;
-                gap: 16px;
-                padding: 16px 20px;
-            }
-
-            .header-logos {
-                gap: 16px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .header-logos img.logo-unimed { height: 42px; }
-            .header-logos img.logo-icds { height: 34px; }
-            .header-logos img.logo-axia { height: 24px; }
-            .logo-sep { height: 28px; }
-
-            .header-hero {
-                padding: 16px 20px 40px;
-            }
-
-            .header-hero h1 { font-size: 26px; }
-            .header-hero .subtitle { font-size: 15px; }
-
-            .header-meta {
-                flex-direction: column;
-                gap: 4px;
-                align-items: center;
-            }
-
-            .container { padding: 0 20px; }
-
-            .notices { margin-top: -24px; }
-
-            .notice {
-                padding: 16px 18px;
-                font-size: 13px;
-            }
-
-            .eixo-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-
-            .eixo-card { padding: 22px; }
-
-            .fc-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-            }
-
-            .lb-nav.prev { left: 4px; }
-            .lb-nav.next { right: 4px; }
-            .lb-nav { width: 40px; height: 40px; font-size: 18px; }
-
-            .footer-inner { padding: 36px 20px 28px; }
-
-            .footer-top {
-                flex-direction: column;
-                gap: 24px;
-                text-align: center;
-            }
-
-            .footer-logos {
-                gap: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .footer-logos img.fl-unimed { height: 38px; }
-            .footer-logos img.fl-icds { height: 30px; }
-            .footer-logos img.fl-axia { height: 24px; }
-
-            .footer-links {
-                justify-content: center;
-                gap: 20px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header-nav { padding: 14px 16px; }
-
-            .header-logos img.logo-unimed { height: 38px; }
-            .header-logos img.logo-icds { height: 30px; }
-            .header-logos img.logo-axia { height: 20px; }
-            .logo-sep { height: 24px; }
-
-            .header-hero { padding: 12px 16px 32px; }
-            .header-hero h1 { font-size: 22px; }
-            .header-hero .subtitle { font-size: 14px; }
-            .header-meta { font-size: 12px; }
-
-            .container { padding: 0 16px; }
-
-            .eixo-card { padding: 18px; }
-            .eixo-title { font-size: 15px; }
-            .eixo-desc { font-size: 13px; }
-            .eixo-icon { width: 42px; height: 42px; font-size: 18px; }
-
-            .fc-grid {
-                grid-template-columns: 1fr;
-                max-width: 340px;
-                margin: 0 auto;
-            }
-
-            .fc-body { padding: 14px 16px; }
-            .fc-actions { padding: 0 16px 16px; }
-
-            .footer-inner { padding: 28px 16px 24px; }
-            .footer-logos img.fl-unimed { height: 34px; }
-            .footer-logos img.fl-icds { height: 26px; }
-            .footer-logos img.fl-axia { height: 20px; }
-            .footer-links { gap: 16px; font-size: 12px; }
-        }
         /* ========================================
            Auth Overlay
            ======================================== */
@@ -900,32 +794,32 @@
         .auth-blur {
             position: absolute;
             inset: 0;
-            backdrop-filter: blur(24px) saturate(0.7);
-            -webkit-backdrop-filter: blur(24px) saturate(0.7);
-            background: rgba(8, 31, 62, 0.55);
+            backdrop-filter: blur(28px) saturate(0.6);
+            -webkit-backdrop-filter: blur(28px) saturate(0.6);
+            background: rgba(8, 31, 62, 0.6);
         }
 
         .auth-card {
             position: relative;
             z-index: 1;
             background: rgba(255,255,255,0.97);
-            border-radius: 20px;
-            padding: 48px 44px 40px;
+            border-radius: 24px;
+            padding: 52px 48px 44px;
             max-width: 400px;
             width: 90%;
-            box-shadow: 0 24px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.1);
+            box-shadow: 0 24px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.08);
             text-align: center;
-            animation: authSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: authSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes authSlideIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.97); }
+            from { opacity: 0; transform: translateY(24px) scale(0.96); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .auth-logo {
             height: 56px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             object-fit: contain;
         }
 
@@ -937,22 +831,20 @@
         }
 
         .auth-subtitle {
-            font-size: 13px;
+            font-size: 12.5px;
             color: var(--cinza-400);
-            margin-bottom: 32px;
+            margin-bottom: 36px;
             font-weight: 400;
+            letter-spacing: 0.2px;
         }
 
-        .auth-field {
-            position: relative;
-            margin-bottom: 16px;
-        }
+        .auth-field { margin-bottom: 16px; }
 
         .auth-input {
             width: 100%;
             padding: 14px 20px;
             border: 1.5px solid var(--cinza-200);
-            border-radius: 10px;
+            border-radius: var(--raio-sm);
             font-size: 15px;
             font-family: inherit;
             color: var(--cinza-900);
@@ -966,18 +858,18 @@
         .auth-input::placeholder {
             letter-spacing: 0;
             color: var(--cinza-400);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .auth-input:focus {
             border-color: var(--azul-axiacare);
-            box-shadow: 0 0 0 3px rgba(27,94,159,0.1);
+            box-shadow: 0 0 0 3px rgba(27,94,159,0.08);
             background: var(--branco);
         }
 
         .auth-input.error {
             border-color: #ef4444;
-            box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+            box-shadow: 0 0 0 3px rgba(239,68,68,0.08);
             animation: authShake 0.4s ease;
         }
 
@@ -995,8 +887,8 @@
             background: linear-gradient(135deg, var(--azul-axiacare), var(--azul-escuro));
             color: var(--branco);
             border: none;
-            border-radius: 10px;
-            font-size: 15px;
+            border-radius: var(--raio-sm);
+            font-size: 14px;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
@@ -1008,24 +900,143 @@
         .auth-btn:active { transform: scale(0.98); }
 
         .auth-error-msg {
-            font-size: 13px;
+            font-size: 12px;
             color: #ef4444;
             margin-top: 12px;
-            min-height: 20px;
-            transition: opacity 0.2s;
+            min-height: 18px;
         }
 
         .auth-footer-text {
-            margin-top: 28px;
+            margin-top: 32px;
             font-size: 11px;
             color: var(--cinza-400);
-            line-height: 1.5;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           Responsive — Mobile First
+           ======================================== */
+
+        @media (max-width: 768px) {
+            .header-nav {
+                flex-direction: column;
+                gap: 14px;
+                padding: 18px 24px;
+            }
+
+            .header-left {
+                gap: 14px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .header-left img.logo-unimed { height: 44px; }
+            .header-left img.logo-icds { height: 34px; }
+            .logo-sep { height: 28px; }
+
+            .header-right { gap: 12px; }
+            .header-right img.logo-axia { height: 20px; }
+
+            .header-hero {
+                padding: 12px 24px 48px;
+            }
+
+            .header-hero h1 { font-size: 28px; }
+            .header-hero .subtitle { font-size: 14px; }
+
+            .header-meta {
+                flex-direction: column;
+                gap: 4px;
+                align-items: center;
+            }
+
+            .container { padding: 0 24px; }
+            .notices { margin-top: -20px; margin-bottom: 36px; }
+            .notice { padding: 16px 18px; font-size: 13px; }
+
+            .eixo-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .eixo-card { padding: 24px; }
+
+            .fc-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .lb-nav.prev { left: 4px; }
+            .lb-nav.next { right: 4px; }
+            .lb-nav { width: 38px; height: 38px; font-size: 16px; }
+
+            .footer-inner { padding: 36px 24px 28px; }
+
+            .footer-top {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .footer-logos {
+                gap: 18px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .footer-logos img.fl-unimed { height: 40px; }
+            .footer-logos img.fl-icds { height: 32px; }
+            .footer-logos img.fl-axia { height: 22px; }
+
+            .footer-links {
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
         }
 
         @media (max-width: 480px) {
+            .header-nav { padding: 16px 18px; }
+            .header-left img.logo-unimed { height: 40px; }
+            .header-left img.logo-icds { height: 30px; }
+            .header-right img.logo-axia { height: 18px; }
+            .logo-sep { height: 24px; }
+            .header-badge { font-size: 9px; padding: 5px 14px; }
+
+            .header-hero { padding: 8px 18px 36px; }
+            .header-hero h1 { font-size: 24px; }
+            .header-hero .subtitle { font-size: 13px; }
+            .header-meta { font-size: 11px; }
+
+            .container { padding: 0 18px; }
+            .eixo-card { padding: 20px; }
+            .eixo-title { font-size: 15px; }
+            .eixo-icon { width: 42px; height: 42px; font-size: 18px; border-radius: 12px; }
+
+            .fc-grid {
+                grid-template-columns: 1fr;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .fc-body { padding: 14px 16px 8px; }
+            .fc-actions { padding: 0 16px 16px; }
+
+            .footer-inner { padding: 28px 18px 24px; }
+            .footer-logos img.fl-unimed { height: 36px; }
+            .footer-logos img.fl-icds { height: 28px; }
+            .footer-logos img.fl-axia { height: 18px; }
+            .footer-links { gap: 16px; }
+            .footer-links a { font-size: 11px; }
+
             .auth-card {
-                padding: 36px 28px 32px;
-                border-radius: 16px;
+                padding: 40px 28px 32px;
+                border-radius: 18px;
             }
             .auth-logo { height: 48px; }
             .auth-title { font-size: 18px; }
@@ -1055,17 +1066,18 @@
         </div>
     </div>
 
-    <!-- ====== HEADER ====== -->
+    <!-- ====== HEADER (not fixed) ====== -->
     <header class="header">
         <nav class="header-nav">
-            <div class="header-logos">
+            <div class="header-left">
                 <img src="assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="logo-unimed">
                 <div class="logo-sep"></div>
-                <img src="assets/icds_horizontal_negativo.png" alt="ICDS &mdash; Instituto de Coopera&ccedil;&atilde;o para o Desenvolvimento da Sa&uacute;de" class="logo-icds">
-                <div class="logo-sep"></div>
-                <img src="assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="logo-axia">
+                <img src="assets/icds_horizontal_negativo.png" alt="ICDS" class="logo-icds">
             </div>
-            <div class="header-badge">Portal de Entregas</div>
+            <div class="header-right">
+                <img src="assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="logo-axia">
+                <div class="header-badge">Portal de Entregas</div>
+            </div>
         </nav>
         <div class="header-hero">
             <h1>Unimed Ourinhos</h1>
@@ -1106,7 +1118,9 @@
                 <!-- Eixo 01 -->
                 <a href="entregas/eixo-01/index.html" class="eixo-card eixo-01">
                     <div class="eixo-top">
-                        <div class="eixo-icon i-01">&#9881;</div>
+                        <div class="eixo-icon i-01">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        </div>
                         <span class="eixo-status st-preliminar">Vers&atilde;o preliminar</span>
                     </div>
                     <div class="eixo-title">Eixo 01 &mdash; Leitura da Rede Assistencial</div>
@@ -1120,7 +1134,9 @@
                 <!-- Eixo 02 -->
                 <div class="eixo-card eixo-02 disabled">
                     <div class="eixo-top">
-                        <div class="eixo-icon i-02">&#9878;</div>
+                        <div class="eixo-icon i-02">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                        </div>
                         <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
                     </div>
                     <div class="eixo-title">Eixo 02 &mdash; An&aacute;lise de Variabilidade de Custos</div>
@@ -1133,7 +1149,9 @@
                 <!-- Eixo 03 -->
                 <div class="eixo-card eixo-03 disabled">
                     <div class="eixo-top">
-                        <div class="eixo-icon i-03">&#9879;</div>
+                        <div class="eixo-icon i-03">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
                         <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
                     </div>
                     <div class="eixo-title">Eixo 03 &mdash; Oportunidades de Internaliza&ccedil;&atilde;o</div>
@@ -1146,7 +1164,9 @@
                 <!-- Eixo 04 -->
                 <div class="eixo-card eixo-04 disabled">
                     <div class="eixo-top">
-                        <div class="eixo-icon i-04">&#9880;</div>
+                        <div class="eixo-icon i-04">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        </div>
                         <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
                     </div>
                     <div class="eixo-title">Eixo 04 &mdash; Leitura Integrada Operadora-Hospital</div>
@@ -1184,8 +1204,8 @@
                         <p>Distribui&ccedil;&atilde;o por camada operacional, setores de maior representatividade e principais achados.</p>
                     </div>
                     <div class="fc-actions">
-                        <button class="fc-btn fc-btn-view" onclick="openLightbox(0)">&#128269; Visualizar</button>
-                        <a href="entregas/flash-cards/FC-01-001-v1.png" download class="fc-btn fc-btn-dl">&#8681; Download</a>
+                        <button class="fc-btn fc-btn-view" onclick="openLightbox(0)">Visualizar</button>
+                        <a href="entregas/flash-cards/FC-01-001-v1.png" download class="fc-btn fc-btn-dl">Download</a>
                     </div>
                 </div>
 
@@ -1202,8 +1222,8 @@
                         <p>Nota de outlier identificado. Varia&ccedil;&otilde;es de at&eacute; 72,4x entre setores da mesma operadora.</p>
                     </div>
                     <div class="fc-actions">
-                        <button class="fc-btn fc-btn-view" onclick="openLightbox(1)">&#128269; Visualizar</button>
-                        <a href="entregas/flash-cards/FC-01-002-v1.png" download class="fc-btn fc-btn-dl">&#8681; Download</a>
+                        <button class="fc-btn fc-btn-view" onclick="openLightbox(1)">Visualizar</button>
+                        <a href="entregas/flash-cards/FC-01-002-v1.png" download class="fc-btn fc-btn-dl">Download</a>
                     </div>
                 </div>
 
@@ -1220,8 +1240,8 @@
                         <p>Limita&ccedil;&otilde;es da base de dados, achados que requerem verifica&ccedil;&atilde;o e trilhas para os pr&oacute;ximos eixos.</p>
                     </div>
                     <div class="fc-actions">
-                        <button class="fc-btn fc-btn-view" onclick="openLightbox(2)">&#128269; Visualizar</button>
-                        <a href="entregas/flash-cards/FC-01-003-v1.png" download class="fc-btn fc-btn-dl">&#8681; Download</a>
+                        <button class="fc-btn fc-btn-view" onclick="openLightbox(2)">Visualizar</button>
+                        <a href="entregas/flash-cards/FC-01-003-v1.png" download class="fc-btn fc-btn-dl">Download</a>
                     </div>
                 </div>
 
@@ -1239,7 +1259,7 @@
             <button class="lb-nav next" onclick="navLightbox(1)">&#8250;</button>
             <div class="lb-meta">
                 <div class="lb-title" id="lb-title"></div>
-                <a class="lb-dl" id="lb-dl" href="" download>&#8681; Download em alta resolu&ccedil;&atilde;o</a>
+                <a class="lb-dl" id="lb-dl" href="" download>Download em alta resolu&ccedil;&atilde;o</a>
                 <div class="lb-counter" id="lb-counter"></div>
             </div>
         </div>
@@ -1259,7 +1279,6 @@
                 <div class="footer-links">
                     <a href="https://axcare.com.br" target="_blank" rel="noopener">axcare.com.br</a>
                     <a href="https://icds.org.br" target="_blank" rel="noopener">icds.org.br</a>
-                    <a href="https://github.com/axiacare/unimed-ourinhos" target="_blank" rel="noopener">Reposit&oacute;rio</a>
                 </div>
             </div>
             <div class="footer-bottom">
