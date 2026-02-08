@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="robots" content="noindex, nofollow">
     <title>Unimed Ourinhos | Portal de Entregas AxiaCare&reg;</title>
 
@@ -25,311 +25,388 @@
     <meta name="twitter:description" content="Entregas t&eacute;cnicas do projeto de consultoria em efici&ecirc;ncia assistencial e otimiza&ccedil;&atilde;o de custos.">
     <meta name="twitter:image" content="https://unimed167.axcare.com.br/assets/og_unimed_ourinhos.png">
 
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         /* ========================================
-           Design System — AxiaCare / Unimed / ICDS
+           Design Tokens — AxiaCare Portal v3.0
            ======================================== */
 
         :root {
             --azul-axiacare: #1B5E9F;
             --azul-escuro: #0D3B66;
-            --teal-axiacare: #7FBFB2;
+            --azul-profundo: #081F3E;
+            --teal: #7FBFB2;
+            --teal-hover: #6aada0;
             --verde-unimed: #00A859;
-            --cinza-900: #1a1a2e;
+            --amarelo-aviso: #f59e0b;
+            --cinza-900: #111827;
             --cinza-700: #374151;
             --cinza-500: #6b7280;
+            --cinza-400: #9ca3af;
             --cinza-300: #d1d5db;
+            --cinza-200: #e5e7eb;
             --cinza-100: #f3f4f6;
             --cinza-50: #f9fafb;
             --branco: #ffffff;
-            --sombra-sutil: 0 1px 3px rgba(0,0,0,0.08);
-            --sombra-card: 0 4px 12px rgba(0,0,0,0.06);
-            --sombra-card-hover: 0 8px 24px rgba(0,0,0,0.10);
-            --raio: 8px;
+            --raio: 12px;
+            --raio-sm: 8px;
+            --sombra-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --sombra-md: 0 4px 16px rgba(0,0,0,0.06);
+            --sombra-lg: 0 8px 30px rgba(0,0,0,0.10);
+            --sombra-xl: 0 16px 48px rgba(0,0,0,0.12);
+            --transicao: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
-            background-color: var(--cinza-50);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--cinza-50);
             color: var(--cinza-700);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* ========================================
-           Header
+           Header — Hero Section
            ======================================== */
 
         .header {
-            background: linear-gradient(135deg, var(--azul-escuro) 0%, var(--azul-axiacare) 100%);
+            background: linear-gradient(160deg, var(--azul-profundo) 0%, var(--azul-escuro) 40%, var(--azul-axiacare) 100%);
             color: var(--branco);
-            padding: 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .header-top {
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(127,191,178,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 24px;
+            padding: 20px 32px;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .header-logos {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 24px;
         }
 
-        .header-logos img {
-            height: 36px;
+        .header-logos img.logo-unimed {
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .header-logos img.logo-icds {
+            height: 40px;
             object-fit: contain;
         }
 
         .header-logos img.logo-axia {
-            height: 26px;
-            opacity: 0.85;
+            height: 30px;
+            object-fit: contain;
+            opacity: 0.75;
         }
 
-        .header-logos .separator {
+        .logo-sep {
             width: 1px;
-            height: 28px;
-            background: rgba(255,255,255,0.25);
+            height: 36px;
+            background: rgba(255,255,255,0.2);
+            flex-shrink: 0;
         }
 
         .header-badge {
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--teal-axiacare);
+            letter-spacing: 2px;
+            color: var(--teal);
             font-weight: 600;
+            padding: 6px 16px;
+            border: 1px solid rgba(127,191,178,0.3);
+            border-radius: 20px;
         }
 
-        .header-content {
+        .header-hero {
             text-align: center;
-            padding: 32px 24px 48px;
-            max-width: 800px;
+            padding: 24px 32px 56px;
+            max-width: 780px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
-        .header-content h1 {
-            font-size: 28px;
+        .header-hero h1 {
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
         }
 
-        .header-content .subtitle {
-            font-size: 15px;
-            color: rgba(255,255,255,0.8);
-            max-width: 640px;
+        .header-hero .subtitle {
+            font-size: 16px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.7;
+            max-width: 620px;
             margin: 0 auto;
-            line-height: 1.6;
         }
 
         .header-meta {
             display: flex;
             justify-content: center;
-            gap: 24px;
-            margin-top: 20px;
+            gap: 32px;
+            margin-top: 24px;
             font-size: 13px;
-            color: rgba(255,255,255,0.55);
-        }
-
-        .header-meta span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            color: rgba(255,255,255,0.45);
+            font-weight: 500;
         }
 
         /* ========================================
-           Main Content
+           Main Container
            ======================================== */
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .section {
-            margin-top: -28px;
-            margin-bottom: 40px;
-        }
-
-        .section:first-of-type {
-            margin-top: -28px;
-        }
-
-        .section-title {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--cinza-500);
-            font-weight: 600;
-            margin-bottom: 20px;
-            padding-top: 32px;
+            padding: 0 32px;
         }
 
         /* ========================================
-           Info Banner
+           Notices
            ======================================== */
 
-        .info-banner {
-            background: var(--branco);
-            border: 1px solid var(--cinza-300);
+        .notices {
+            margin-top: -32px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .notice {
             border-radius: var(--raio);
-            padding: 20px 24px;
-            margin-bottom: 12px;
+            padding: 18px 24px;
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 14px;
             font-size: 14px;
-            color: var(--cinza-700);
             line-height: 1.6;
         }
 
-        .info-banner .icon {
+        .notice-icon {
             font-size: 18px;
             flex-shrink: 0;
             margin-top: 1px;
-            color: var(--azul-axiacare);
+            width: 24px;
+            text-align: center;
         }
 
-        .disclaimer-banner {
+        .notice-info {
+            background: var(--branco);
+            border: 1px solid var(--cinza-200);
+            color: var(--cinza-700);
+            box-shadow: var(--sombra-sm);
+        }
+
+        .notice-info .notice-icon { color: var(--azul-axiacare); }
+
+        .notice-warn {
             background: #fffbeb;
             border: 1px solid #fde68a;
-            border-radius: var(--raio);
-            padding: 16px 24px;
-            margin-bottom: 32px;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            font-size: 13px;
-            color: #92400e;
-            line-height: 1.5;
+            color: #78350f;
         }
 
-        .disclaimer-banner .icon {
-            font-size: 16px;
-            flex-shrink: 0;
-            margin-top: 1px;
+        .notice-warn .notice-icon { color: var(--amarelo-aviso); }
+
+        /* ========================================
+           Section Headers
+           ======================================== */
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-top: 8px;
+        }
+
+        .section-line {
+            flex-grow: 1;
+            height: 1px;
+            background: var(--cinza-200);
+        }
+
+        .section-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--cinza-400);
+            font-weight: 600;
+            white-space: nowrap;
         }
 
         /* ========================================
-           Cards Grid
+           Eixo Cards
            ======================================== */
 
-        .cards-grid {
+        .eixo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
 
-        .card {
+        .eixo-card {
             background: var(--branco);
             border-radius: var(--raio);
-            box-shadow: var(--sombra-card);
-            padding: 24px;
-            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            box-shadow: var(--sombra-md);
+            padding: 28px;
+            transition: box-shadow var(--transicao), transform var(--transicao);
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(0,0,0,0.04);
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:hover {
-            box-shadow: var(--sombra-card-hover);
-            transform: translateY(-2px);
+        .eixo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
         }
 
-        .card-header {
+        .eixo-card.eixo-01::before { background: var(--azul-axiacare); }
+        .eixo-card.eixo-02::before { background: #059669; }
+        .eixo-card.eixo-03::before { background: #d97706; }
+        .eixo-card.eixo-04::before { background: #7c3aed; }
+
+        .eixo-card:not(.disabled):hover {
+            box-shadow: var(--sombra-lg);
+            transform: translateY(-3px);
+        }
+
+        .eixo-card.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .eixo-top {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
-        .card-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
+        .eixo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             flex-shrink: 0;
         }
 
-        .card-icon.eixo-01 { background: linear-gradient(135deg, #e0f2fe, #bae6fd); color: var(--azul-axiacare); }
-        .card-icon.eixo-02 { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #059669; }
-        .card-icon.eixo-03 { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #d97706; }
-        .card-icon.eixo-04 { background: linear-gradient(135deg, #ede9fe, #ddd6fe); color: #7c3aed; }
+        .eixo-icon.i-01 { background: linear-gradient(135deg, #dbeafe, #bfdbfe); color: var(--azul-axiacare); }
+        .eixo-icon.i-02 { background: linear-gradient(135deg, #d1fae5, #a7f3d0); color: #059669; }
+        .eixo-icon.i-03 { background: linear-gradient(135deg, #fef3c7, #fde68a); color: #d97706; }
+        .eixo-icon.i-04 { background: linear-gradient(135deg, #ede9fe, #ddd6fe); color: #7c3aed; }
 
-        .card-status {
-            font-size: 11px;
+        .eixo-status {
+            font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
+            white-space: nowrap;
         }
 
-        .status-publicado { background: #d1fae5; color: #065f46; }
-        .status-preliminar { background: #fef3c7; color: #92400e; }
-        .status-elaboracao { background: var(--cinza-100); color: var(--cinza-500); }
+        .st-preliminar { background: #fef3c7; color: #92400e; }
+        .st-elaboracao { background: var(--cinza-100); color: var(--cinza-400); }
 
-        .card-title {
-            font-size: 16px;
-            font-weight: 600;
+        .eixo-title {
+            font-size: 17px;
+            font-weight: 700;
             color: var(--cinza-900);
             margin-bottom: 8px;
+            line-height: 1.3;
         }
 
-        .card-description {
+        .eixo-desc {
             font-size: 14px;
             color: var(--cinza-500);
-            line-height: 1.5;
+            line-height: 1.6;
             flex-grow: 1;
         }
 
-        .card-footer {
-            margin-top: 18px;
-            padding-top: 14px;
+        .eixo-footer {
+            margin-top: 20px;
+            padding-top: 16px;
             border-top: 1px solid var(--cinza-100);
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-size: 13px;
-            color: var(--cinza-500);
         }
 
-        .card-footer .card-link {
+        .eixo-tag {
+            color: var(--cinza-400);
+            font-weight: 500;
+        }
+
+        .eixo-link {
             color: var(--azul-axiacare);
             font-weight: 600;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
+            transition: gap var(--transicao);
         }
 
-        .card-footer .card-link:hover { text-decoration: underline; }
-        .card.disabled { opacity: 0.55; pointer-events: none; }
+        .eixo-card:hover .eixo-link { gap: 10px; }
 
         /* ========================================
-           Flash Cards Section
+           Flash Cards
            ======================================== */
 
-        .fc-section {
-            margin-top: 8px;
-            margin-bottom: 40px;
+        .fc-intro {
+            font-size: 14px;
+            color: var(--cinza-500);
+            margin-bottom: 24px;
+            line-height: 1.7;
+            max-width: 680px;
         }
 
         .fc-grid {
@@ -341,131 +418,139 @@
         .fc-card {
             background: var(--branco);
             border-radius: var(--raio);
-            box-shadow: var(--sombra-card);
+            box-shadow: var(--sombra-md);
             overflow: hidden;
-            transition: box-shadow 0.2s, transform 0.2s;
+            transition: box-shadow var(--transicao), transform var(--transicao);
             border: 1px solid rgba(0,0,0,0.04);
         }
 
         .fc-card:hover {
-            box-shadow: var(--sombra-card-hover);
-            transform: translateY(-2px);
+            box-shadow: var(--sombra-lg);
+            transform: translateY(-3px);
         }
 
         .fc-thumb {
             width: 100%;
-            aspect-ratio: 1142/2048;
+            aspect-ratio: 9/16;
             overflow: hidden;
             position: relative;
             cursor: pointer;
-            background: #f0f2f5;
+            background: var(--cinza-100);
         }
 
         .fc-thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
+            transition: transform 0.4s ease;
         }
 
         .fc-card:hover .fc-thumb img {
-            transform: scale(1.03);
+            transform: scale(1.04);
         }
 
-        .fc-thumb-overlay {
+        .fc-overlay {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%);
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.6) 100%);
             opacity: 0;
             transition: opacity 0.3s;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            padding: 16px;
+            padding: 20px;
         }
 
-        .fc-card:hover .fc-thumb-overlay { opacity: 1; }
+        .fc-card:hover .fc-overlay { opacity: 1; }
 
-        .fc-thumb-overlay .fc-view-btn {
+        .fc-overlay-btn {
             background: rgba(255,255,255,0.95);
-            color: var(--azul-axiacare);
+            color: var(--azul-escuro);
             border: none;
-            padding: 8px 20px;
-            border-radius: 6px;
+            padding: 10px 28px;
+            border-radius: var(--raio-sm);
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
+            font-family: inherit;
+            transition: background var(--transicao);
         }
 
-        .fc-info {
-            padding: 14px 16px;
+        .fc-overlay-btn:hover { background: var(--branco); }
+
+        .fc-body {
+            padding: 16px 20px;
         }
 
-        .fc-info h4 {
-            font-size: 13px;
+        .fc-body h4 {
+            font-size: 14px;
             font-weight: 600;
             color: var(--cinza-900);
             margin-bottom: 4px;
+            line-height: 1.3;
         }
 
-        .fc-info p {
-            font-size: 12px;
+        .fc-body p {
+            font-size: 13px;
             color: var(--cinza-500);
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .fc-actions {
-            padding: 0 16px 14px;
+            padding: 0 20px 18px;
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
         .fc-btn {
             flex: 1;
-            padding: 7px 12px;
-            border-radius: 6px;
-            font-size: 12px;
+            padding: 10px 16px;
+            border-radius: var(--raio-sm);
+            font-size: 13px;
             font-weight: 600;
             text-align: center;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.2s;
+            transition: all var(--transicao);
             border: none;
-            display: inline-block;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
 
         .fc-btn-view {
-            background: #f0f4f8;
+            background: var(--cinza-100);
             color: var(--azul-axiacare);
         }
-        .fc-btn-view:hover { background: #e0e8f0; }
+        .fc-btn-view:hover { background: var(--cinza-200); }
 
         .fc-btn-dl {
             background: var(--azul-axiacare);
-            color: #fff;
+            color: var(--branco);
         }
         .fc-btn-dl:hover { background: var(--azul-escuro); }
 
-        .fc-section-intro {
-            font-size: 14px;
-            color: var(--cinza-500);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
+        /* ========================================
+           Lightbox
+           ======================================== */
 
-        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            inset: 0;
             background: rgba(0,0,0,0.92);
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 24px;
+            backdrop-filter: blur(4px);
         }
+
         .lightbox.active { display: flex; }
-        .lightbox-content {
+
+        .lb-wrap {
             position: relative;
             max-width: 90vw;
             max-height: 90vh;
@@ -473,32 +558,37 @@
             flex-direction: column;
             align-items: center;
         }
-        .lightbox-content img {
+
+        .lb-wrap img {
             max-width: 100%;
-            max-height: 78vh;
-            border-radius: 8px;
-            box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+            max-height: 76vh;
+            border-radius: var(--raio);
+            box-shadow: 0 8px 48px rgba(0,0,0,0.5);
         }
-        .lightbox-close {
+
+        .lb-close {
             position: absolute;
-            top: -40px;
+            top: -48px;
             right: 0;
             background: none;
             border: none;
-            color: #fff;
-            font-size: 28px;
+            color: rgba(255,255,255,0.7);
+            font-size: 32px;
             cursor: pointer;
-            opacity: 0.7;
+            transition: color var(--transicao);
+            padding: 8px;
         }
-        .lightbox-close:hover { opacity: 1; }
-        .lightbox-nav {
+
+        .lb-close:hover { color: #fff; }
+
+        .lb-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255,255,255,0.15);
-            border: none;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
             color: #fff;
-            font-size: 24px;
+            font-size: 22px;
             width: 48px;
             height: 48px;
             border-radius: 50%;
@@ -506,262 +596,478 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background var(--transicao);
+            backdrop-filter: blur(8px);
         }
-        .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
-        .lightbox-nav.prev { left: -60px; }
-        .lightbox-nav.next { right: -60px; }
-        .lightbox-meta {
-            margin-top: 16px;
+
+        .lb-nav:hover { background: rgba(255,255,255,0.25); }
+        .lb-nav.prev { left: -64px; }
+        .lb-nav.next { right: -64px; }
+
+        .lb-meta {
+            margin-top: 20px;
             text-align: center;
-            color: rgba(255,255,255,0.7);
-            font-size: 13px;
         }
-        .lightbox-meta .lb-title { color: #fff; font-weight: 600; font-size: 15px; }
-        .lightbox-meta .lb-dl {
-            display: inline-block;
-            margin-top: 10px;
-            background: #7FBFB2;
-            color: #0D3B66;
-            padding: 8px 24px;
-            border-radius: 6px;
+
+        .lb-meta .lb-title {
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .lb-meta .lb-dl {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            background: var(--teal);
+            color: var(--azul-profundo);
+            padding: 10px 28px;
+            border-radius: var(--raio-sm);
             text-decoration: none;
             font-size: 13px;
             font-weight: 600;
+            transition: background var(--transicao);
         }
-        .lightbox-meta .lb-dl:hover { background: #6aada0; }
-        .lightbox-meta .lb-counter {
-            margin-top: 6px;
-            color: rgba(255,255,255,0.4);
+
+        .lb-meta .lb-dl:hover { background: var(--teal-hover); }
+
+        .lb-meta .lb-counter {
+            margin-top: 8px;
+            color: rgba(255,255,255,0.35);
             font-size: 12px;
         }
 
         /* ========================================
-           Footer Institucional
+           Footer Institucional Padr&atilde;o
            ======================================== */
 
         .footer {
-            margin-top: 48px;
-            background: linear-gradient(135deg, var(--azul-escuro) 0%, #14466b 100%);
+            margin-top: 64px;
+            background: linear-gradient(160deg, var(--azul-profundo) 0%, var(--azul-escuro) 60%, #14466b 100%);
             color: rgba(255,255,255,0.7);
-            padding: 40px 24px 32px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--azul-axiacare), var(--teal));
         }
 
         .footer-inner {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 48px 32px 36px;
+        }
+
+        .footer-top {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 20px;
+            justify-content: space-between;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .footer-logos {
             display: flex;
             align-items: center;
-            gap: 24px;
-            flex-wrap: wrap;
-            justify-content: center;
+            gap: 28px;
         }
 
-        .footer-logos img {
+        .footer-logos img.fl-unimed {
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .footer-logos img.fl-icds {
+            height: 36px;
+            object-fit: contain;
+        }
+
+        .footer-logos img.fl-axia {
             height: 28px;
             object-fit: contain;
-            opacity: 0.9;
+            opacity: 0.7;
         }
 
-        .footer-logos img.logo-axia-footer {
-            height: 22px;
-            opacity: 0.65;
-        }
-
-        .footer-logos .separator {
+        .footer-logos .fl-sep {
             width: 1px;
-            height: 24px;
-            background: rgba(255,255,255,0.2);
-        }
-
-        .footer-divider {
-            width: 100%;
-            max-width: 400px;
-            height: 1px;
-            background: rgba(255,255,255,0.12);
-        }
-
-        .footer-text {
-            text-align: center;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .footer-text .brand {
-            color: var(--teal-axiacare);
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .footer-text .tagline {
-            font-style: italic;
-            color: rgba(255,255,255,0.5);
-            font-size: 12px;
+            height: 32px;
+            background: rgba(255,255,255,0.15);
         }
 
         .footer-links {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 24px;
         }
 
         .footer-links a {
             color: rgba(255,255,255,0.5);
             text-decoration: none;
-            font-size: 12px;
-            transition: color 0.2s;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color var(--transicao);
         }
 
-        .footer-links a:hover {
-            color: var(--teal-axiacare);
+        .footer-links a:hover { color: var(--teal); }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 24px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .footer-brand .brand-name {
+            color: var(--teal);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .footer-brand .brand-tagline {
+            font-style: italic;
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
         }
 
         .footer-copy {
             font-size: 11px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.25);
         }
 
         /* ========================================
-           Responsive — Mobile First
+           Responsive — Mobile Optimized
            ======================================== */
 
+        @media (max-width: 1024px) {
+            .eixo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
-            .header-top {
+            .header-nav {
                 flex-direction: column;
-                gap: 12px;
-                padding: 14px 16px;
+                gap: 16px;
+                padding: 16px 20px;
             }
 
             .header-logos {
-                gap: 14px;
+                gap: 16px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
-            .header-logos img {
-                height: 30px;
+            .header-logos img.logo-unimed { height: 42px; }
+            .header-logos img.logo-icds { height: 34px; }
+            .header-logos img.logo-axia { height: 24px; }
+            .logo-sep { height: 28px; }
+
+            .header-hero {
+                padding: 16px 20px 40px;
             }
 
-            .header-logos img.logo-axia {
-                height: 22px;
-            }
-
-            .header-content {
-                padding: 20px 16px 36px;
-            }
-
-            .header-content h1 {
-                font-size: 22px;
-            }
-
-            .header-content .subtitle {
-                font-size: 14px;
-            }
+            .header-hero h1 { font-size: 26px; }
+            .header-hero .subtitle { font-size: 15px; }
 
             .header-meta {
                 flex-direction: column;
-                gap: 6px;
+                gap: 4px;
                 align-items: center;
             }
 
-            .container {
-                padding: 0 16px;
+            .container { padding: 0 20px; }
+
+            .notices { margin-top: -24px; }
+
+            .notice {
+                padding: 16px 18px;
+                font-size: 13px;
             }
 
-            .cards-grid {
+            .eixo-grid {
                 grid-template-columns: 1fr;
                 gap: 16px;
             }
 
+            .eixo-card { padding: 22px; }
+
             .fc-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
             }
 
-            .lightbox-nav.prev { left: -10px; }
-            .lightbox-nav.next { right: -10px; }
-            .lightbox-nav { width: 36px; height: 36px; font-size: 18px; }
+            .lb-nav.prev { left: 4px; }
+            .lb-nav.next { right: 4px; }
+            .lb-nav { width: 40px; height: 40px; font-size: 18px; }
 
-            .info-banner,
-            .disclaimer-banner {
-                padding: 16px;
-                font-size: 13px;
-            }
+            .footer-inner { padding: 36px 20px 28px; }
 
-            .card {
-                padding: 20px;
-            }
-
-            .footer {
-                padding: 32px 16px 24px;
+            .footer-top {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
             }
 
             .footer-logos {
-                gap: 16px;
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
-            .footer-logos img {
-                height: 24px;
+            .footer-logos img.fl-unimed { height: 38px; }
+            .footer-logos img.fl-icds { height: 30px; }
+            .footer-logos img.fl-axia { height: 24px; }
+
+            .footer-links {
+                justify-content: center;
+                gap: 20px;
             }
 
-            .footer-logos img.logo-axia-footer {
-                height: 18px;
+            .footer-bottom {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
             }
         }
 
         @media (max-width: 480px) {
-            .header-logos img {
-                height: 26px;
-            }
+            .header-nav { padding: 14px 16px; }
 
-            .header-logos img.logo-axia {
-                height: 18px;
-            }
+            .header-logos img.logo-unimed { height: 38px; }
+            .header-logos img.logo-icds { height: 30px; }
+            .header-logos img.logo-axia { height: 20px; }
+            .logo-sep { height: 24px; }
 
-            .header-content h1 {
-                font-size: 20px;
-            }
+            .header-hero { padding: 12px 16px 32px; }
+            .header-hero h1 { font-size: 22px; }
+            .header-hero .subtitle { font-size: 14px; }
+            .header-meta { font-size: 12px; }
 
-            .card {
-                padding: 16px;
-            }
+            .container { padding: 0 16px; }
 
-            .card-title {
-                font-size: 15px;
-            }
-
-            .card-description {
-                font-size: 13px;
-            }
+            .eixo-card { padding: 18px; }
+            .eixo-title { font-size: 15px; }
+            .eixo-desc { font-size: 13px; }
+            .eixo-icon { width: 42px; height: 42px; font-size: 18px; }
 
             .fc-grid {
                 grid-template-columns: 1fr;
-                max-width: 320px;
+                max-width: 340px;
                 margin: 0 auto;
             }
+
+            .fc-body { padding: 14px 16px; }
+            .fc-actions { padding: 0 16px 16px; }
+
+            .footer-inner { padding: 28px 16px 24px; }
+            .footer-logos img.fl-unimed { height: 34px; }
+            .footer-logos img.fl-icds { height: 26px; }
+            .footer-logos img.fl-axia { height: 20px; }
+            .footer-links { gap: 16px; font-size: 12px; }
+        }
+        /* ========================================
+           Auth Overlay
+           ======================================== */
+
+        .auth-wall {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .auth-wall.dismissed {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .auth-blur {
+            position: absolute;
+            inset: 0;
+            backdrop-filter: blur(24px) saturate(0.7);
+            -webkit-backdrop-filter: blur(24px) saturate(0.7);
+            background: rgba(8, 31, 62, 0.55);
+        }
+
+        .auth-card {
+            position: relative;
+            z-index: 1;
+            background: rgba(255,255,255,0.97);
+            border-radius: 20px;
+            padding: 48px 44px 40px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.1);
+            text-align: center;
+            animation: authSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes authSlideIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .auth-logo {
+            height: 56px;
+            margin-bottom: 8px;
+            object-fit: contain;
+        }
+
+        .auth-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cinza-900);
+            margin-bottom: 4px;
+        }
+
+        .auth-subtitle {
+            font-size: 13px;
+            color: var(--cinza-400);
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .auth-field {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1.5px solid var(--cinza-200);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            color: var(--cinza-900);
+            background: var(--cinza-50);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .auth-input::placeholder {
+            letter-spacing: 0;
+            color: var(--cinza-400);
+            font-size: 14px;
+        }
+
+        .auth-input:focus {
+            border-color: var(--azul-axiacare);
+            box-shadow: 0 0 0 3px rgba(27,94,159,0.1);
+            background: var(--branco);
+        }
+
+        .auth-input.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+            animation: authShake 0.4s ease;
+        }
+
+        @keyframes authShake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--azul-axiacare), var(--azul-escuro));
+            color: var(--branco);
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+            letter-spacing: 0.3px;
+        }
+
+        .auth-btn:hover { opacity: 0.92; }
+        .auth-btn:active { transform: scale(0.98); }
+
+        .auth-error-msg {
+            font-size: 13px;
+            color: #ef4444;
+            margin-top: 12px;
+            min-height: 20px;
+            transition: opacity 0.2s;
+        }
+
+        .auth-footer-text {
+            margin-top: 28px;
+            font-size: 11px;
+            color: var(--cinza-400);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 36px 28px 32px;
+                border-radius: 16px;
+            }
+            .auth-logo { height: 48px; }
+            .auth-title { font-size: 18px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- ====== AUTH OVERLAY ====== -->
+    <div class="auth-wall" id="authWall">
+        <div class="auth-blur"></div>
+        <div class="auth-card">
+            <img src="assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="auth-logo">
+            <div class="auth-title">Portal de Entregas</div>
+            <div class="auth-subtitle">Acesso restrito aos stakeholders do projeto</div>
+            <form id="authForm" onsubmit="return handleAuth(event)">
+                <div class="auth-field">
+                    <input type="password" class="auth-input" id="authInput" placeholder="Senha de acesso" autocomplete="off" autofocus>
+                </div>
+                <button type="submit" class="auth-btn">Acessar</button>
+                <div class="auth-error-msg" id="authError"></div>
+            </form>
+            <div class="auth-footer-text">
+                Conte&uacute;do sob curadoria do respons&aacute;vel t&eacute;cnico.<br>
+                AxiaCare&reg; &mdash; Grupo CSV
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== HEADER ====== -->
     <header class="header">
-        <div class="header-top">
+        <nav class="header-nav">
             <div class="header-logos">
-                <img src="assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos">
-                <div class="separator"></div>
-                <img src="assets/icds_horizontal_negativo.png" alt="ICDS &mdash; Gest&atilde;o em Sa&uacute;de">
-                <div class="separator"></div>
+                <img src="assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="logo-unimed">
+                <div class="logo-sep"></div>
+                <img src="assets/icds_horizontal_negativo.png" alt="ICDS &mdash; Instituto de Coopera&ccedil;&atilde;o para o Desenvolvimento da Sa&uacute;de" class="logo-icds">
+                <div class="logo-sep"></div>
                 <img src="assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="logo-axia">
             </div>
             <div class="header-badge">Portal de Entregas</div>
-        </div>
-        <div class="header-content">
+        </nav>
+        <div class="header-hero">
             <h1>Unimed Ourinhos</h1>
             <p class="subtitle">
                 Este portal re&uacute;ne parte das entregas do Instituto de Coopera&ccedil;&atilde;o para o Desenvolvimento da Sa&uacute;de (ICDS) que est&atilde;o sendo conduzidas atrav&eacute;s da AxiaCare&reg;.
@@ -773,88 +1079,80 @@
         </div>
     </header>
 
-    <!-- Main -->
+    <!-- ====== MAIN ====== -->
     <main class="container">
 
-        <!-- Info + Disclaimer -->
-        <div class="section">
-            <div class="info-banner">
-                <span class="icon">&#9432;</span>
-                <div>
-                    O conte&uacute;do deste portal &eacute; publicado sob curadoria do respons&aacute;vel t&eacute;cnico do projeto e destina-se exclusivamente aos stakeholders envolvidos na consultoria.
-                </div>
+        <!-- Notices -->
+        <div class="notices">
+            <div class="notice notice-info">
+                <span class="notice-icon">&#9432;</span>
+                <div>O conte&uacute;do deste portal &eacute; publicado sob curadoria do respons&aacute;vel t&eacute;cnico do projeto e destina-se exclusivamente aos stakeholders envolvidos na consultoria.</div>
             </div>
-            <div class="disclaimer-banner">
-                <span class="icon">&#9888;</span>
-                <div>
-                    <strong>Entregas parciais.</strong> Os documentos aqui disponibilizados representam entregas em andamento, sujeitas a revis&atilde;o, complementa&ccedil;&atilde;o e valida&ccedil;&atilde;o ao longo do projeto. N&atilde;o devem ser interpretados como relat&oacute;rios finais ou conclusivos.
-                </div>
+            <div class="notice notice-warn">
+                <span class="notice-icon">&#9888;</span>
+                <div><strong>Entregas parciais.</strong> Os documentos aqui disponibilizados representam entregas em andamento, sujeitas &agrave; revis&atilde;o, complementa&ccedil;&atilde;o e valida&ccedil;&atilde;o ao longo do projeto. N&atilde;o devem ser interpretados como relat&oacute;rios finais ou conclusivos.</div>
             </div>
         </div>
 
         <!-- Relat&oacute;rios T&eacute;cnicos -->
         <div class="section">
-            <div class="section-title">Relat&oacute;rios T&eacute;cnicos</div>
-            <div class="cards-grid">
+            <div class="section-header">
+                <span class="section-label">Relat&oacute;rios T&eacute;cnicos</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="eixo-grid">
 
                 <!-- Eixo 01 -->
-                <a href="entregas/eixo-01/index.html" class="card">
-                    <div class="card-header">
-                        <div class="card-icon eixo-01">&#9881;</div>
-                        <span class="card-status status-preliminar">Vers&atilde;o preliminar</span>
+                <a href="entregas/eixo-01/index.html" class="eixo-card eixo-01">
+                    <div class="eixo-top">
+                        <div class="eixo-icon i-01">&#9881;</div>
+                        <span class="eixo-status st-preliminar">Vers&atilde;o preliminar</span>
                     </div>
-                    <div class="card-title">Eixo 01 &mdash; Leitura da Rede Assistencial</div>
-                    <div class="card-description">
-                        Mapeamento completo da rede assistencial, incluindo distribui&ccedil;&atilde;o de custos por tipo de rede, setor, tipo de atendimento e procedimento. An&aacute;lise de concentra&ccedil;&atilde;o e identifica&ccedil;&atilde;o de direcionadores de despesa.
-                    </div>
-                    <div class="card-footer">
-                        <span>An&aacute;lise de Rede</span>
-                        <span class="card-link">Acessar &#8594;</span>
+                    <div class="eixo-title">Eixo 01 &mdash; Leitura da Rede Assistencial</div>
+                    <div class="eixo-desc">Mapeamento completo da rede assistencial, incluindo distribui&ccedil;&atilde;o de custos por tipo de rede, setor, tipo de atendimento e procedimento. An&aacute;lise de concentra&ccedil;&atilde;o e identifica&ccedil;&atilde;o de direcionadores de despesa.</div>
+                    <div class="eixo-footer">
+                        <span class="eixo-tag">An&aacute;lise de Rede</span>
+                        <span class="eixo-link">Acessar <span>&rarr;</span></span>
                     </div>
                 </a>
 
                 <!-- Eixo 02 -->
-                <div class="card disabled">
-                    <div class="card-header">
-                        <div class="card-icon eixo-02">&#9878;</div>
-                        <span class="card-status status-elaboracao">Em elabora&ccedil;&atilde;o</span>
+                <div class="eixo-card eixo-02 disabled">
+                    <div class="eixo-top">
+                        <div class="eixo-icon i-02">&#9878;</div>
+                        <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
                     </div>
-                    <div class="card-title">Eixo 02 &mdash; An&aacute;lise de Variabilidade de Custos</div>
-                    <div class="card-description">
-                        Estudo comparativo de custos entre prestadores para identifica&ccedil;&atilde;o de varia&ccedil;&otilde;es injustificadas e quantifica&ccedil;&atilde;o de oportunidades de economia por padroniza&ccedil;&atilde;o.
-                    </div>
-                    <div class="card-footer">
-                        <span>Variabilidade</span>
+                    <div class="eixo-title">Eixo 02 &mdash; An&aacute;lise de Variabilidade de Custos</div>
+                    <div class="eixo-desc">Estudo comparativo de custos entre prestadores para identifica&ccedil;&atilde;o de varia&ccedil;&otilde;es injustificadas e quantifica&ccedil;&atilde;o de oportunidades de economia por padroniza&ccedil;&atilde;o.</div>
+                    <div class="eixo-footer">
+                        <span class="eixo-tag">Variabilidade</span>
                     </div>
                 </div>
 
                 <!-- Eixo 03 -->
-                <div class="card disabled">
-                    <div class="card-header">
-                        <div class="card-icon eixo-03">&#9879;</div>
-                        <span class="card-status status-elaboracao">Em elabora&ccedil;&atilde;o</span>
+                <div class="eixo-card eixo-03 disabled">
+                    <div class="eixo-top">
+                        <div class="eixo-icon i-03">&#9879;</div>
+                        <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
                     </div>
-                    <div class="card-title">Eixo 03 &mdash; Oportunidades de Internaliza&ccedil;&atilde;o</div>
-                    <div class="card-description">
-                        Avalia&ccedil;&atilde;o de impacto financeiro da internaliza&ccedil;&atilde;o de procedimentos, com an&aacute;lise de viabilidade e proje&ccedil;&atilde;o de economia para o Hospital Unimed Ourinhos.
-                    </div>
-                    <div class="card-footer">
-                        <span>Internaliza&ccedil;&atilde;o</span>
+                    <div class="eixo-title">Eixo 03 &mdash; Oportunidades de Internaliza&ccedil;&atilde;o</div>
+                    <div class="eixo-desc">Avalia&ccedil;&atilde;o de impacto financeiro da internaliza&ccedil;&atilde;o de procedimentos, com an&aacute;lise de viabilidade e proje&ccedil;&atilde;o de economia para o Hospital Unimed Ourinhos.</div>
+                    <div class="eixo-footer">
+                        <span class="eixo-tag">Internaliza&ccedil;&atilde;o</span>
                     </div>
                 </div>
 
                 <!-- Eixo 04 -->
-                <div class="card disabled">
-                    <div class="card-header">
-                        <div class="card-icon eixo-04">&#9880;</div>
-                        <span class="card-status status-elaboracao">Em elabora&ccedil;&atilde;o</span>
+                <div class="eixo-card eixo-04 disabled">
+                    <div class="eixo-top">
+                        <div class="eixo-icon i-04">&#9880;</div>
+                        <span class="eixo-status st-elaboracao">Em elabora&ccedil;&atilde;o</span>
                     </div>
-                    <div class="card-title">Eixo 04 &mdash; Leitura Integrada Operadora-Hospital</div>
-                    <div class="card-description">
-                        An&aacute;lise de fluxo de servi&ccedil;os entre a operadora e o hospital pr&oacute;prio, identificando oportunidades de reten&ccedil;&atilde;o e otimiza&ccedil;&atilde;o da rede pr&oacute;pria.
-                    </div>
-                    <div class="card-footer">
-                        <span>Leitura Integrada</span>
+                    <div class="eixo-title">Eixo 04 &mdash; Leitura Integrada Operadora-Hospital</div>
+                    <div class="eixo-desc">An&aacute;lise de fluxo de servi&ccedil;os entre a operadora e o hospital pr&oacute;prio, identificando oportunidades de reten&ccedil;&atilde;o e otimiza&ccedil;&atilde;o da rede pr&oacute;pria.</div>
+                    <div class="eixo-footer">
+                        <span class="eixo-tag">Leitura Integrada</span>
                     </div>
                 </div>
 
@@ -862,64 +1160,68 @@
         </div>
 
         <!-- Flash Cards -->
-        <div class="fc-section">
-            <div class="section-title">Flash Cards</div>
-            <p class="fc-section-intro">
+        <div class="section">
+            <div class="section-header">
+                <span class="section-label">Flash Cards</span>
+                <div class="section-line"></div>
+            </div>
+            <p class="fc-intro">
                 S&iacute;nteses visuais de alta densidade para acompanhamento din&acirc;mico do projeto. Micro entregas que condensam os principais achados de cada eixo de an&aacute;lise.
             </p>
+
             <div class="fc-grid">
 
                 <!-- FC-01-001 -->
                 <div class="fc-card">
                     <div class="fc-thumb" onclick="openLightbox(0)">
-                        <img src="entregas/flash-cards/FC-01-001-v1.png" alt="Flash Card 01" loading="lazy">
-                        <div class="fc-thumb-overlay">
-                            <button class="fc-view-btn">Visualizar</button>
+                        <img src="entregas/flash-cards/FC-01-001-v1.png" alt="Flash Card &mdash; An&aacute;lise da Rede Assistencial" loading="lazy">
+                        <div class="fc-overlay">
+                            <button class="fc-overlay-btn">Visualizar em tela cheia</button>
                         </div>
                     </div>
-                    <div class="fc-info">
+                    <div class="fc-body">
                         <h4>An&aacute;lise da Rede Assistencial</h4>
                         <p>Distribui&ccedil;&atilde;o por camada operacional, setores de maior representatividade e principais achados.</p>
                     </div>
                     <div class="fc-actions">
-                        <button class="fc-btn fc-btn-view" onclick="openLightbox(0)">Visualizar</button>
-                        <a href="entregas/flash-cards/FC-01-001-v1.png" download class="fc-btn fc-btn-dl">Download</a>
+                        <button class="fc-btn fc-btn-view" onclick="openLightbox(0)">&#128269; Visualizar</button>
+                        <a href="entregas/flash-cards/FC-01-001-v1.png" download class="fc-btn fc-btn-dl">&#8681; Download</a>
                     </div>
                 </div>
 
                 <!-- FC-01-002 -->
                 <div class="fc-card">
                     <div class="fc-thumb" onclick="openLightbox(1)">
-                        <img src="entregas/flash-cards/FC-01-002-v1.png" alt="Flash Card 02" loading="lazy">
-                        <div class="fc-thumb-overlay">
-                            <button class="fc-view-btn">Visualizar</button>
+                        <img src="entregas/flash-cards/FC-01-002-v1.png" alt="Flash Card &mdash; Variabilidade de Pre&ccedil;os" loading="lazy">
+                        <div class="fc-overlay">
+                            <button class="fc-overlay-btn">Visualizar em tela cheia</button>
                         </div>
                     </div>
-                    <div class="fc-info">
+                    <div class="fc-body">
                         <h4>Variabilidade de Pre&ccedil;os entre Setores</h4>
                         <p>Nota de outlier identificado. Varia&ccedil;&otilde;es de at&eacute; 72,4x entre setores da mesma operadora.</p>
                     </div>
                     <div class="fc-actions">
-                        <button class="fc-btn fc-btn-view" onclick="openLightbox(1)">Visualizar</button>
-                        <a href="entregas/flash-cards/FC-01-002-v1.png" download class="fc-btn fc-btn-dl">Download</a>
+                        <button class="fc-btn fc-btn-view" onclick="openLightbox(1)">&#128269; Visualizar</button>
+                        <a href="entregas/flash-cards/FC-01-002-v1.png" download class="fc-btn fc-btn-dl">&#8681; Download</a>
                     </div>
                 </div>
 
                 <!-- FC-01-003 -->
                 <div class="fc-card">
                     <div class="fc-thumb" onclick="openLightbox(2)">
-                        <img src="entregas/flash-cards/FC-01-003-v1.png" alt="Flash Card 03" loading="lazy">
-                        <div class="fc-thumb-overlay">
-                            <button class="fc-view-btn">Visualizar</button>
+                        <img src="entregas/flash-cards/FC-01-003-v1.png" alt="Flash Card &mdash; Pontos de Aten&ccedil;&atilde;o" loading="lazy">
+                        <div class="fc-overlay">
+                            <button class="fc-overlay-btn">Visualizar em tela cheia</button>
                         </div>
                     </div>
-                    <div class="fc-info">
+                    <div class="fc-body">
                         <h4>Pontos de Aten&ccedil;&atilde;o e Pr&oacute;ximos Eixos</h4>
                         <p>Limita&ccedil;&otilde;es da base de dados, achados que requerem verifica&ccedil;&atilde;o e trilhas para os pr&oacute;ximos eixos.</p>
                     </div>
                     <div class="fc-actions">
-                        <button class="fc-btn fc-btn-view" onclick="openLightbox(2)">Visualizar</button>
-                        <a href="entregas/flash-cards/FC-01-003-v1.png" download class="fc-btn fc-btn-dl">Download</a>
+                        <button class="fc-btn fc-btn-view" onclick="openLightbox(2)">&#128269; Visualizar</button>
+                        <a href="entregas/flash-cards/FC-01-003-v1.png" download class="fc-btn fc-btn-dl">&#8681; Download</a>
                     </div>
                 </div>
 
@@ -928,82 +1230,127 @@
 
     </main>
 
-    <!-- Lightbox -->
+    <!-- ====== LIGHTBOX ====== -->
     <div class="lightbox" id="lightbox">
-        <div class="lightbox-content">
-            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-            <button class="lightbox-nav prev" onclick="navLightbox(-1)">&#8249;</button>
+        <div class="lb-wrap">
+            <button class="lb-close" onclick="closeLightbox()">&times;</button>
+            <button class="lb-nav prev" onclick="navLightbox(-1)">&#8249;</button>
             <img id="lb-img" src="" alt="">
-            <button class="lightbox-nav next" onclick="navLightbox(1)">&#8250;</button>
-            <div class="lightbox-meta">
+            <button class="lb-nav next" onclick="navLightbox(1)">&#8250;</button>
+            <div class="lb-meta">
                 <div class="lb-title" id="lb-title"></div>
-                <a class="lb-dl" id="lb-dl" href="" download>Download em alta resolu&ccedil;&atilde;o</a>
+                <a class="lb-dl" id="lb-dl" href="" download>&#8681; Download em alta resolu&ccedil;&atilde;o</a>
                 <div class="lb-counter" id="lb-counter"></div>
             </div>
         </div>
     </div>
 
-    <!-- Footer Institucional -->
+    <!-- ====== FOOTER INSTITUCIONAL ====== -->
     <footer class="footer">
         <div class="footer-inner">
-            <div class="footer-logos">
-                <img src="assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos">
-                <div class="separator"></div>
-                <img src="assets/icds_horizontal_negativo.png" alt="ICDS">
-                <div class="separator"></div>
-                <img src="assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="logo-axia-footer">
+            <div class="footer-top">
+                <div class="footer-logos">
+                    <img src="assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="fl-unimed">
+                    <div class="fl-sep"></div>
+                    <img src="assets/icds_horizontal_negativo.png" alt="ICDS" class="fl-icds">
+                    <div class="fl-sep"></div>
+                    <img src="assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="fl-axia">
+                </div>
+                <div class="footer-links">
+                    <a href="https://axcare.com.br" target="_blank" rel="noopener">axcare.com.br</a>
+                    <a href="https://icds.org.br" target="_blank" rel="noopener">icds.org.br</a>
+                    <a href="https://github.com/axiacare/unimed-ourinhos" target="_blank" rel="noopener">Reposit&oacute;rio</a>
+                </div>
             </div>
-            <div class="footer-divider"></div>
-            <div class="footer-text">
-                <div class="brand">AxiaCare&reg; &mdash; Grupo CSV</div>
-                <div class="tagline">Cuidado em Sa&uacute;de com Valor, na pr&aacute;tica.</div>
+            <div class="footer-bottom">
+                <div class="footer-brand">
+                    <span class="brand-name">AxiaCare&reg; &mdash; Grupo CSV</span>
+                    <span class="brand-tagline">Cuidado em Sa&uacute;de com Valor, na pr&aacute;tica.</span>
+                </div>
+                <div class="footer-copy">&copy; 2026 Grupo CSV. Todos os direitos reservados.</div>
             </div>
-            <div class="footer-links">
-                <a href="https://axcare.com.br" target="_blank" rel="noopener">axcare.com.br</a>
-                <a href="https://icds.org.br" target="_blank" rel="noopener">icds.org.br</a>
-                <a href="https://github.com/axiacare/unimed-ourinhos" target="_blank" rel="noopener">Reposit&oacute;rio</a>
-            </div>
-            <div class="footer-copy">&copy; 2026 Grupo CSV. Todos os direitos reservados.</div>
         </div>
     </footer>
 
-<script>
-const fcCards = [
-  { src: 'entregas/flash-cards/FC-01-001-v1.png', title: 'An\u00e1lise da Rede Assistencial' },
-  { src: 'entregas/flash-cards/FC-01-002-v1.png', title: 'Variabilidade de Pre\u00e7os entre Setores' },
-  { src: 'entregas/flash-cards/FC-01-003-v1.png', title: 'Pontos de Aten\u00e7\u00e3o e Pr\u00f3ximos Eixos' }
-];
-let fcIndex = 0;
-function openLightbox(i) {
-  fcIndex = i;
-  updateLightbox();
-  document.getElementById('lightbox').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
-  document.body.style.overflow = '';
-}
-function navLightbox(d) {
-  fcIndex = (fcIndex + d + fcCards.length) % fcCards.length;
-  updateLightbox();
-}
-function updateLightbox() {
-  const c = fcCards[fcIndex];
-  document.getElementById('lb-img').src = c.src;
-  document.getElementById('lb-title').textContent = c.title;
-  document.getElementById('lb-dl').href = c.src;
-  document.getElementById('lb-counter').textContent = (fcIndex + 1) + ' de ' + fcCards.length;
-}
-document.addEventListener('keydown', function(e) {
-  if (!document.getElementById('lightbox').classList.contains('active')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') navLightbox(-1);
-  if (e.key === 'ArrowRight') navLightbox(1);
-});
-document.getElementById('lightbox').addEventListener('click', function(e) {
-  if (e.target === this) closeLightbox();
-});
-</script>
+    <!-- ====== SCRIPTS ====== -->
+    <script>
+    const fcCards = [
+      { src: 'entregas/flash-cards/FC-01-001-v1.png', title: 'An\u00e1lise da Rede Assistencial' },
+      { src: 'entregas/flash-cards/FC-01-002-v1.png', title: 'Variabilidade de Pre\u00e7os entre Setores' },
+      { src: 'entregas/flash-cards/FC-01-003-v1.png', title: 'Pontos de Aten\u00e7\u00e3o e Pr\u00f3ximos Eixos' }
+    ];
+    let fcIdx = 0;
+
+    function openLightbox(i) {
+      fcIdx = i;
+      render();
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navLightbox(d) {
+      fcIdx = (fcIdx + d + fcCards.length) % fcCards.length;
+      render();
+    }
+
+    function render() {
+      const c = fcCards[fcIdx];
+      document.getElementById('lb-img').src = c.src;
+      document.getElementById('lb-title').textContent = c.title;
+      document.getElementById('lb-dl').href = c.src;
+      document.getElementById('lb-counter').textContent = (fcIdx + 1) + ' de ' + fcCards.length;
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navLightbox(-1);
+      if (e.key === 'ArrowRight') navLightbox(1);
+    });
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    // ====== AUTH ======
+    const AUTH_HASH = '83a40f6323d76084faabc155ce8dd7874f8c75dc1caac8b9bd2a6a2d57ce7d01';
+    const AUTH_KEY = 'axiacare_portal_auth';
+
+    (function checkAuth() {
+      if (sessionStorage.getItem(AUTH_KEY) === AUTH_HASH) {
+        document.getElementById('authWall').classList.add('dismissed');
+      }
+    })();
+
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function handleAuth(e) {
+      e.preventDefault();
+      const input = document.getElementById('authInput');
+      const error = document.getElementById('authError');
+      const hash = await sha256(input.value);
+
+      if (hash === AUTH_HASH) {
+        sessionStorage.setItem(AUTH_KEY, AUTH_HASH);
+        document.getElementById('authWall').classList.add('dismissed');
+        error.textContent = '';
+      } else {
+        input.classList.add('error');
+        error.textContent = 'Senha incorreta.';
+        setTimeout(() => input.classList.remove('error'), 500);
+        input.value = '';
+        input.focus();
+      }
+      return false;
+    }
+    </script>
 </body>
 </html>
