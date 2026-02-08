@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Unimed Ourinhos — Entregas de Consultoria | AxiaCare</title>
+    <style>
+        /* ========================================
+           Design System — AxiaCare / Unimed
+           ======================================== */
+
+        :root {
+            --azul-axiacare: #1B5E9F;
+            --azul-escuro: #0D3B66;
+            --teal-axiacare: #7FBFB2;
+            --verde-unimed: #00A859;
+            --cinza-900: #1a1a2e;
+            --cinza-700: #374151;
+            --cinza-500: #6b7280;
+            --cinza-300: #d1d5db;
+            --cinza-100: #f3f4f6;
+            --cinza-50: #f9fafb;
+            --branco: #ffffff;
+            --sombra-sutil: 0 1px 3px rgba(0,0,0,0.08);
+            --sombra-card: 0 4px 12px rgba(0,0,0,0.06);
+            --sombra-card-hover: 0 8px 24px rgba(0,0,0,0.10);
+            --raio: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--cinza-50);
+            color: var(--cinza-700);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========================================
+           Header
+           ======================================== */
+
+        .header {
+            background: linear-gradient(135deg, var(--azul-escuro) 0%, var(--azul-axiacare) 100%);
+            color: var(--branco);
+            padding: 0;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-logos {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .header-logos img {
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .header-logos .separator {
+            width: 1px;
+            height: 32px;
+            background: rgba(255,255,255,0.3);
+        }
+
+        .header-badge {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--teal-axiacare);
+            font-weight: 600;
+        }
+
+        .header-content {
+            text-align: center;
+            padding: 40px 40px 56px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header-content h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .header-content p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header-meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .header-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ========================================
+           Main Content
+           ======================================== */
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section {
+            margin-top: -32px;
+            margin-bottom: 48px;
+        }
+
+        .section:first-of-type {
+            margin-top: -32px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--cinza-500);
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-top: 32px;
+        }
+
+        /* ========================================
+           Cards Grid
+           ======================================== */
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--branco);
+            border-radius: var(--raio);
+            box-shadow: var(--sombra-card);
+            padding: 28px;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .card:hover {
+            box-shadow: var(--sombra-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .card-icon.eixo-01 {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            color: var(--azul-axiacare);
+        }
+
+        .card-icon.eixo-02 {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #059669;
+        }
+
+        .card-icon.eixo-03 {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #d97706;
+        }
+
+        .card-icon.eixo-04 {
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            color: #7c3aed;
+        }
+
+        .card-status {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .status-publicado {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-elaboracao {
+            background: var(--cinza-100);
+            color: var(--cinza-500);
+        }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--cinza-900);
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: var(--cinza-500);
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--cinza-100);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--cinza-500);
+        }
+
+        .card-footer .card-link {
+            color: var(--azul-axiacare);
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-footer .card-link:hover {
+            text-decoration: underline;
+        }
+
+        .card.disabled {
+            opacity: 0.55;
+            pointer-events: none;
+        }
+
+        /* ========================================
+           Footer
+           ======================================== */
+
+        .footer {
+            margin-top: 64px;
+            padding: 32px 40px;
+            border-top: 1px solid var(--cinza-300);
+            text-align: center;
+            color: var(--cinza-500);
+            font-size: 13px;
+        }
+
+        .footer-brand {
+            font-weight: 600;
+            color: var(--cinza-700);
+        }
+
+        .footer p {
+            margin-top: 4px;
+        }
+
+        .footer-links {
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: var(--cinza-500);
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .footer-links a:hover {
+            color: var(--azul-axiacare);
+        }
+
+        /* ========================================
+           Info Banner
+           ======================================== */
+
+        .info-banner {
+            background: var(--branco);
+            border: 1px solid var(--cinza-300);
+            border-radius: var(--raio);
+            padding: 20px 24px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--cinza-700);
+        }
+
+        .info-banner .icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ========================================
+           Responsive
+           ======================================== */
+
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 16px;
+                padding: 16px 20px;
+            }
+
+            .header-content {
+                padding: 24px 20px 40px;
+            }
+
+            .header-content h1 {
+                font-size: 22px;
+            }
+
+            .header-meta {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .footer {
+                padding: 24px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-logos img {
+                height: 32px;
+            }
+
+            .header-content h1 {
+                font-size: 20px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="header-logos">
+                <img src="assets/axiacare_logo.png" alt="AxiaCare">
+                <div class="separator"></div>
+                <img src="assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos">
+            </div>
+            <div class="header-badge">Portal de Entregas</div>
+        </div>
+        <div class="header-content">
+            <h1>Unimed Ourinhos</h1>
+            <p>Entregas do projeto de consultoria em eficiência assistencial e otimização de custos</p>
+            <div class="header-meta">
+                <span>Cooperativa de Trabalho Médico de Ourinhos/SP</span>
+                <span>Código ANS 167</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="container">
+
+        <!-- Info -->
+        <div class="section">
+            <div class="info-banner">
+                <span class="icon">&#9432;</span>
+                <div>
+                    Este portal reúne as entregas técnicas do projeto de consultoria conduzido pela AxiaCare (Grupo CSV) para a Unimed Ourinhos, sob contratação do ICDS. O conteúdo é publicado sob curadoria do responsável técnico do projeto.
+                </div>
+            </div>
+        </div>
+
+        <!-- Relatórios Técnicos -->
+        <div class="section">
+            <div class="section-title">Relatórios Técnicos</div>
+            <div class="cards-grid">
+
+                <!-- Eixo 01 -->
+                <a href="entregas/eixo-01/index.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon eixo-01">&#9881;</div>
+                        <span class="card-status status-publicado">Publicado</span>
+                    </div>
+                    <div class="card-title">Eixo 01 — Leitura da Rede Assistencial</div>
+                    <div class="card-description">
+                        Mapeamento completo da rede assistencial, incluindo distribuição de custos por tipo de rede, setor, tipo de atendimento e procedimento. Análise de concentração e identificação de direcionadores de despesa.
+                    </div>
+                    <div class="card-footer">
+                        <span>Análise de Rede</span>
+                        <span class="card-link">Acessar &#8594;</span>
+                    </div>
+                </a>
+
+                <!-- Eixo 02 -->
+                <div class="card disabled">
+                    <div class="card-header">
+                        <div class="card-icon eixo-02">&#9878;</div>
+                        <span class="card-status status-elaboracao">Em elaboração</span>
+                    </div>
+                    <div class="card-title">Eixo 02 — Análise de Variabilidade de Custos</div>
+                    <div class="card-description">
+                        Estudo comparativo de custos entre prestadores para identificação de variações injustificadas e quantificação de oportunidades de economia por padronização.
+                    </div>
+                    <div class="card-footer">
+                        <span>Variabilidade</span>
+                    </div>
+                </div>
+
+                <!-- Eixo 03 -->
+                <div class="card disabled">
+                    <div class="card-header">
+                        <div class="card-icon eixo-03">&#9879;</div>
+                        <span class="card-status status-elaboracao">Em elaboração</span>
+                    </div>
+                    <div class="card-title">Eixo 03 — Oportunidades de Internalização</div>
+                    <div class="card-description">
+                        Avaliação de impacto financeiro da internalização de procedimentos, com análise de viabilidade e projeção de economia para o Hospital Unimed Ourinhos.
+                    </div>
+                    <div class="card-footer">
+                        <span>Internalização</span>
+                    </div>
+                </div>
+
+                <!-- Eixo 04 -->
+                <div class="card disabled">
+                    <div class="card-header">
+                        <div class="card-icon eixo-04">&#9880;</div>
+                        <span class="card-status status-elaboracao">Em elaboração</span>
+                    </div>
+                    <div class="card-title">Eixo 04 — Leitura Integrada Operadora-Hospital</div>
+                    <div class="card-description">
+                        Análise de fluxo de serviços entre a operadora e o hospital próprio, identificando oportunidades de retenção e otimização da rede própria.
+                    </div>
+                    <div class="card-footer">
+                        <span>Leitura Integrada</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-brand">AxiaCare — Grupo CSV</div>
+        <p>Cuidado em Saúde com Valor, na prática.</p>
+        <div class="footer-links">
+            <a href="https://github.com/axiacare/unimed-ourinhos">Repositório</a>
+        </div>
+    </footer>
+
+</body>
+</html>
