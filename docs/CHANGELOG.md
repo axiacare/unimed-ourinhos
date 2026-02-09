@@ -1,5 +1,11 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v2.1 — 2026-02-08
+
+- **FIX**: Eixos 03 e 04 corrigidos para "Pendente" (roadmap e cards). Apenas o Eixo 02 é "Em Desenvolvimento".
+- **FIX**: Nome contratual corrigido para "Unimed Ourinhos Cooperativa de Trabalho Médico" (nome oficial).
+- **FEATURE**: Card do Eixo 02 agora possui diferenciação visual muito mais evidente: opacity 0.88, sem grayscale, borda azul lateral, sombra sutil e gradiente de fundo. Contraste claro com os Eixos 03/04 (opacity 0.45, grayscale 80%).
+
 ## v2.0 — 2026-02-08
 
 - **FIX (CRÍTICO)**: Removidas previsões de datas inventadas nos cards dos Eixos 02, 03 e 04 ("Previsão: Mar/2026", "Abr/2026", "Mai/2026"). Essas datas nunca foram acordadas com o cliente.

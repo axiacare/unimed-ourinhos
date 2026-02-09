@@ -528,13 +528,22 @@
         .eixo-card.disabled:hover { opacity: 0.52; }
 
         .eixo-card.in-progress {
-            opacity: 0.68;
-            filter: grayscale(20%);
+            opacity: 0.88;
+            filter: none;
             cursor: default;
-            border-color: rgba(27,94,159,0.08);
+            border-left: 4px solid var(--azul-axiacare);
+            background: linear-gradient(135deg, rgba(27,94,159,0.03) 0%, rgba(127,191,178,0.03) 100%);
+            box-shadow: 0 2px 12px rgba(27,94,159,0.08);
         }
 
-        .eixo-card.in-progress:hover { opacity: 0.78; }
+        .eixo-card.in-progress:hover {
+            opacity: 0.94;
+            box-shadow: 0 4px 16px rgba(27,94,159,0.12);
+        }
+
+        .eixo-card.in-progress::before {
+            background: linear-gradient(180deg, var(--azul-axiacare), rgba(27,94,159,0.4));
+        }
 
         .eixo-card-inner {
             padding: 28px;
@@ -1502,7 +1511,7 @@
                 Este portal re&uacute;ne as entregas t&eacute;cnicas do projeto conduzido pelo <span class="hl-icds">ICDS</span>, com apoio metodol&oacute;gico e anal&iacute;tico da <span class="hl-axia">AxiaCare&reg;</span>, bra&ccedil;o de consultoria do <span class="hl-csv">Grupo CSV</span>. O trabalho foca em an&aacute;lise estrat&eacute;gica da rede assistencial, efici&ecirc;ncia operacional e sustentabilidade financeira da cooperativa.
             </p>
             <div class="header-meta">
-                <span>Cooperativa de Trabalho M&eacute;dico de Ourinhos/SP</span>
+                <span>Unimed Ourinhos Cooperativa de Trabalho M&eacute;dico</span>
                 <div class="header-divider"></div>
                 <span>Registro ANS 31.129-4</span>
             </div>
@@ -1569,7 +1578,7 @@
                     <div class="tl-content-mobile">
                         <div class="tl-label">Eixo 03</div>
                         <div class="tl-title">Oportunidades de Internaliza&ccedil;&atilde;o</div>
-                        <span class="tl-status tl-st-dev">Em Desenvolvimento</span>
+                        <span class="tl-status tl-st-pending">Pendente</span>
                     </div>
                 </div>
 
@@ -1578,7 +1587,7 @@
                     <div class="tl-content-mobile">
                         <div class="tl-label">Eixo 04</div>
                         <div class="tl-title">Leitura Integrada Operadora-Hospital</div>
-                        <span class="tl-status tl-st-dev">Em Desenvolvimento</span>
+                        <span class="tl-status tl-st-pending">Pendente</span>
                     </div>
                 </div>
             </div>
@@ -1649,7 +1658,7 @@
                             </div>
                             <div class="eixo-badges">
                                 <span class="eixo-num">Eixo 03</span>
-                                <span class="eixo-status st-dev">Em Desenvolvimento</span>
+                                <span class="eixo-status st-pending">Pendente</span>
                             </div>
                         </div>
                         <div class="eixo-title">Oportunidades de Internaliza&ccedil;&atilde;o</div>
@@ -1669,7 +1678,7 @@
                             </div>
                             <div class="eixo-badges">
                                 <span class="eixo-num">Eixo 04</span>
-                                <span class="eixo-status st-dev">Em Desenvolvimento</span>
+                                <span class="eixo-status st-pending">Pendente</span>
                             </div>
                         </div>
                         <div class="eixo-title">Leitura Integrada Operadora-Hospital</div>
