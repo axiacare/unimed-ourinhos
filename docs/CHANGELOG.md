@@ -1,5 +1,17 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v2.2 — 2026-02-08
+
+- **FIX (CRÍTICO)**: Revisão completa de linguagem em 100% dos entregáveis. Removidos 14 trechos com linguagem prescritiva, opinativa ou que extrapolava o papel de consultor.
+- **FIX**: Removido "comprometendo a gestão" do achado 6 do Sumário Executivo.
+- **FIX**: Removido "caminho mais curto para o controle de custos" do achado 1.
+- **FIX**: Substituído "desproporcionais" e "requerem" por linguagem neutra no achado 7.
+- **FIX**: Substituído "devem" por "podem" em todas as implicações para a gestão.
+- **FIX**: Reescrito parágrafo prescritivo sobre gestão de custos por procedimento (seção 4.1).
+- **FIX**: Substituídos todos os usos de "requer" por "depende de", "será objeto de" ou "pode ser complementada".
+- **FIX**: Removido adjetivo "expressivos" e "relevantes" de descrições de dados.
+- **DOCS**: Criada `REGRA_LINGUAGEM_NEUTRA.md` no repositório analytics como padrão obrigatório.
+
 ## v2.1 — 2026-02-08
 
 - **FIX**: Eixos 03 e 04 corrigidos para "Pendente" (roadmap e cards). Apenas o Eixo 02 é "Em Desenvolvimento".
