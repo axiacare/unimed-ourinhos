@@ -1,5 +1,12 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v2.3 — 2026-02-09
+
+- **FIX (CRÍTICO)**: Corrigido o número da singular Unimed Ourinhos de `167` para `094` em todos os arquivos e repositórios. O domínio do portal foi alterado de `unimed167.axcare.com.br` para `unimed094.axcare.com.br`.
+- **FIX**: Atualizado o arquivo `CNAME` para refletir o novo domínio.
+- **FIX**: Corrigidas todas as meta tags OpenGraph (`og:url`, `og:image`) e `twitter:image` nos arquivos HTML.
+- **FIX**: Corrigido o link do portal no `README.md` do repositório `axiacare/analytics`.
+
 ## v2.2 — 2026-02-08
 
 - **FIX (CRÍTICO)**: Revisão completa de linguagem em 100% dos entregáveis. Removidos 14 trechos com linguagem prescritiva, opinativa ou que extrapolava o papel de consultor.

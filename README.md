@@ -20,7 +20,7 @@ A Unimed Ourinhos contratou o ICDS (Instituto de Cooperacao para o Desenvolvimen
 
 - Repositorio institucional de entregas parciais e finais
 - Publicado sob curadoria humana do responsavel tecnico do projeto
-- Acessivel via [unimed167.axcare.com.br](https://unimed167.axcare.com.br)
+- Acessivel via [unimed094.axcare.com.br](https://unimed094.axcare.com.br)
 
 ### O que este repositorio nao e
 
@@ -83,7 +83,7 @@ unimed-ourinhos/
 
 Este repositorio e publicado via GitHub Pages no dominio:
 
-> **[unimed167.axcare.com.br](https://unimed167.axcare.com.br)**
+> **[unimed094.axcare.com.br](https://unimed094.axcare.com.br)**
 
 ---
 
