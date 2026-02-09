@@ -1,5 +1,12 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v2.4 — 2026-02-09
+
+- **FIX**: Migração completa de domínio de `axcare.com.br` para `axcare.app` em todos os arquivos de ambos os repositórios.
+- **FIX**: CNAME atualizado para `unimed094.axcare.app`.
+- **FIX**: Todas as meta tags OpenGraph, links institucionais, favicons e referências de domínio atualizados.
+- **FIX**: Links de footer (texto visível) atualizados de `axcare.com.br` para `axcare.app`.
+
 ## v2.3 — 2026-02-09
 
 - **FIX (CRÍTICO)**: Corrigido o número da singular Unimed Ourinhos de `167` para `094` em todos os arquivos e repositórios. O domínio do portal foi alterado de `unimed167.axcare.com.br` para `unimed094.axcare.com.br`.
