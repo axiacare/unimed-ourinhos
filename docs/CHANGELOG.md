@@ -1,5 +1,15 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v2.5 — 2026-02-10
+
+- **FEAT**: KPIs do Eixo 01 atualizados com números exatos: 2.852.907 lançamentos assistenciais e 8.184.951 unidades de procedimento.
+- **FEAT**: Novo KPI "Unidades de Procedimento" adicionado aos destaques.
+- **FIX**: Removido "Ticket Médio Geral" dos destaques (métrica sem valor para tomada de decisão).
+- **FEAT**: Tooltips elegantes com hover nos KPI cards, exibindo breve explicação de cada indicador.
+- **FIX**: Texto de contexto atualizado com terminologia precisa ("lançamentos assistenciais" e "unidades de procedimento").
+- **DOCS**: Criado `conceitos_kpi_ourinhos.md` no repositório analytics com definições formais dos KPIs.
+- **DOCS**: Atualizado `frontend_institucional.md` v9.2 com componente KPI Card com Tooltip.
+
 ## v2.4 — 2026-02-09
 
 - **FIX**: Migração completa de domínio de `axcare.com.br` para `axcare.app` em todos os arquivos de ambos os repositórios.
