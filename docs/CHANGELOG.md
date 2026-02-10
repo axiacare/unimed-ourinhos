@@ -1,5 +1,12 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v2.6 — 2026-02-10
+
+- **FIX (CONCEITUAL)**: Terminologia "Setores de atendimento" corrigida para "Setores de faturamento" em todos os entregáveis e documentação. Os 18 setores são categorias do sistema de gestão da operadora, não unidades físicas.
+- **FIX**: Tooltip do KPI atualizado com explicação de que são categorias de faturamento.
+- **FIX**: Texto de contexto da seção 3 atualizado com esclarecimento sobre a natureza dos setores.
+- **DOCS**: Atualizado `conceitos_kpi_ourinhos.md` com definição completa e alerta terminológico.
+
 ## v2.5 — 2026-02-10
 
 - **FEAT**: KPIs do Eixo 01 atualizados com números exatos: 2.852.907 lançamentos assistenciais e 8.184.951 unidades de procedimento.
