@@ -1,5 +1,19 @@
 # Changelog - Portal de Entregas Unimed Ourinhos
 
+## v2.7 — 2026-02-10
+
+- **REFACTOR (ESTRUTURAL)**: Reorganização completa das camadas operacionais. De 5 camadas para 8 camadas, conforme definição do Arquiteto do Projeto.
+- **FIX**: Setor TESTE excluído da análise (0 registros válidos). Total de setores: 17.
+- **FIX**: KPIs atualizados: 2.852.906 lançamentos (excluído 1 registro TESTE), 17 setores de faturamento.
+- **FIX**: "Rede Credenciada Externa" → "Rede Credenciada" (removido "Externa").
+- **FIX**: "Reembolso/Judicial" → "Reembolso / Liminares".
+- **FEAT**: Novas camadas: Hospital Próprio, Ato Cooperado, Intercâmbio Estadual, Intercâmbio Nacional, Outros.
+- **FEAT**: Tooltips de composição na tabela de camadas — hover mostra os setores que compõem cada camada.
+- **FIX**: Gráfico doughnut e gráfico trimestral atualizados com 8 camadas e dados recalculados.
+- **FIX**: Textos de insight e sumário executivo atualizados com as novas camadas.
+- **DOCS**: SQL de camadas (`eixo1_leitura_rede.sql`) atualizado com novo CASE.
+- **DOCS**: `conceitos_kpi_ourinhos.md` reescrito com definição completa das 8 camadas e mapeamento setor→camada.
+
 ## v2.6 — 2026-02-10
 
 - **FIX (CONCEITUAL)**: Terminologia "Setores de atendimento" corrigida para "Setores de faturamento" em todos os entregáveis e documentação. Os 18 setores são categorias do sistema de gestão da operadora, não unidades físicas.

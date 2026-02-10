@@ -253,6 +253,65 @@ tbody tr { transition: background 0.15s ease; }
 tbody tr:hover { background: #eef4fa; }
 td.num { text-align: right; font-variant-numeric: tabular-nums; }
 
+/* TOOLTIP DE COMPOSIÇÃO NA TABELA */
+.camada-row {
+  position: relative;
+  cursor: default;
+}
+.camada-row .camada-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 16px;
+  background: var(--azul-escuro, #081F3E);
+  color: rgba(255,255,255,0.92);
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 10px 14px;
+  border-radius: 6px;
+  white-space: normal;
+  width: 300px;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+  transform: translateY(4px);
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  z-index: 100;
+}
+.camada-row .camada-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 32px;
+  border: 6px solid transparent;
+  border-top-color: var(--azul-escuro, #081F3E);
+}
+.camada-row:hover .camada-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.camada-tooltip .ct-title {
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 4px;
+}
+.camada-tooltip .ct-setor {
+  display: block;
+  padding: 1px 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.88);
+}
+.camada-tooltip .ct-setor::before {
+  content: '\2022';
+  margin-right: 6px;
+  color: rgba(255,255,255,0.4);
+}
+
 /* CHART CONTAINERS */
 .chart-container {
   background: var(--branco);
@@ -679,7 +738,7 @@ footer::before {
 <section id="contexto">
 <div class="container">
 <h2>1. Contexto da Análise</h2>
-<p>Esta an&aacute;lise explora os dados de eventos assistenciais da Unimed Ourinhos de <strong>janeiro de 2024 a agosto de 2025</strong> (dados de atendimento; agosto/2025 parcial). O estudo abrange <strong>2.852.907 lan&ccedil;amentos assistenciais</strong>, totalizando <strong>8.184.951 unidades de procedimento</strong>, que somam um custo total de <strong>R$ 555,86 milh&otilde;es</strong>. O objetivo &eacute; fornecer um mapa claro de como os custos se distribuem pela rede de atendimento, identificando os principais vetores e pontos de aten&ccedil;&atilde;o para futuras a&ccedil;&otilde;es de gest&atilde;o.</p>
+<p>Esta an&aacute;lise explora os dados de eventos assistenciais da Unimed Ourinhos de <strong>janeiro de 2024 a agosto de 2025</strong> (dados de atendimento; agosto/2025 parcial). O estudo abrange <strong>2.852.906 lan&ccedil;amentos assistenciais</strong>, totalizando <strong>8.184.951 unidades de procedimento</strong>, que somam um custo total de <strong>R$ 555,86 milh&otilde;es</strong>. O objetivo &eacute; fornecer um mapa claro de como os custos se distribuem pela rede de atendimento, identificando os principais vetores e pontos de aten&ccedil;&atilde;o para futuras a&ccedil;&otilde;es de gest&atilde;o.</p>
 
 <div class="kpi-row">
   <div class="kpi-card">
@@ -688,8 +747,8 @@ footer::before {
     <div class="kpi-label">Custo total no per&iacute;odo</div>
   </div>
   <div class="kpi-card green">
-    <div class="kpi-tooltip">Cada linha de registro no banco de dados representa um lan&ccedil;amento assistencial. Total: 2.852.907 linhas.</div>
-    <div class="kpi-value">2.852.907</div>
+    <div class="kpi-tooltip">Cada linha de registro no banco de dados representa um lan&ccedil;amento assistencial. Total: 2.852.906 linhas (exclu&iacute;do 1 registro de teste).</div>
+    <div class="kpi-value">2.852.906</div>
     <div class="kpi-label">Lan&ccedil;amentos assistenciais</div>
   </div>
   <div class="kpi-card green">
@@ -698,8 +757,8 @@ footer::before {
     <div class="kpi-label">Unidades de procedimento</div>
   </div>
   <div class="kpi-card">
-    <div class="kpi-tooltip">Categorias de faturamento utilizadas pelo sistema de gest&atilde;o da operadora para classificar os lan&ccedil;amentos. N&atilde;o correspondem necessariamente a unidades f&iacute;sicas ou setores assistenciais.</div>
-    <div class="kpi-value">18</div>
+    <div class="kpi-tooltip">17 categorias de faturamento do sistema de gest&atilde;o da operadora, agrupadas em 8 camadas operacionais. Exclu&iacute;do 1 setor de teste (TESTE, sem registros v&aacute;lidos).</div>
+    <div class="kpi-value">17</div>
     <div class="kpi-label">Setores de faturamento</div>
   </div>
 </div>
@@ -716,8 +775,8 @@ footer::before {
 <thead><tr><th style="width:40px">#</th><th>Achado</th><th style="width:140px">Impacto</th></tr></thead>
 <tbody>
 <tr><td><strong>1</strong></td><td><strong>Concentração em poucos setores.</strong> Quatro setores concentram 66,6% de todo o custo assistencial.</td><td class="num">R$ 370M</td></tr>
-<tr><td><strong>2</strong></td><td><strong>Rede Própria vs. Rede Credenciada.</strong> A Rede Própria responde por 34,6% dos custos com ticket médio de R$ 408, enquanto a Rede Credenciada representa 39,3% com ticket médio de R$ 112. O ticket médio da Rede Própria é 3,6 vezes maior que o da Rede Credenciada.</td><td class="num">R$ 192M vs R$ 218M</td></tr>
-<tr><td><strong>3</strong></td><td><strong>Concentração no Reembolso.</strong> Apenas 0,1% dos eventos, mas 4,85% dos recursos. Ticket médio de R$ 11.436, com concentração em terapias para TEA/ABA.</td><td class="num">R$ 26,9M</td></tr>
+<tr><td><strong>2</strong></td><td><strong>Rede Pr&oacute;pria + Hospital Pr&oacute;prio vs. Rede Credenciada.</strong> A Rede Pr&oacute;pria (CAMU-OURS + NAS) e o Hospital Pr&oacute;prio somam 35,6% dos custos (R$ 197,5M), enquanto a Rede Credenciada representa 31,0% (R$ 172,4M). O ticket m&eacute;dio da Rede Pr&oacute;pria (&eacute; R$ 1.397, 13x maior que o da Rede Credenciada (R$ 106).</td><td class="num">R$ 197M vs R$ 172M</td></tr>
+<tr><td><strong>3</strong></td><td><strong>Concentra&ccedil;&atilde;o no Reembolso / Liminares.</strong> Apenas 0,1% dos lan&ccedil;amentos, mas 4,8% dos recursos. Ticket m&eacute;dio de R$ 11.437, com concentra&ccedil;&atilde;o em terapias para TEA/ABA.</td><td class="num">R$ 26,9M</td></tr>
 <tr><td><strong>4</strong></td><td><strong>Procedimentos multi-setor dominam o custo.</strong> Procedimentos que ocorrem em múltiplos setores representam 82,3% do custo total.</td><td class="num">R$ 457M</td></tr>
 <tr><td><strong>5</strong></td><td><strong>Variabilidade de preços entre setores.</strong> Oxigenoterapia varia 14,4x entre setores. Terapia TEA via reembolso apresenta preço médio 22,7x maior que na rede credenciada.</td><td class="num">Até 22,7x</td></tr>
 <tr><td><strong>6</strong></td><td><strong>Pontos cegos de R$ 95 milhões.</strong> 17,1% do custo está em rubricas genéricas sem detalhamento.</td><td class="num">R$ 95M</td></tr>
@@ -731,7 +790,7 @@ footer::before {
 <section id="camadas">
 <div class="container">
 <h2>3. Distribuição de Custos por Camada Operacional</h2>
-<p>Os 18 setores de faturamento da Unimed Ourinhos foram agrupados em cinco camadas operacionais. Esses setores correspondem a categorias do sistema de gest&atilde;o da operadora, n&atilde;o necessariamente a unidades f&iacute;sicas. A tabela e o gr&aacute;fico a seguir apresentam a distribui&ccedil;&atilde;o de custos entre elas.</p>
+<p>Os 17 setores de faturamento da Unimed Ourinhos foram agrupados em oito camadas operacionais. Esses setores correspondem a categorias do sistema de gest&atilde;o da operadora, n&atilde;o necessariamente a unidades f&iacute;sicas. Passe o mouse sobre o nome de cada camada para ver os setores que a comp&otilde;em.</p>
 
 <div class="chart-container">
   <div class="chart-title">Distribuição de Custos por Camada Operacional</div>
@@ -739,24 +798,27 @@ footer::before {
 </div>
 
 <table>
-<thead><tr><th>Camada Operacional</th><th class="num">Custo Total (R$)</th><th class="num">% do Total</th><th class="num">Eventos</th><th class="num">Ticket Médio (R$)</th></tr></thead>
+<thead><tr><th>Camada Operacional</th><th class="num">Custo Total (R$)</th><th class="num">% do Total</th><th class="num">Lan&ccedil;amentos</th><th class="num">Ticket M&eacute;dio (R$)</th></tr></thead>
 <tbody>
-<tr><td><strong>Rede Credenciada Externa</strong></td><td class="num">218.273.751</td><td class="num">39,3%</td><td class="num">1.942.141</td><td class="num">112</td></tr>
-<tr><td><strong>Rede Própria</strong></td><td class="num">192.332.753</td><td class="num">34,6%</td><td class="num">470.792</td><td class="num">408</td></tr>
-<tr><td><strong>Intercâmbio</strong></td><td class="num">106.223.737</td><td class="num">19,1%</td><td class="num">418.923</td><td class="num">254</td></tr>
-<tr><td><strong>Reembolso/Judicial</strong></td><td class="num">26.933.388</td><td class="num">4,8%</td><td class="num">2.355</td><td class="num">11.437</td></tr>
-<tr><td><strong>Indeterminado</strong></td><td class="num">12.099.053</td><td class="num">2,2%</td><td class="num">18.696</td><td class="num">647</td></tr>
-<tr style="font-weight:700;background:#eef4fa"><td>Total Geral</td><td class="num">555.862.682</td><td class="num">100,0%</td><td class="num">2.852.907</td><td class="num">195</td></tr>
+<tr class="camada-row"><td><strong>Rede Credenciada</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Hospital (cd 10)</span><span class="ct-setor">Radiologia (cd 60)</span><span class="ct-setor">Cl&iacute;nicas (cd 20)</span><span class="ct-setor">Laborat&oacute;rio (cd 30)</span><span class="ct-setor">Outros Serv. Credenciados (cd 50)</span><span class="ct-setor">Cl&iacute;nica Anestesiologia (cd 21)</span><span class="ct-setor">Hemoterapia (cd 33)</span></div></td><td class="num">172.397.135</td><td class="num">31,0%</td><td class="num">1.619.271</td><td class="num">106</td></tr>
+<tr class="camada-row"><td><strong>Rede Pr&oacute;pria</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">CAMU-OURS (cd 13)</span><span class="ct-setor">NAS - Ourinhos (cd 12)</span></div></td><td class="num">102.145.670</td><td class="num">18,4%</td><td class="num">73.124</td><td class="num">1.397</td></tr>
+<tr class="camada-row"><td><strong>Hospital Pr&oacute;prio</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Hospital Unimed (cd 11)</span></div></td><td class="num">95.343.759</td><td class="num">17,2%</td><td class="num">430.863</td><td class="num">221</td></tr>
+<tr class="camada-row"><td><strong>Interc&acirc;mbio Estadual</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Unimed's - Estado (cd 81)</span></div></td><td class="num">88.823.565</td><td class="num">16,0%</td><td class="num">317.962</td><td class="num">279</td></tr>
+<tr class="camada-row"><td><strong>Ato Cooperado</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Cooperados (cd 1)</span><span class="ct-setor">Pr&eacute; Cooperado (cd 6)</span></div></td><td class="num">27.665.486</td><td class="num">5,0%</td><td class="num">277.697</td><td class="num">100</td></tr>
+<tr class="camada-row"><td><strong>Reembolso / Liminares</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Reembolso Usu&aacute;rios (cd 92)</span></div></td><td class="num">26.933.388</td><td class="num">4,8%</td><td class="num">2.355</td><td class="num">11.437</td></tr>
+<tr class="camada-row"><td><strong>Outros</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Fornecedor PJ (cd 90)</span><span class="ct-setor">N/A (sem c&oacute;digo)</span></div></td><td class="num">25.153.508</td><td class="num">4,5%</td><td class="num">30.673</td><td class="num">820</td></tr>
+<tr class="camada-row"><td><strong>Interc&acirc;mbio Nacional</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Unimed,S (cd 80)</span></div></td><td class="num">17.400.172</td><td class="num">3,1%</td><td class="num">100.961</td><td class="num">172</td></tr>
+<tr style="font-weight:700;background:#eef4fa"><td>Total Geral</td><td class="num">555.862.682</td><td class="num">100,0%</td><td class="num">2.852.906</td><td class="num">195</td></tr>
 </tbody>
 </table>
 
 <div class="insight">
   <div class="insight-label">O que os dados mostram</div>
-  <p>As camadas Rede Credenciada Externa e Rede Própria, juntas, concentram 73,9% do custo assistencial. A Rede Própria apresenta volume de eventos quatro vezes menor e ticket médio quatro vezes maior que a Rede Credenciada Externa (R$ 408 vs. R$ 112).</p>
+  <p>A Rede Credenciada concentra 31,0% do custo com 1,6M de lan&ccedil;amentos (ticket m&eacute;dio R$ 106). A Rede Pr&oacute;pria (CAMU-OURS + NAS) e o Hospital Pr&oacute;prio somam 35,6% (R$ 197,5M), com perfis distintos: a Rede Pr&oacute;pria tem ticket m&eacute;dio de R$ 1.397 (13x maior que a Rede Credenciada), enquanto o Hospital Pr&oacute;prio tem ticket de R$ 221. O Interc&acirc;mbio Estadual responde por 16,0% (R$ 88,8M).</p>
 </div>
 <div class="insight">
-  <div class="insight-label">Implicação para a gestão</div>
-  <p>A diferença de perfil entre as duas camadas sugere que análises subsequentes (Eixo 02) podem considerar abordagens distintas: gestão de volume e padronização de preços na Rede Credenciada, e análise de custos por caso na Rede Própria.</p>
+  <div class="insight-label">Leitura para a gest&atilde;o</div>
+  <p>A separa&ccedil;&atilde;o em oito camadas permite identificar perfis operacionais distintos. O Ato Cooperado (R$ 27,7M) e o Interc&acirc;mbio Nacional (R$ 17,4M) agora s&atilde;o vis&iacute;veis como camadas independentes, possibilitando an&aacute;lises espec&iacute;ficas nos pr&oacute;ximos eixos.</p>
 </div>
 
 <div class="chart-container">
@@ -969,7 +1031,7 @@ footer::before {
 </tr>
 <tr>
   <td><strong>Eixo 04<br>Leitura Integrada</strong></td>
-  <td>Intercâmbio representa 19,1% (R$ 106M) do custo total, com R$ 6,4M em "Taxa Genérica" sem detalhamento.</td>
+  <td>Interc&acirc;mbio Estadual (16,0%, R$ 88,8M) e Nacional (3,1%, R$ 17,4M) somam 19,1% do custo total, com R$ 6,4M em "Taxa Gen&eacute;rica" sem detalhamento.</td>
   <td>Qual o perfil dos beneficiários que utilizam o intercâmbio? É possível fortalecer a rede local para reter parte dessa demanda?</td>
 </tr>
 </tbody>
@@ -1023,6 +1085,11 @@ const AMARELO = '#FFC107';
 const AZUL_LIGHT = 'rgba(27,94,159,0.55)';
 const VERDE_LIGHT = 'rgba(0,168,89,0.50)';
 const CIANO_LIGHT = 'rgba(0,160,227,0.50)';
+/* Cores adicionais para 8 camadas */
+const AZUL_ESCURO = '#0D3B66';
+const LARANJA = '#E67E22';
+const ROXO = '#8E44AD';
+const ROSA = '#E74C8B';
 
 Chart.defaults.font.family = 'Roboto';
 Chart.defaults.font.size = 12;
@@ -1037,12 +1104,12 @@ const isMobile = window.innerWidth < 768;
 const legendPos = isMobile ? 'bottom' : 'right';
 const legendPosTop = isMobile ? 'bottom' : 'top';
 
-// 1. Camadas - Doughnut
+// 1. Camadas - Doughnut (8 camadas)
 new Chart(document.getElementById('chartCamadas'), {
   type: 'doughnut',
   data: {
-    labels: ['Rede Credenciada (39,3%)', 'Rede Própria (34,6%)', 'Intercâmbio (19,1%)', 'Reembolso/Judicial (4,8%)', 'Indeterminado (2,2%)'],
-    datasets: [{ data: [218.3, 192.3, 106.2, 26.9, 12.1], backgroundColor: [AZUL, VERDE, CIANO, AMARELO, CINZA] }]
+    labels: ['Rede Credenciada (31,0%)', 'Rede Pr\u00f3pria (18,4%)', 'Hospital Pr\u00f3prio (17,2%)', 'Interc\u00e2mbio Estadual (16,0%)', 'Ato Cooperado (5,0%)', 'Reembolso / Liminares (4,8%)', 'Outros (4,5%)', 'Interc\u00e2mbio Nacional (3,1%)'],
+    datasets: [{ data: [172.4, 102.1, 95.3, 88.8, 27.7, 26.9, 25.2, 17.4], backgroundColor: [AZUL, VERDE, AZUL_ESCURO, CIANO, LARANJA, AMARELO, CINZA, ROXO] }]
   },
   options: {
     responsive: true,
@@ -1053,24 +1120,27 @@ new Chart(document.getElementById('chartCamadas'), {
   }
 });
 
-// 2. Trimestral - Stacked Bar
+// 2. Trimestral - Stacked Bar (8 camadas)
 new Chart(document.getElementById('chartTrimestral'), {
   type: 'bar',
   data: {
     labels: ['1T24', '2T24', '3T24', '4T24', '1T25', '2T25'],
     datasets: [
-      { label: 'Rede Credenciada', data: [32.2, 37.3, 33.6, 27.6, 29.7, 34.9], backgroundColor: AZUL },
-      { label: 'Rede Própria', data: [22.7, 31.3, 29.9, 22.6, 32.8, 30.8], backgroundColor: VERDE },
-      { label: 'Intercâmbio', data: [13.1, 17.4, 17.7, 16.1, 20.1, 11.9], backgroundColor: CIANO },
-      { label: 'Reembolso', data: [3.6, 4.0, 4.4, 3.9, 3.8, 4.2], backgroundColor: AMARELO },
-      { label: 'Indeterminado', data: [1.4, 1.3, 2.0, 1.5, 1.5, 2.6], backgroundColor: CINZA }
+      { label: 'Rede Credenciada', data: [25.7, 29.9, 26.1, 21.3, 23.6, 27.1], backgroundColor: AZUL },
+      { label: 'Rede Pr\u00f3pria', data: [12.6, 16.7, 13.2, 11.4, 20.4, 15.3], backgroundColor: VERDE },
+      { label: 'Hospital Pr\u00f3prio', data: [10.7, 15.4, 17.5, 12.0, 13.2, 16.3], backgroundColor: AZUL_ESCURO },
+      { label: 'Interc\u00e2mbio Estadual', data: [11.2, 15.0, 15.4, 13.6, 15.2, 9.7], backgroundColor: CIANO },
+      { label: 'Ato Cooperado', data: [4.2, 4.8, 4.7, 3.7, 3.8, 3.9], backgroundColor: LARANJA },
+      { label: 'Reembolso / Liminares', data: [3.6, 4.0, 4.4, 3.9, 3.8, 4.2], backgroundColor: AMARELO },
+      { label: 'Outros', data: [3.0, 3.1, 3.9, 3.3, 3.0, 5.5], backgroundColor: CINZA },
+      { label: 'Interc\u00e2mbio Nacional', data: [1.9, 2.4, 2.2, 2.5, 4.8, 2.3], backgroundColor: ROXO }
     ]
   },
   options: {
     responsive: true,
     scales: {
       x: { stacked: true },
-      y: { stacked: true, title: { display: true, text: 'R$ milhões' } }
+      y: { stacked: true, title: { display: true, text: 'R$ milh\u00f5es' } }
     },
     plugins: {
       tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': R$ ' + ctx.parsed.y.toFixed(1) + 'M' } }
