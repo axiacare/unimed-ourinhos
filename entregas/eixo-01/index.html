@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Análise da Rede Assistencial | Unimed Ourinhos</title>
 <link rel="icon" href="../../assets/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="../../assets/favicon.ico" type="image/x-icon">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -164,6 +167,11 @@ strong { font-weight: 700; }
   padding: 20px;
   border-radius: 6px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
 }
 .kpi-card.alert { border-left-color: var(--amarelo-ouro); }
 .kpi-card.green { border-left-color: var(--verde-unimed); }
@@ -199,6 +207,7 @@ tbody td {
   border-bottom: 1px solid #e0e0e0;
 }
 tbody tr:nth-child(even) { background: #f9fbfd; }
+tbody tr { transition: background 0.15s ease; }
 tbody tr:hover { background: #eef4fa; }
 td.num { text-align: right; font-variant-numeric: tabular-nums; }
 
@@ -210,6 +219,10 @@ td.num { text-align: right; font-variant-numeric: tabular-nums; }
   margin: 24px 0;
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   position: relative;
+  transition: box-shadow 0.2s ease;
+}
+.chart-container:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
 .chart-container canvas { max-height: 380px; }
 .chart-title {
@@ -398,9 +411,9 @@ footer::before {
   table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   thead th { padding: 8px 10px; font-size: 12px; }
   tbody td { padding: 8px 10px; font-size: 13px; }
-  .chart-container { padding: 16px 8px; }
-  .chart-container canvas { max-height: 280px; }
-  .chart-title { font-size: 13px; }
+  .chart-container { padding: 16px 10px; margin: 16px 0; }
+  .chart-container canvas { max-height: 320px; }
+  .chart-title { font-size: 13px; margin-bottom: 8px; }
   .insight { padding: 12px 14px; }
   .insight p { font-size: 14px; }
   p { font-size: 15px; }
@@ -416,16 +429,28 @@ footer::before {
 
 @media (max-width: 480px) {
   .kpi-row { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .kpi-card .kpi-value { font-size: 20px; }
+  .kpi-card { padding: 12px; }
+  .kpi-card .kpi-value { font-size: 18px; }
+  .kpi-card .kpi-label { font-size: 11px; }
   h2 { font-size: 18px; }
+  h3 { font-size: 15px; }
   .header-inner { padding: 16px 18px; }
   .header-left img.logo-unimed { height: 40px; }
   .header-left img.logo-icds { height: 30px; }
   .header-right img.logo-axia { height: 30px; }
   .logo-sep { height: 24px; }
   .header-text h1 { font-size: 16px; }
+  .header-text p { font-size: 11px; }
   nav a { font-size: 11px; padding: 3px 6px; }
   nav .btn-voltar { font-size: 10px; padding: 4px 10px; }
+  section { padding: 24px 0; }
+  p { font-size: 14px; }
+  .chart-container canvas { max-height: 260px; }
+  .insight { padding: 10px 12px; }
+  .insight p { font-size: 13px; }
+  .insight-label { font-size: 11px; }
+  thead th { padding: 6px 8px; font-size: 11px; }
+  tbody td { padding: 6px 8px; font-size: 12px; }
   .footer-logos img.fl-unimed { height: 36px; }
   .footer-logos img.fl-icds { height: 28px; }
   .footer-logos img.fl-axia { height: 28px; }
@@ -479,6 +504,14 @@ footer::before {
   box-shadow: 0 2px 8px rgba(0,82,204,0.25);
 }
 .auth-btn:hover { opacity: 0.92; box-shadow: 0 4px 16px rgba(0,82,204,0.35); }
+.auth-btn:disabled { opacity: 0.7; cursor: wait; }
+.auth-spinner {
+  display: inline-block; width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+  border-radius: 50%; animation: authSpin 0.6s linear infinite;
+  vertical-align: middle; margin-right: 6px;
+}
+@keyframes authSpin { to { transform: rotate(360deg); } }
 .auth-error-msg { font-size: 12px; color: #ef4444; margin-top: 12px; min-height: 18px; }
 .auth-footer-text { margin-top: 24px; font-size: 11px; color: var(--cinza-400); line-height: 1.6; }
 .auth-mailto {
@@ -934,15 +967,29 @@ footer::before {
 
 <!-- CHARTS -->
 <script>
+/* Paleta conforme Design System */
 const AZUL = '#1B5E9F';
 const VERDE = '#00A859';
 const CIANO = '#00A0E3';
 const CINZA = '#888888';
 const AMARELO = '#FFC107';
-const AZUL_LIGHT = '#5B9BD5';
+/* Derivadas (tonalidades da paleta oficial) */
+const AZUL_LIGHT = 'rgba(27,94,159,0.55)';
+const VERDE_LIGHT = 'rgba(0,168,89,0.50)';
+const CIANO_LIGHT = 'rgba(0,160,227,0.50)';
 
 Chart.defaults.font.family = 'Roboto';
 Chart.defaults.font.size = 12;
+Chart.defaults.color = '#333333';
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.padding = 16;
+Chart.defaults.maintainAspectRatio = true;
+Chart.defaults.responsive = true;
+
+/* Responsividade: legendas embaixo em mobile */
+const isMobile = window.innerWidth < 768;
+const legendPos = isMobile ? 'bottom' : 'right';
+const legendPosTop = isMobile ? 'bottom' : 'top';
 
 // 1. Camadas - Doughnut
 new Chart(document.getElementById('chartCamadas'), {
@@ -954,7 +1001,7 @@ new Chart(document.getElementById('chartCamadas'), {
   options: {
     responsive: true,
     plugins: {
-      legend: { position: window.innerWidth < 768 ? 'bottom' : 'right' },
+      legend: { position: legendPos },
       tooltip: { callbacks: { label: ctx => ctx.label + ': R$ ' + ctx.parsed.toFixed(1) + 'M' } }
     }
   }
@@ -1012,7 +1059,15 @@ new Chart(document.getElementById('chartVariabilidade'), {
   type: 'bar',
   data: {
     labels: ['Taxa Genérica', 'Fono — TEA', 'TO — TEA', 'Gaze Star', 'ABA Psicologia', 'Psicólogo TEA', 'ABA Ter. Ocup.', 'ABA Fono', 'Oxigenoterapia', 'Psicoterapia'],
-    datasets: [{ label: 'Variação (x)', data: [72.4, 64.7, 45.5, 35.6, 31.1, 30.0, 22.1, 20.6, 14.4, 8.4], backgroundColor: [AMARELO, AMARELO, AMARELO, AMARELO, AMARELO, AMARELO, AMARELO, AMARELO, CIANO, VERDE] }]
+    datasets: [{ label: 'Variação (x)', data: [72.4, 64.7, 45.5, 35.6, 31.1, 30.0, 22.1, 20.6, 14.4, 8.4],
+      backgroundColor: function() {
+        /* Gradiente: vermelho-alarme para valores altos, transição para azul nos baixos */
+        return [72.4, 64.7, 45.5, 35.6, 31.1, 30.0, 22.1, 20.6, 14.4, 8.4].map(v => {
+          if (v >= 40) return AMARELO;
+          if (v >= 20) return CIANO;
+          return VERDE;
+        });
+      }() }]
   },
   options: {
     indexAxis: 'y',
@@ -1097,10 +1152,10 @@ new Chart(document.getElementById('chartMatriz'), {
       { label: 'Materiais', data: [28.4, 8.2, 5.4, 4.3, 0.1, 0], backgroundColor: VERDE },
       { label: 'Gases', data: [0, 23.8, 22.4, 5.4, 0, 0], backgroundColor: CIANO },
       { label: 'SADT', data: [5.0, 2.2, 4.7, 4.5, 12.4, 13.5], backgroundColor: AZUL_LIGHT },
-      { label: 'Diárias', data: [0, 6.5, 11.4, 7.4, 0, 0], backgroundColor: '#9B59B6' },
+      { label: 'Diárias', data: [0, 6.5, 11.4, 7.4, 0, 0], backgroundColor: CIANO_LIGHT },
       { label: 'Taxas/Outros', data: [15.2, 11.3, 4.5, 10.4, 0, 2.0], backgroundColor: CINZA },
       { label: 'Não Informado', data: [20.0, 13.1, 5.7, 15.3, 0, 6.1], backgroundColor: AMARELO },
-      { label: 'HM', data: [2.5, 0.9, 1.8, 5.5, 0, 2.2], backgroundColor: '#E67E22' }
+      { label: 'HM', data: [2.5, 0.9, 1.8, 5.5, 0, 2.2], backgroundColor: VERDE_LIGHT }
     ]
   },
   options: {
@@ -1153,11 +1208,16 @@ async function handleAuth(e) {
   e.preventDefault();
   const input = document.getElementById('authInput');
   const error = document.getElementById('authError');
+  const btn = e.target.querySelector('.auth-btn');
+  const btnOriginal = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="auth-spinner"></span> Acessando...';
+  error.textContent = '';
+
   const hash = await sha256(input.value);
   if (hash === AUTH_HASH) {
     sessionStorage.setItem(AUTH_KEY, AUTH_HASH);
     document.getElementById('authWall').classList.add('dismissed');
-    error.textContent = '';
   } else {
     input.classList.add('error');
     error.textContent = 'Senha incorreta.';
@@ -1165,6 +1225,8 @@ async function handleAuth(e) {
     input.value = '';
     input.focus();
   }
+  btn.disabled = false;
+  btn.innerHTML = btnOriginal;
   return false;
 }
 

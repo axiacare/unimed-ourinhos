@@ -8,7 +8,10 @@
 
     <!-- Favicon -->
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="assets/site.webmanifest">
 
     <!-- OpenGraph -->
     <meta property="og:title" content="Unimed Ourinhos | Portal de Entregas AxiaCare&reg;">
@@ -516,7 +519,8 @@
 
         .eixo-card.active:hover {
             box-shadow: var(--sombra-card-hover);
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            border-color: rgba(27,94,159,0.12);
         }
 
         .eixo-card.disabled {
@@ -1262,6 +1266,14 @@
         }
 
         .auth-btn:hover { opacity: 0.92; box-shadow: 0 4px 16px rgba(0,82,204,0.35); }
+        .auth-btn:disabled { opacity: 0.7; cursor: wait; }
+        .auth-spinner {
+          display: inline-block; width: 16px; height: 16px;
+          border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+          border-radius: 50%; animation: authSpin 0.6s linear infinite;
+          vertical-align: middle; margin-right: 6px;
+        }
+        @keyframes authSpin { to { transform: rotate(360deg); } }
 
         .auth-error-msg {
             font-size: 12px;
@@ -1995,12 +2007,17 @@
       e.preventDefault();
       const input = document.getElementById('authInput');
       const error = document.getElementById('authError');
+      const btn = e.target.querySelector('.auth-btn');
+      const btnOriginal = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="auth-spinner"></span> Acessando...';
+      error.textContent = '';
+
       const hash = await sha256(input.value);
 
       if (hash === AUTH_HASH) {
         sessionStorage.setItem(AUTH_KEY, AUTH_HASH);
         document.getElementById('authWall').classList.add('dismissed');
-        error.textContent = '';
       } else {
         input.classList.add('error');
         error.textContent = 'Senha incorreta.';
@@ -2008,6 +2025,8 @@
         input.value = '';
         input.focus();
       }
+      btn.disabled = false;
+      btn.innerHTML = btnOriginal;
       return false;
     }
 
