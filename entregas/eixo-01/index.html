@@ -8,7 +8,7 @@
 <link rel="shortcut icon" href="../../assets/favicon.ico" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 :root {
@@ -20,10 +20,21 @@
   --cinza-claro: #F5F5F5;
   --branco: #FFFFFF;
   --amarelo-ouro: #FFC107;
+  /* Auth tokens */
+  --cinza-900: #111827;
+  --cinza-800: #1f2937;
+  --cinza-600: #4b5563;
+  --cinza-500: #6b7280;
+  --cinza-400: #9ca3af;
+  --cinza-200: #e5e7eb;
+  --cinza-50: #f9fafb;
+  --raio-sm: 10px;
+  --sombra-xl: 0 20px 60px rgba(0,0,0,0.12);
+  --transicao: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--cinza-escuro);
   background: var(--branco);
   line-height: 1.7;
@@ -31,11 +42,10 @@ body {
 }
 .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
 
-/* HEADER */
+/* HEADER — Split layout (portal pattern) */
 header {
   background: linear-gradient(135deg, #081F3E 0%, #0D3B66 40%, #14466b 100%);
   color: var(--branco);
-  padding: 32px 0;
   position: relative;
 }
 header::after {
@@ -47,15 +57,23 @@ header::after {
 }
 .header-inner {
   display: flex; align-items: center; justify-content: space-between;
+  padding: 28px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.header-logos { display: flex; align-items: center; gap: 20px; }
-.header-logos a { display: flex; align-items: center; }
-.header-logos img { height: 44px; object-fit: contain; }
-.header-logos .hl-sep {
-  width: 1px; height: 32px;
-  background: rgba(255,255,255,0.15);
+.header-left { display: flex; align-items: center; gap: 20px; }
+.header-left a { display: flex; align-items: center; }
+.header-left img.logo-unimed { height: 52px; object-fit: contain; }
+.header-left img.logo-icds { height: 42px; object-fit: contain; }
+.logo-sep {
+  width: 1px; height: 36px;
+  background: rgba(255,255,255,0.12);
+  flex-shrink: 0;
 }
-.header-text { text-align: right; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.header-right a { display: flex; align-items: center; }
+.header-right img.logo-axia { height: 44px; object-fit: contain; opacity: 0.9; }
+.header-text { text-align: center; padding: 16px 48px 32px; }
 .header-text h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
 .header-text p { font-size: 13px; font-weight: 300; opacity: 0.85; }
 .header-text .badge-eixo {
@@ -351,18 +369,22 @@ footer::before {
 /* RESPONSIVE - MOBILE */
 @media (max-width: 768px) {
   .container { padding: 0 16px; }
-  header { padding: 20px 0; }
+  header { padding: 0; }
   .header-inner {
     flex-direction: column;
     text-align: center;
-    gap: 12px;
+    gap: 14px;
+    padding: 18px 24px;
   }
+  .header-left { gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .header-left img.logo-unimed { height: 44px; }
+  .header-left img.logo-icds { height: 34px; }
+  .logo-sep { height: 28px; }
+  .header-right { gap: 12px; }
+  .header-right img.logo-axia { height: 36px; }
   .header-text { text-align: center; }
   .header-text h1 { font-size: 18px; }
   .header-text p { font-size: 12px; }
-  .header-logos { justify-content: center; }
-  .header-logos img { height: 36px; }
-  .header-logos .hl-sep { height: 24px; }
   nav .container { justify-content: center; }
   nav a { font-size: 12px; padding: 4px 8px; }
   nav .btn-voltar { font-size: 11px; padding: 5px 12px; margin-right: 4px; }
@@ -396,9 +418,12 @@ footer::before {
   .kpi-row { grid-template-columns: 1fr 1fr; gap: 8px; }
   .kpi-card .kpi-value { font-size: 20px; }
   h2 { font-size: 18px; }
+  .header-inner { padding: 16px 18px; }
+  .header-left img.logo-unimed { height: 40px; }
+  .header-left img.logo-icds { height: 30px; }
+  .header-right img.logo-axia { height: 30px; }
+  .logo-sep { height: 24px; }
   .header-text h1 { font-size: 16px; }
-  .header-logos img { height: 30px; }
-  .header-logos .hl-sep { height: 20px; }
   nav a { font-size: 11px; padding: 3px 6px; }
   nav .btn-voltar { font-size: 10px; padding: 4px 10px; }
   .footer-logos img.fl-unimed { height: 36px; }
@@ -408,8 +433,89 @@ footer::before {
   .footer-links a { font-size: 11px; }
 }
 
+/* AUTH OVERLAY */
+.auth-wall {
+  position: fixed; inset: 0; z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.auth-wall.dismissed { opacity: 0; visibility: hidden; pointer-events: none; }
+.auth-blur {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, #001a33 0%, #000d1a 100%);
+  backdrop-filter: blur(8px);
+}
+.auth-card {
+  position: relative; background: var(--branco); border-radius: 20px;
+  padding: 48px 40px 36px; max-width: 400px; width: 100%;
+  box-shadow: var(--sombra-xl); text-align: center;
+}
+.auth-logo { height: 56px; margin-bottom: 28px; }
+.auth-title { font-size: 22px; font-weight: 700; color: var(--cinza-900); margin-bottom: 6px; }
+.auth-subtitle { font-size: 13px; color: var(--cinza-400); margin-bottom: 32px; }
+.auth-field { position: relative; margin-bottom: 16px; }
+.auth-input {
+  width: 100%; padding: 14px 48px 14px 18px;
+  border: 1.5px solid var(--cinza-200); border-radius: var(--raio-sm);
+  font-size: 15px; font-family: inherit; color: var(--cinza-800);
+  background: var(--cinza-50); outline: none;
+  transition: border-color var(--transicao), box-shadow var(--transicao);
+}
+.auth-input:focus { border-color: var(--azul-axia); box-shadow: 0 0 0 3px rgba(27,94,159,0.08); background: var(--branco); }
+.auth-input.error { border-color: #ef4444; animation: authShake 0.4s ease; }
+@keyframes authShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.auth-toggle-pw {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--cinza-400); cursor: pointer; padding: 4px;
+}
+.auth-toggle-pw:hover { color: var(--cinza-600); }
+.auth-toggle-pw svg { width: 20px; height: 20px; }
+.auth-btn {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, #0052cc, #003d99);
+  color: var(--branco); border: none; border-radius: var(--raio-sm);
+  font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer;
+  transition: opacity var(--transicao), box-shadow var(--transicao);
+  box-shadow: 0 2px 8px rgba(0,82,204,0.25);
+}
+.auth-btn:hover { opacity: 0.92; box-shadow: 0 4px 16px rgba(0,82,204,0.35); }
+.auth-error-msg { font-size: 12px; color: #ef4444; margin-top: 12px; min-height: 18px; }
+.auth-footer-text { margin-top: 24px; font-size: 11px; color: var(--cinza-400); line-height: 1.6; }
+.auth-mailto {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
+  font-size: 11.5px; color: var(--azul-axia); text-decoration: none; font-weight: 500;
+}
+.auth-mailto:hover { color: #0D3B66; }
+.auth-mailto svg { width: 14px; height: 14px; }
+.auth-logos {
+  display: flex; align-items: center; justify-content: center; gap: 28px;
+  margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.06);
+}
+.auth-logos img { opacity: 0.7; transition: opacity 0.3s ease; }
+.auth-logos img:hover { opacity: 0.95; }
+.auth-logos .auth-logo-icds { height: 28px; }
+.auth-logos .auth-logo-axia { height: 30px; }
+.auth-spectra { margin-top: 14px; text-align: center; }
+.auth-spectra .spectra-sig {
+  display: inline-flex; align-items: center; gap: 5px; text-decoration: none;
+  font-size: 10px; color: var(--cinza-500); opacity: 0.8;
+}
+.auth-spectra .spectra-sig-name { font-weight: 700; letter-spacing: 0.3px; color: var(--azul-axia); }
+.auth-spectra .spectra-sig:hover { opacity: 1; }
+.auth-spectra .spectra-sig-tm { font-size: 0.6em; vertical-align: super; opacity: 0.8; font-weight: 400; }
+.auth-spectra .spectra-sig-dot { opacity: 0.6; }
+.auth-spectra .spectra-sig-tagline { font-weight: 400; font-style: italic; opacity: 0.9; }
+@media (max-width: 480px) {
+  .auth-card { padding: 36px 24px 28px; border-radius: 18px; margin: 0 16px; }
+  .auth-logo { height: 48px; }
+  .auth-title { font-size: 18px; }
+  .auth-subtitle { font-size: 12px; }
+  .auth-btn { min-height: 48px; font-size: 14px; }
+}
+
 /* PRINT */
 @media print {
+  .auth-wall { display: none !important; }
   nav { display: none; }
   section { page-break-inside: avoid; }
   .chart-container { page-break-inside: avoid; }
@@ -418,16 +524,61 @@ footer::before {
 </head>
 <body>
 
+<!-- AUTH OVERLAY -->
+<div class="auth-wall" id="authWall">
+    <div class="auth-blur"></div>
+    <div class="auth-card">
+        <img src="../../assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="auth-logo">
+        <div class="auth-title">Portal de Entregas</div>
+        <div class="auth-subtitle">Acesso restrito aos stakeholders do projeto</div>
+        <form id="authForm" onsubmit="return handleAuth(event)">
+            <div class="auth-field">
+                <input type="password" class="auth-input" id="authInput" placeholder="Senha de acesso" autocomplete="off" autofocus>
+                <button type="button" class="auth-toggle-pw" id="togglePw" onclick="togglePassword()" aria-label="Mostrar senha">
+                    <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </button>
+            </div>
+            <button type="submit" class="auth-btn">Acessar</button>
+            <div class="auth-error-msg" id="authError"></div>
+        </form>
+        <a href="mailto:contato@grupocsv.com?subject=Solicita%C3%A7%C3%A3o%20de%20Acesso%20%E2%80%93%20Portal%20Unimed%20Ourinhos" class="auth-mailto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
+            Solicitar acesso
+        </a>
+        <div class="auth-footer-text">
+            Conte&uacute;do sob curadoria do respons&aacute;vel t&eacute;cnico Guilherme Thom&eacute; | CRM-MG 64193 | RQE 41538<br>
+            AxiaCare&reg; | Grupo CSV
+        </div>
+        <div class="auth-logos">
+            <a href="https://icds.org.br" target="_blank" rel="noopener"><img src="../../assets/icds_horizontal_positivo.png" alt="ICDS" class="auth-logo-icds"></a>
+            <a href="https://axcare.app" target="_blank" rel="noopener"><img src="../../assets/axiacare_horizontal.png" alt="AxiaCare" class="auth-logo-axia"></a>
+        </div>
+        <div class="auth-spectra">
+            <a href="https://spectra.thera.tech" target="_blank" rel="noopener" class="spectra-sig">
+                <span class="spectra-sig-name">Spectra<span class="spectra-sig-tm">&trade;</span></span>
+                <span class="spectra-sig-dot">&bull;</span>
+                <span class="spectra-sig-tagline">Intelig&ecirc;ncia Cl&iacute;nica para Operadoras de Sa&uacute;de</span>
+            </a>
+        </div>
+    </div>
+</div>
+
 <!-- HEADER -->
 <header>
-<div class="container header-inner">
-  <div class="header-logos">
-    <a href="https://www.unimedourinhos.com.br/" target="_blank" rel="noopener"><img src="../../assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos"></a>
-    <div class="hl-sep"></div>
-    <a href="https://icds.org.br/" target="_blank" rel="noopener"><img src="../../assets/icds_horizontal_negativo.png" alt="ICDS"></a>
-    <div class="hl-sep"></div>
-    <a href="https://axcare.app" target="_blank" rel="noopener"><img src="../../assets/axiacare_horizontal_negativo.png" alt="AxiaCare"></a>
+<div class="header-inner">
+  <div class="header-left">
+    <a href="https://www.unimedourinhos.com.br/" target="_blank" rel="noopener"><img src="../../assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="logo-unimed"></a>
+    <div class="logo-sep"></div>
+    <a href="https://icds.org.br/" target="_blank" rel="noopener"><img src="../../assets/icds_horizontal_negativo.png" alt="ICDS" class="logo-icds"></a>
   </div>
+  <div class="header-right">
+    <a href="https://axcare.app" target="_blank" rel="noopener"><img src="../../assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="logo-axia"></a>
+  </div>
+</div>
+<div class="container">
   <div class="header-text">
     <div class="badge-eixo">EIXO 01</div>
     <h1>Análise da Rede Assistencial</h1>
@@ -980,6 +1131,54 @@ new Chart(document.getElementById('chartPontosCegos'), {
     }
   }
 });
+</script>
+
+<!-- AUTH SCRIPT -->
+<script>
+const AUTH_HASH = '83a40f6323d76084faabc155ce8dd7874f8c75dc1caac8b9bd2a6a2d57ce7d01';
+const AUTH_KEY = 'axiacare_portal_auth';
+
+(function checkAuth() {
+  if (sessionStorage.getItem(AUTH_KEY) === AUTH_HASH) {
+    document.getElementById('authWall').classList.add('dismissed');
+  }
+})();
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function handleAuth(e) {
+  e.preventDefault();
+  const input = document.getElementById('authInput');
+  const error = document.getElementById('authError');
+  const hash = await sha256(input.value);
+  if (hash === AUTH_HASH) {
+    sessionStorage.setItem(AUTH_KEY, AUTH_HASH);
+    document.getElementById('authWall').classList.add('dismissed');
+    error.textContent = '';
+  } else {
+    input.classList.add('error');
+    error.textContent = 'Senha incorreta.';
+    setTimeout(() => input.classList.remove('error'), 500);
+    input.value = '';
+    input.focus();
+  }
+  return false;
+}
+
+function togglePassword() {
+  const input = document.getElementById('authInput');
+  const icon = document.getElementById('eyeIcon');
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+  } else {
+    input.type = 'password';
+    icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  }
+}
 </script>
 
 </body>
