@@ -13,6 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <style>
 :root {
   --azul-axia: #1B5E9F;
@@ -23,6 +25,7 @@
   --cinza-claro: #F5F5F5;
   --branco: #FFFFFF;
   --amarelo-ouro: #FFC107;
+  --azul-escuro: #081F3E;
   /* Auth tokens */
   --cinza-900: #111827;
   --cinza-800: #1f2937;
@@ -648,11 +651,84 @@ footer::before {
 }
 
 /* PRINT */
+/* PDF DOWNLOAD BUTTON */
+.btn-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  background: var(--azul-axia);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  margin-left: auto;
+}
+.btn-pdf:hover { background: #14466b; transform: translateY(-1px); }
+.btn-pdf:active { transform: translateY(0); }
+.btn-pdf:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.btn-pdf svg { flex-shrink: 0; }
+
+/* PDF PROGRESS OVERLAY */
+.pdf-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(8, 31, 62, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+.pdf-overlay .pdf-spinner {
+  width: 48px; height: 48px;
+  border: 4px solid rgba(255,255,255,0.2);
+  border-top-color: var(--verde-unimed);
+  border-radius: 50%;
+  animation: pdfSpin 0.8s linear infinite;
+  margin-bottom: 20px;
+}
+@keyframes pdfSpin { to { transform: rotate(360deg); } }
+.pdf-overlay .pdf-status {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.pdf-overlay .pdf-substatus {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+}
+.pdf-overlay .pdf-progress-bar {
+  width: 280px;
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+.pdf-overlay .pdf-progress-fill {
+  height: 100%;
+  background: var(--verde-unimed);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
 @media print {
   .auth-wall { display: none !important; }
   nav { display: none; }
   section { page-break-inside: avoid; }
   .chart-container { page-break-inside: avoid; }
+  .btn-pdf { display: none; }
 }
 </style>
 </head>
@@ -731,6 +807,10 @@ footer::before {
   <a href="#setores">Setores</a>
   <a href="#pontos-cegos">Pontos Cegos</a>
   <a href="#trilhas">Próximos Eixos</a>
+  <button id="btnDownloadPdf" class="btn-pdf" onclick="exportToPDF()" title="Exportar relatório em PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    PDF
+  </button>
 </div>
 </nav>
 
@@ -1439,6 +1519,190 @@ function togglePassword() {
   } else {
     input.type = 'password';
     icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  }
+}
+</script>
+
+<!-- PDF EXPORT SCRIPT -->
+<script>
+async function exportToPDF() {
+  const btn = document.getElementById('btnDownloadPdf');
+  btn.disabled = true;
+  const btnOriginal = btn.innerHTML;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Gerando...';
+
+  /* Create progress overlay */
+  const overlay = document.createElement('div');
+  overlay.className = 'pdf-overlay';
+  overlay.innerHTML = '<div class="pdf-spinner"></div><div class="pdf-status">Preparando exporta\u00e7\u00e3o</div><div class="pdf-substatus">Convertendo gr\u00e1ficos em imagens...</div><div class="pdf-progress-bar"><div class="pdf-progress-fill" id="pdfProgress"></div></div>';
+  document.body.appendChild(overlay);
+  const statusEl = overlay.querySelector('.pdf-status');
+  const substatusEl = overlay.querySelector('.pdf-substatus');
+  const progressEl = document.getElementById('pdfProgress');
+
+  function updateProgress(pct, status, substatus) {
+    if (progressEl) progressEl.style.width = pct + '%';
+    if (status && statusEl) statusEl.textContent = status;
+    if (substatus && substatusEl) substatusEl.textContent = substatus;
+  }
+
+  try {
+    const { jsPDF } = window.jspdf;
+
+    /* --- Phase 1: Convert all Chart.js canvases to static images --- */
+    updateProgress(5, 'Convertendo gr\u00e1ficos', 'Capturando canvas dos gr\u00e1ficos...');
+    await new Promise(r => setTimeout(r, 100));
+
+    const canvases = document.querySelectorAll('canvas');
+    const chartImages = [];
+    for (let i = 0; i < canvases.length; i++) {
+      const canvas = canvases[i];
+      const img = document.createElement('img');
+      img.src = canvas.toDataURL('image/png', 1.0);
+      img.style.width = '100%';
+      img.style.height = 'auto';
+      img.style.display = 'block';
+      img.className = 'pdf-chart-img';
+      chartImages.push({ canvas, img, parent: canvas.parentNode });
+      canvas.parentNode.insertBefore(img, canvas);
+      canvas.style.display = 'none';
+      updateProgress(5 + Math.round((i + 1) / canvases.length * 15), null, 'Gr\u00e1fico ' + (i + 1) + ' de ' + canvases.length + '...');
+    }
+
+    /* --- Phase 2: Prepare the page for capture --- */
+    updateProgress(25, 'Preparando layout', 'Ajustando elementos para PDF...');
+    await new Promise(r => setTimeout(r, 200));
+
+    /* Hide elements that shouldn't appear in PDF */
+    const authWall = document.querySelector('.auth-wall');
+    const nav = document.querySelector('nav');
+    const footer = document.querySelector('footer');
+    const pdfBtn = document.getElementById('btnDownloadPdf');
+    if (authWall) authWall.style.display = 'none';
+    if (nav) nav.style.display = 'none';
+    if (pdfBtn) pdfBtn.style.display = 'none';
+
+    /* Ensure all tooltips are hidden */
+    document.querySelectorAll('.kpi-tooltip, .camada-tooltip').forEach(t => {
+      t.style.display = 'none';
+    });
+
+    /* --- Phase 3: Capture sections individually for multi-page PDF --- */
+    updateProgress(30, 'Capturando p\u00e1ginas', 'Renderizando se\u00e7\u00f5es...');
+    await new Promise(r => setTimeout(r, 100));
+
+    const sections = document.querySelectorAll('header, section');
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const pageW = 210;
+    const pageH = 297;
+    const margin = 12;
+    const contentW = pageW - 2 * margin;
+    let isFirstPage = true;
+
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      updateProgress(30 + Math.round((i + 1) / sections.length * 55), null, 'Se\u00e7\u00e3o ' + (i + 1) + ' de ' + sections.length + '...');
+
+      const sectionCanvas = await html2canvas(section, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        logging: false,
+        windowWidth: 1100
+      });
+
+      const imgData = sectionCanvas.toDataURL('image/jpeg', 0.92);
+      const imgW = contentW;
+      const imgH = (sectionCanvas.height * contentW) / sectionCanvas.width;
+
+      /* Handle sections taller than one page */
+      let yOffset = 0;
+      while (yOffset < imgH) {
+        if (!isFirstPage) {
+          pdf.addPage();
+        }
+        isFirstPage = false;
+
+        const remainingH = imgH - yOffset;
+        const sliceH = Math.min(remainingH, pageH - 2 * margin);
+
+        /* Calculate source crop coordinates */
+        const srcY = (yOffset / imgH) * sectionCanvas.height;
+        const srcH = (sliceH / imgH) * sectionCanvas.height;
+
+        /* Create a cropped canvas for this slice */
+        const sliceCanvas = document.createElement('canvas');
+        sliceCanvas.width = sectionCanvas.width;
+        sliceCanvas.height = srcH;
+        const sliceCtx = sliceCanvas.getContext('2d');
+        sliceCtx.drawImage(sectionCanvas, 0, srcY, sectionCanvas.width, srcH, 0, 0, sectionCanvas.width, srcH);
+
+        const sliceData = sliceCanvas.toDataURL('image/jpeg', 0.92);
+        const actualSliceH = (srcH * contentW) / sectionCanvas.width;
+        pdf.addImage(sliceData, 'JPEG', margin, margin, imgW, actualSliceH);
+
+        yOffset += sliceH;
+      }
+    }
+
+    /* --- Phase 4: Add footer to last page --- */
+    updateProgress(90, 'Finalizando', 'Adicionando rodap\u00e9...');
+    const lastPageH = pdf.internal.pageSize.getHeight();
+    pdf.setFontSize(8);
+    pdf.setTextColor(136, 136, 136);
+    pdf.text('AxiaCare\u00AE \u2014 Grupo CSV | Cuidados em Sa\u00fade com Valor', pageW / 2, lastPageH - 8, { align: 'center' });
+    pdf.text('Documento gerado automaticamente em ' + new Date().toLocaleDateString('pt-BR') + ' | Vers\u00e3o 4.4', pageW / 2, lastPageH - 4, { align: 'center' });
+
+    /* Add page numbers to all pages */
+    const totalPages = pdf.internal.getNumberOfPages();
+    for (let p = 1; p <= totalPages; p++) {
+      pdf.setPage(p);
+      pdf.setFontSize(8);
+      pdf.setTextColor(180, 180, 180);
+      pdf.text(p + ' / ' + totalPages, pageW - margin, lastPageH - 4, { align: 'right' });
+    }
+
+    /* --- Phase 5: Save --- */
+    updateProgress(95, 'Salvando arquivo', 'Gerando PDF final...');
+    await new Promise(r => setTimeout(r, 200));
+    pdf.save('Eixo01_Analise_Rede_Assistencial_Unimed_Ourinhos.pdf');
+    updateProgress(100, 'Conclu\u00eddo', 'Download iniciado.');
+    await new Promise(r => setTimeout(r, 800));
+
+  } catch (err) {
+    console.error('Erro ao gerar PDF:', err);
+    if (statusEl) statusEl.textContent = 'Erro ao gerar PDF';
+    if (substatusEl) substatusEl.textContent = err.message;
+    await new Promise(r => setTimeout(r, 2000));
+  } finally {
+    /* --- Restore original state --- */
+    const chartImgs = document.querySelectorAll('.pdf-chart-img');
+    chartImgs.forEach(img => {
+      const canvas = img.nextElementSibling;
+      if (canvas && canvas.tagName === 'CANVAS') {
+        canvas.style.display = '';
+      }
+      img.remove();
+    });
+
+    /* Also restore any canvases that might have been hidden */
+    document.querySelectorAll('canvas').forEach(c => c.style.display = '');
+
+    const authWall = document.querySelector('.auth-wall');
+    const nav = document.querySelector('nav');
+    const pdfBtn = document.getElementById('btnDownloadPdf');
+    if (authWall) authWall.style.display = '';
+    if (nav) nav.style.display = '';
+    if (pdfBtn) pdfBtn.style.display = '';
+
+    document.querySelectorAll('.kpi-tooltip, .camada-tooltip').forEach(t => {
+      t.style.display = '';
+    });
+
+    overlay.remove();
+    btn.disabled = false;
+    btn.innerHTML = btnOriginal;
   }
 }
 </script>
