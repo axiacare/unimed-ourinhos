@@ -1,41 +1,530 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>Eixo 01 | Revis&atilde;o T&eacute;cnica | AxiaCare&reg;</title>
-    <link rel="icon" href="../../assets/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16x16.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Roboto', -apple-system, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f9fafb;
-            color: #6b7280;
-            padding: 24px;
-            -webkit-font-smoothing: antialiased;
-        }
-        .container { max-width: 440px; text-align: center; }
-        .container h1 { font-size: 18px; font-weight: 600; color: #0D3B66; margin-bottom: 12px; }
-        .container p { font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
-        .container a { color: #1B5E9F; text-decoration: none; font-size: 13px; }
-        .container a:hover { text-decoration: underline; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise da Rede Assistencial | Unimed Ourinhos</title>
+<link rel="icon" href="../../assets/favicon.ico" type="image/x-icon">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+<link rel="manifest" href="../../assets/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<style>
+:root{--azul-axia:#1B5E9F;--verde-unimed:#00A859;--azul-ciano:#00A0E3;--cinza-escuro:#333;--cinza-medio:#888;--cinza-claro:#F5F5F5;--branco:#FFF;--amarelo-ouro:#FFC107;--azul-escuro:#081F3E;--cinza-900:#111827;--cinza-800:#1f2937;--cinza-600:#4b5563;--cinza-500:#6b7280;--cinza-400:#9ca3af;--cinza-200:#e5e7eb;--cinza-50:#f9fafb;--raio-sm:10px;--sombra-xl:0 20px 60px rgba(0,0,0,.12);--transicao:.3s cubic-bezier(.4,0,.2,1)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Roboto',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--cinza-escuro);background:var(--branco);line-height:1.7;font-size:16px}
+.container{max-width:1100px;margin:0 auto;padding:0 32px}
+header{background:linear-gradient(135deg,#081F3E 0%,#0D3B66 40%,#14466b 100%);color:var(--branco);position:relative}
+header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--verde-unimed),var(--azul-ciano),var(--azul-axia))}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:28px 48px;max-width:1200px;margin:0 auto}
+.header-left{display:flex;align-items:center;gap:20px}
+.header-left a{display:flex;align-items:center}
+.header-left img.logo-unimed{height:52px;object-fit:contain}
+.header-left img.logo-icds{height:42px;object-fit:contain}
+.logo-sep{width:1px;height:36px;background:rgba(255,255,255,.12);flex-shrink:0}
+.header-right{display:flex;align-items:center;gap:16px}
+.header-right a{display:flex;align-items:center}
+.header-right img.logo-axia{height:44px;object-fit:contain;opacity:.9}
+.header-text{text-align:center;padding:16px 48px 32px}
+.header-text h1{font-size:22px;font-weight:700;margin-bottom:4px}
+.header-text p{font-size:13px;font-weight:300;opacity:.85}
+.header-text .badge-eixo{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:3px;margin-bottom:8px}
+nav{background:var(--cinza-claro);border-bottom:2px solid #e0e0e0;padding:12px 0;position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+nav a{color:var(--azul-axia);text-decoration:none;font-size:13px;font-weight:500;padding:4px 12px;border-radius:4px;transition:background .2s}
+nav a:hover{background:#dce8f5}
+nav .btn-voltar{display:inline-flex;align-items:center;gap:6px;color:var(--branco);background:var(--azul-axia);text-decoration:none;font-size:12px;font-weight:600;padding:6px 16px;border-radius:20px;letter-spacing:.3px;transition:all .3s ease;margin-right:8px}
+nav .btn-voltar:hover{background:#14466b;transform:translateX(-2px)}
+nav .btn-voltar svg{width:14px;height:14px;fill:currentColor}
+section{padding:48px 0}
+section:nth-child(even){background:var(--cinza-claro)}
+h2{font-size:26px;font-weight:700;color:var(--azul-axia);margin-bottom:24px;padding-bottom:8px;border-bottom:3px solid var(--verde-unimed)}
+h3{font-size:20px;font-weight:700;color:var(--azul-axia);margin:32px 0 16px}
+p{margin-bottom:16px}
+strong{font-weight:700}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:24px 0}
+.kpi-card{background:var(--branco);border-left:4px solid var(--azul-axia);padding:20px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,.08);transition:transform .2s ease,box-shadow .2s ease;position:relative;cursor:default}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.10)}
+.kpi-card.alert{border-left-color:var(--amarelo-ouro)}
+.kpi-card.green{border-left-color:var(--verde-unimed)}
+.kpi-card .kpi-value{font-size:28px;font-weight:700;color:var(--azul-axia);margin-bottom:4px}
+.kpi-card.alert .kpi-value{color:#d4760a}
+.kpi-card.green .kpi-value{color:var(--verde-unimed)}
+.kpi-card .kpi-label{font-size:13px;color:var(--cinza-medio);font-weight:400}
+.kpi-card .kpi-tooltip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);background:var(--azul-escuro);color:rgba(255,255,255,.92);font-size:12px;line-height:1.5;padding:10px 14px;border-radius:6px;white-space:normal;width:240px;text-align:center;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease,transform .25s ease;transform:translateX(-50%) translateY(4px);pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:100}
+.kpi-card .kpi-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--azul-escuro)}
+.kpi-card:hover .kpi-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+thead th{background:var(--azul-axia);color:var(--branco);padding:12px 16px;text-align:left;font-weight:500;font-size:13px}
+tbody td{padding:10px 16px;border-bottom:1px solid #e0e0e0}
+tbody tr:nth-child(even){background:#f9fbfd}
+tbody tr{transition:background .15s ease}
+tbody tr:hover{background:#eef4fa}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.camada-row{position:relative;cursor:default}
+.camada-row .camada-tooltip{position:absolute;bottom:calc(100% + 6px);left:16px;background:var(--azul-escuro);color:rgba(255,255,255,.92);font-size:12px;line-height:1.6;padding:10px 14px;border-radius:6px;white-space:normal;width:300px;text-align:left;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease,transform .25s ease;transform:translateY(4px);pointer-events:none;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:100}
+.camada-row .camada-tooltip::after{content:'';position:absolute;top:100%;left:32px;border:6px solid transparent;border-top-color:var(--azul-escuro)}
+.camada-row:hover .camada-tooltip{opacity:1;visibility:visible;transform:translateY(0)}
+.camada-tooltip .ct-title{font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.55);margin-bottom:4px}
+.camada-tooltip .ct-setor{display:block;padding:1px 0;font-size:12px;color:rgba(255,255,255,.88)}
+.camada-tooltip .ct-setor::before{content:'\2022';margin-right:6px;color:rgba(255,255,255,.4)}
+.chart-container{background:var(--branco);border-radius:8px;padding:24px;margin:24px 0;box-shadow:0 1px 4px rgba(0,0,0,.06);position:relative;transition:box-shadow .2s ease}
+.chart-container:hover{box-shadow:0 2px 8px rgba(0,0,0,.10)}
+.chart-container canvas{max-height:380px}
+.chart-title{font-size:15px;font-weight:700;color:var(--azul-axia);margin-bottom:12px}
+.insight{background:#f0f7ff;border-left:4px solid var(--azul-ciano);padding:16px 20px;margin:20px 0;border-radius:0 6px 6px 0}
+.insight p{margin-bottom:8px}
+.insight p:last-child{margin-bottom:0}
+.insight-label{font-size:12px;font-weight:700;color:var(--azul-ciano);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.insight.warn{background:#fff8e6;border-left-color:var(--amarelo-ouro)}
+.insight.warn .insight-label{color:#b8860b}
+footer{margin-top:72px;background:linear-gradient(160deg,#081F3E 0%,#0D3B66 60%,#14466b 100%);color:rgba(255,255,255,.65);position:relative}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#7FBFB2,#1B5E9F,#7FBFB2,transparent)}
+.footer-inner{max-width:1120px;margin:0 auto;padding:48px 40px 36px}
+.footer-top{display:flex;align-items:center;justify-content:space-between;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-logos{display:flex;align-items:center;gap:24px}
+.footer-logos img.fl-unimed{height:48px;object-fit:contain}
+.footer-logos img.fl-icds{height:38px;object-fit:contain}
+.footer-logos img.fl-axia{height:40px;object-fit:contain;opacity:.85}
+.footer-logos .fl-sep{width:1px;height:32px;background:rgba(255,255,255,.2)}
+.footer-links{display:flex;gap:28px}
+.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:12px;font-weight:500;transition:color .3s ease;letter-spacing:.2px}
+.footer-links a:hover{color:#7FBFB2}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:24px}
+.footer-brand{display:flex;flex-direction:column;gap:3px}
+.footer-brand .brand-name{color:#7FBFB2;font-weight:600;font-size:13px}
+.footer-brand .brand-tagline{font-style:italic;color:rgba(255,255,255,.45);font-size:11px}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.4)}
+.footer-spectra{text-align:center;padding-top:20px;margin-top:20px;border-top:1px solid rgba(255,255,255,.1)}
+.footer-spectra .spectra-sig{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-size:11px;color:rgba(255,255,255,.5);opacity:1;transition:opacity .3s ease}
+.footer-spectra .spectra-sig:hover{opacity:1}
+.footer-spectra .spectra-sig-name{font-weight:700;letter-spacing:.3px;color:#7FBFB2;opacity:.9}
+.footer-spectra .spectra-sig:hover .spectra-sig-name{opacity:1}
+.footer-spectra .spectra-sig-tm{font-size:.6em;vertical-align:super;opacity:.8;font-weight:400}
+.footer-spectra .spectra-sig-dot{opacity:.6}
+.footer-spectra .spectra-sig-tagline{font-weight:400;font-style:italic;opacity:.9}
+.btn-pdf{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;background:var(--azul-axia);color:#fff;border:none;border-radius:6px;font-family:'Roboto',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s ease,transform .15s ease;margin-left:auto}
+.btn-pdf:hover{background:#14466b;transform:translateY(-1px)}
+.btn-pdf:active{transform:translateY(0)}
+.btn-pdf:disabled{opacity:.6;cursor:wait}
+.btn-pdf svg{flex-shrink:0}
+.pdf-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(8,31,62,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;color:#fff;font-family:'Roboto',sans-serif}
+.pdf-overlay .pdf-spinner{width:48px;height:48px;border:4px solid rgba(255,255,255,.2);border-top-color:var(--verde-unimed);border-radius:50%;animation:pdfSpin .8s linear infinite;margin-bottom:20px}
+@keyframes pdfSpin{to{transform:rotate(360deg)}}
+.pdf-overlay .pdf-status{font-size:16px;font-weight:500;margin-bottom:8px}
+.pdf-overlay .pdf-substatus{font-size:13px;color:rgba(255,255,255,.65)}
+.pdf-overlay .pdf-progress-bar{width:280px;height:4px;background:rgba(255,255,255,.15);border-radius:2px;margin-top:16px;overflow:hidden}
+.pdf-overlay .pdf-progress-fill{height:100%;background:var(--verde-unimed);border-radius:2px;transition:width .3s ease;width:0%}
+.auth-wall{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;transition:opacity .5s ease,visibility .5s ease}
+.auth-wall.dismissed{opacity:0;visibility:hidden;pointer-events:none}
+.auth-blur{position:absolute;inset:0;background:linear-gradient(160deg,#001a33 0%,#000d1a 100%);backdrop-filter:blur(8px)}
+.auth-card{position:relative;background:var(--branco);border-radius:20px;padding:48px 40px 36px;max-width:400px;width:100%;box-shadow:var(--sombra-xl);text-align:center}
+.auth-logo{height:56px;margin-bottom:28px}
+.auth-title{font-size:22px;font-weight:700;color:var(--cinza-900);margin-bottom:6px}
+.auth-subtitle{font-size:13px;color:var(--cinza-400);margin-bottom:32px}
+.auth-field{position:relative;margin-bottom:16px}
+.auth-input{width:100%;padding:14px 48px 14px 18px;border:1.5px solid var(--cinza-200);border-radius:var(--raio-sm);font-size:15px;font-family:inherit;color:var(--cinza-800);background:var(--cinza-50);outline:none;transition:border-color var(--transicao),box-shadow var(--transicao)}
+.auth-input:focus{border-color:var(--azul-axia);box-shadow:0 0 0 3px rgba(27,94,159,.08);background:var(--branco)}
+.auth-input.error{border-color:#ef4444;animation:authShake .4s ease}
+@keyframes authShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.auth-toggle-pw{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--cinza-400);cursor:pointer;padding:4px}
+.auth-toggle-pw:hover{color:var(--cinza-600)}
+.auth-toggle-pw svg{width:20px;height:20px}
+.auth-btn{width:100%;padding:14px;background:linear-gradient(135deg,#0052cc,#003d99);color:var(--branco);border:none;border-radius:var(--raio-sm);font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:opacity var(--transicao),box-shadow var(--transicao);box-shadow:0 2px 8px rgba(0,82,204,.25)}
+.auth-btn:hover{opacity:.92;box-shadow:0 4px 16px rgba(0,82,204,.35)}
+.auth-btn:disabled{opacity:.7;cursor:wait}
+.auth-spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:authSpin .6s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes authSpin{to{transform:rotate(360deg)}}
+.auth-error-msg{font-size:12px;color:#ef4444;margin-top:12px;min-height:18px}
+.auth-footer-text{margin-top:24px;font-size:11px;color:var(--cinza-400);line-height:1.6}
+.auth-mailto{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:11.5px;color:var(--azul-axia);text-decoration:none;font-weight:500}
+.auth-mailto:hover{color:#0D3B66}
+.auth-mailto svg{width:14px;height:14px}
+.auth-logos{display:flex;align-items:center;justify-content:center;gap:28px;margin-top:20px;padding-top:20px;border-top:1px solid rgba(0,0,0,.06)}
+.auth-logos img{opacity:.7;transition:opacity .3s ease}
+.auth-logos img:hover{opacity:.95}
+.auth-logos .auth-logo-icds{height:28px}
+.auth-logos .auth-logo-axia{height:30px}
+.auth-spectra{margin-top:14px;text-align:center}
+.auth-spectra .spectra-sig{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-size:10px;color:var(--cinza-500);opacity:.8}
+.auth-spectra .spectra-sig-name{font-weight:700;letter-spacing:.3px;color:var(--azul-axia)}
+.auth-spectra .spectra-sig:hover{opacity:1}
+.auth-spectra .spectra-sig-tm{font-size:.6em;vertical-align:super;opacity:.8;font-weight:400}
+.auth-spectra .spectra-sig-dot{opacity:.6}
+.auth-spectra .spectra-sig-tagline{font-weight:400;font-style:italic;opacity:.9}
+@media(max-width:768px){.container{padding:0 16px}header{padding:0}.header-inner{flex-direction:column;text-align:center;gap:14px;padding:18px 24px}.header-left{gap:14px;flex-wrap:wrap;justify-content:center}.header-left img.logo-unimed{height:44px}.header-left img.logo-icds{height:34px}.logo-sep{height:28px}.header-right{gap:12px}.header-right img.logo-axia{height:36px}.header-text{text-align:center}.header-text h1{font-size:18px}.header-text p{font-size:12px}nav .container{justify-content:center}nav a{font-size:12px;padding:4px 8px}nav .btn-voltar{font-size:11px;padding:5px 12px;margin-right:4px}h2{font-size:20px}h3{font-size:17px}section{padding:32px 0}.kpi-row{grid-template-columns:repeat(2,1fr);gap:10px}.kpi-card{padding:14px}.kpi-card .kpi-value{font-size:22px}.kpi-card .kpi-label{font-size:12px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}thead th{padding:8px 10px;font-size:12px}tbody td{padding:8px 10px;font-size:13px}.chart-container{padding:16px 10px;margin:16px 0}.chart-container canvas{max-height:320px}.chart-title{font-size:13px;margin-bottom:8px}.insight{padding:12px 14px}.insight p{font-size:14px}p{font-size:15px}.footer-inner{padding:28px 18px 24px}.footer-top{flex-direction:column;gap:24px;text-align:center}.footer-logos{justify-content:center;flex-wrap:wrap}.footer-logos img.fl-unimed{height:40px}.footer-logos img.fl-icds{height:32px}.footer-logos img.fl-axia{height:34px}.footer-links{justify-content:center;gap:20px}.footer-bottom{flex-direction:column;gap:12px;text-align:center}}
+@media(max-width:480px){.kpi-row{grid-template-columns:1fr 1fr;gap:8px}.kpi-card{padding:12px}.kpi-card .kpi-value{font-size:18px}.kpi-card .kpi-label{font-size:11px}h2{font-size:18px}h3{font-size:15px}.header-inner{padding:16px 18px}.header-left img.logo-unimed{height:40px}.header-left img.logo-icds{height:30px}.header-right img.logo-axia{height:30px}.logo-sep{height:24px}.header-text h1{font-size:16px}.header-text p{font-size:11px}nav a{font-size:11px;padding:3px 6px}nav .btn-voltar{font-size:10px;padding:4px 10px}section{padding:24px 0}p{font-size:14px}.chart-container canvas{max-height:260px}.insight{padding:10px 12px}.insight p{font-size:13px}.insight-label{font-size:11px}thead th{padding:6px 8px;font-size:11px}tbody td{padding:6px 8px;font-size:12px}.footer-logos img.fl-unimed{height:36px}.footer-logos img.fl-icds{height:28px}.footer-logos img.fl-axia{height:28px}.footer-links{gap:16px}.footer-links a{font-size:11px}.auth-card{padding:36px 24px 28px;border-radius:18px;margin:0 16px}.auth-logo{height:48px}.auth-title{font-size:18px}.auth-subtitle{font-size:12px}.auth-btn{min-height:48px;font-size:14px}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Conte&uacute;do em revis&atilde;o t&eacute;cnica</h1>
-        <p>Esta entrega est&aacute; temporariamente indispon&iacute;vel enquanto conduzimos uma revis&atilde;o de integridade de dados.</p>
-        <a href="../../">&larr; Voltar ao portal</a>
+<!-- AUTH WALL -->
+<div id="authWall" class="auth-wall">
+<div class="auth-blur"></div>
+<div class="auth-card">
+  <img src="../../assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="auth-logo">
+  <div class="auth-title">Portal de Entregas</div>
+  <div class="auth-subtitle">Acesso restrito &mdash; AxiaCare&reg; Analytics</div>
+  <form onsubmit="return handleAuth(event)">
+    <div class="auth-field">
+      <input type="password" id="authInput" class="auth-input" placeholder="Senha de acesso" autocomplete="off" autofocus>
+      <button type="button" class="auth-toggle-pw" onclick="togglePassword()">
+        <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
     </div>
+    <button type="submit" class="auth-btn">Acessar</button>
+  </form>
+  <div id="authError" class="auth-error-msg"></div>
+  <div class="auth-footer-text">
+    Este portal &eacute; de uso exclusivo da Unimed Ourinhos e seus parceiros autorizados.
+    <br>
+    <a href="mailto:contato@axcare.app" class="auth-mailto">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      contato@axcare.app
+    </a>
+  </div>
+  <div class="auth-logos">
+    <img src="../../assets/icds_horizontal_positivo.png" alt="ICDS" class="auth-logo-icds">
+    <img src="../../assets/axiacare_horizontal_positivo.png" alt="AxiaCare" class="auth-logo-axia">
+  </div>
+  <div class="auth-spectra">
+    <a href="https://spectra.thera.tech" target="_blank" rel="noopener" class="spectra-sig">
+      <span class="spectra-sig-name">Spectra<span class="spectra-sig-tm">&trade;</span></span>
+      <span class="spectra-sig-dot">&bull;</span>
+      <span class="spectra-sig-tagline">Intelig&ecirc;ncia Cl&iacute;nica para Operadoras de Sa&uacute;de</span>
+    </a>
+  </div>
+</div>
+</div>
+<!-- HEADER -->
+<header>
+<div class="header-inner">
+  <div class="header-left">
+    <a href="https://www.unimedourinhos.com.br/" target="_blank" rel="noopener"><img src="../../assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="logo-unimed"></a>
+    <div class="logo-sep"></div>
+    <a href="https://icds.org.br/" target="_blank" rel="noopener"><img src="../../assets/icds_horizontal_negativo.png" alt="ICDS" class="logo-icds"></a>
+  </div>
+  <div class="header-right">
+    <a href="https://axcare.app" target="_blank" rel="noopener"><img src="../../assets/axiacare_horizontal_negativo.png" alt="AxiaCare" class="logo-axia"></a>
+  </div>
+</div>
+<div class="header-text">
+  <div class="badge-eixo">Eixo 01</div>
+  <h1>An&aacute;lise da Rede Assistencial</h1>
+  <p>Unimed Ourinhos &mdash; Compet&ecirc;ncia de Atendimento: Janeiro/2024 a Dezembro/2025</p>
+</div>
+</header>
+<!-- NAV -->
+<nav>
+<div class="container">
+  <a href="../../" class="btn-voltar"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Portal</a>
+  <a href="#contexto">Contexto</a>
+  <a href="#sumario">Sum&aacute;rio</a>
+  <a href="#camadas">Camadas</a>
+  <a href="#procedimentos">Procedimentos</a>
+  <a href="#setores">Setores</a>
+  <a href="#pontos-cegos">Pontos Cegos</a>
+  <a href="#trilhas">Pr&oacute;ximos Eixos</a>
+  <button id="btnDownloadPdf" class="btn-pdf" onclick="exportToPDF()" title="Exportar em PDF">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    PDF
+  </button>
+</div>
+</nav>
+<!-- 1. CONTEXTO -->
+<section id="contexto">
+<div class="container">
+<h2>1. Contexto da An&aacute;lise</h2>
+<p>Esta an&aacute;lise explora os dados de eventos assistenciais da Unimed Ourinhos de <strong>janeiro de 2024 a dezembro de 2025</strong> (compet&ecirc;ncia de atendimento). O estudo abrange <strong>3.326.952 lan&ccedil;amentos assistenciais</strong>, totalizando <strong>20.098.881 unidades de procedimento</strong>, que somam um custo total de <strong>R$ 272,0 milh&otilde;es</strong>.</p>
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="kpi-tooltip">Soma de todos os valores pagos no per&iacute;odo de jan/2024 a dez/2025 (compet&ecirc;ncia de atendimento).</div>
+    <div class="kpi-value">R$ 272,0M</div>
+    <div class="kpi-label">Custo total no per&iacute;odo</div>
+  </div>
+  <div class="kpi-card green">
+    <div class="kpi-tooltip">Cada linha de registro no banco de dados representa um lan&ccedil;amento assistencial.</div>
+    <div class="kpi-value">3.326.952</div>
+    <div class="kpi-label">Lan&ccedil;amentos assistenciais</div>
+  </div>
+  <div class="kpi-card green">
+    <div class="kpi-tooltip">Soma do campo quantidade (qtde) de todos os lan&ccedil;amentos.</div>
+    <div class="kpi-value">20.098.881</div>
+    <div class="kpi-label">Unidades de procedimento</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-tooltip">17 categorias de faturamento do sistema de gest&atilde;o da operadora, agrupadas em 8 camadas operacionais.</div>
+    <div class="kpi-value">17</div>
+    <div class="kpi-label">Setores de faturamento</div>
+  </div>
+</div>
+</div>
+</section>
+<!-- 2. SUMÁRIO EXECUTIVO -->
+<section id="sumario">
+<div class="container">
+<h2>2. Sum&aacute;rio Executivo</h2>
+<p>Sete achados estruturais emergiram da an&aacute;lise. Cada um representa uma oportunidade de aprofundamento e a&ccedil;&atilde;o gerencial.</p>
+<table>
+<thead><tr><th style="width:40px">#</th><th>Achado</th><th style="width:140px">Impacto</th></tr></thead>
+<tbody>
+<tr><td><strong>1</strong></td><td><strong>Concentra&ccedil;&atilde;o em poucos setores.</strong> Quatro camadas concentram 78,6% de todo o custo assistencial: Rede Credenciada (29,0%), Interc&acirc;mbio Estadual (20,6%), Hospital Pr&oacute;prio (18,4%) e Ato Cooperado (10,6%).</td><td class="num">R$ 213,7M</td></tr>
+<tr><td><strong>2</strong></td><td><strong>Rede Pr&oacute;pria + Hospital Pr&oacute;prio.</strong> A Rede Pr&oacute;pria (CAMU-OURS + NAS) e o Hospital Pr&oacute;prio somam 27,0% dos custos (R$ 73,4M), com perfis operacionais distintos.</td><td class="num">R$ 73,4M</td></tr>
+<tr><td><strong>3</strong></td><td><strong>Reembolso / Liminares.</strong> Apenas 3.008 lan&ccedil;amentos (0,1% do total), mas 2,1% dos recursos (R$ 5,8M), com ticket m&eacute;dio de R$ 1.915.</td><td class="num">R$ 5,8M</td></tr>
+<tr><td><strong>4</strong></td><td><strong>Depend&ecirc;ncia externa em alta complexidade.</strong> O Interc&acirc;mbio Estadual concentra procedimentos cl&iacute;nicos exclusivos de alta complexidade, funcionando como refer&ecirc;ncia terci&aacute;ria.</td><td class="num">R$ 56,2M</td></tr>
+<tr><td><strong>5</strong></td><td><strong>Interc&acirc;mbio Estadual em queda.</strong> Redu&ccedil;&atilde;o de 22,1% no comparativo Jan-Out 2024 vs 2025 (R$ -6,3M), enquanto Hospital Pr&oacute;prio cresce 8,6%.</td><td class="num">-22,1%</td></tr>
+<tr><td><strong>6</strong></td><td><strong>Pontos cegos de R$ 56,7 milh&otilde;es.</strong> 20,8% do custo est&aacute; em rubricas gen&eacute;ricas sem detalhamento (grupo n&atilde;o informado + taxa gen&eacute;rica).</td><td class="num">R$ 56,7M</td></tr>
+<tr><td><strong>7</strong></td><td><strong>Rede Pr&oacute;pria em expans&atilde;o.</strong> NAS - Ourinhos cresceu 23,6% e CAMU-OURS 34,9% no comparativo interanual, indicando fortalecimento da rede local.</td><td class="num">+23,6%</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 3. DISTRIBUIÇÃO POR CAMADA -->
+<section id="camadas">
+<div class="container">
+<h2>3. Distribui&ccedil;&atilde;o de Custos por Camada Operacional</h2>
+<p>Os 17 setores de faturamento da Unimed Ourinhos foram agrupados em oito camadas operacionais. Passe o mouse sobre o nome de cada camada para ver os setores que a comp&otilde;em.</p>
+<div class="chart-container">
+  <div class="chart-title">Distribui&ccedil;&atilde;o de Custos por Camada Operacional</div>
+  <canvas id="chartCamadas"></canvas>
+</div>
+<table>
+<thead><tr><th>Camada Operacional</th><th class="num">Custo Total (R$)</th><th class="num">% do Total</th><th class="num">Lan&ccedil;amentos</th></tr></thead>
+<tbody>
+<tr class="camada-row"><td><strong>Rede Credenciada</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Hospital</span><span class="ct-setor">Radiologia</span><span class="ct-setor">Cl&iacute;nicas</span><span class="ct-setor">Laborat&oacute;rio</span><span class="ct-setor">Outros Serv. Credenciados</span><span class="ct-setor">Cl&iacute;nica Anestesiologia</span><span class="ct-setor">Hemoterapia</span></div></td><td class="num">78.791.241</td><td class="num">29,0%</td><td class="num">1.905.611</td></tr>
+<tr class="camada-row"><td><strong>Interc&acirc;mbio Estadual</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Unimed's - Estado</span></div></td><td class="num">56.153.387</td><td class="num">20,6%</td><td class="num">365.784</td></tr>
+<tr class="camada-row"><td><strong>Hospital Pr&oacute;prio</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Hospital Unimed</span></div></td><td class="num">49.990.409</td><td class="num">18,4%</td><td class="num">489.748</td></tr>
+<tr class="camada-row"><td><strong>Ato Cooperado</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Cooperados</span><span class="ct-setor">Pr&eacute; Cooperado</span></div></td><td class="num">28.775.148</td><td class="num">10,6%</td><td class="num">323.522</td></tr>
+<tr class="camada-row"><td><strong>Rede Pr&oacute;pria</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">CAMU-OURS</span><span class="ct-setor">NAS - Ourinhos</span></div></td><td class="num">23.423.096</td><td class="num">8,6%</td><td class="num">84.630</td></tr>
+<tr class="camada-row"><td><strong>Outros</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Fornecedor PJ</span><span class="ct-setor">N/A</span></div></td><td class="num">17.576.842</td><td class="num">6,5%</td><td class="num">33.582</td></tr>
+<tr class="camada-row"><td><strong>Interc&acirc;mbio Nacional</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Unimed,S</span></div></td><td class="num">11.523.430</td><td class="num">4,2%</td><td class="num">121.066</td></tr>
+<tr class="camada-row"><td><strong>Reembolso / Liminares</strong><div class="camada-tooltip"><div class="ct-title">Setores que comp&otilde;em esta camada</div><span class="ct-setor">Reembolso Usu&aacute;rios</span></div></td><td class="num">5.761.646</td><td class="num">2,1%</td><td class="num">3.008</td></tr>
+<tr style="font-weight:700;background:#eef4fa"><td>Total Geral</td><td class="num">271.995.199</td><td class="num">100,0%</td><td class="num">3.326.952</td></tr>
+</tbody>
+</table>
+<div class="insight">
+  <div class="insight-label">O que os dados mostram</div>
+  <p>A Rede Credenciada concentra 29,0% do custo com 1.905.611 lan&ccedil;amentos. O Interc&acirc;mbio Estadual &eacute; a segunda maior camada (20,6%, R$ 56,2M), seguido pelo Hospital Pr&oacute;prio (18,4%, R$ 50,0M). A Rede Pr&oacute;pria (CAMU-OURS + NAS) responde por 8,6% (R$ 23,4M) em 84.630 lan&ccedil;amentos.</p>
+</div>
+<div class="chart-container">
+  <div class="chart-title">Evolu&ccedil;&atilde;o Trimestral por Camada (2024-2025)</div>
+  <canvas id="chartTrimestral"></canvas>
+</div>
+</div>
+</section>
+<!-- 4. ANÁLISE POR PROCEDIMENTO -->
+<section id="procedimentos">
+<div class="container">
+<h2>4. An&aacute;lise por Procedimento</h2>
+<h3>4.1. Top 15 Procedimentos por Custo</h3>
+<table>
+<thead><tr><th>Procedimento</th><th>Setor</th><th class="num">Registros</th><th class="num">Custo (R$)</th></tr></thead>
+<tbody>
+<tr><td>Consulta em Consult&oacute;rio</td><td>Cooperados</td><td class="num">201.609</td><td class="num">20.160.900</td></tr>
+<tr><td>Taxa Gen&eacute;rica</td><td>Unimed's - Estado</td><td class="num">6.129</td><td class="num">6.605.376</td></tr>
+<tr><td>Taxa Gen&eacute;rica</td><td>Fornecedor PJ</td><td class="num">450</td><td class="num">5.845.766</td></tr>
+<tr><td>Taxa de Sala de Observa&ccedil;&atilde;o</td><td>Hospital Unimed</td><td class="num">16.194</td><td class="num">4.445.929</td></tr>
+<tr><td>Consulta em Pronto Socorro</td><td>Hospital</td><td class="num">27.217</td><td class="num">4.280.539</td></tr>
+<tr><td>Sess&atilde;o de Psicoterapia Individual</td><td>Outros Serv.</td><td class="num">84.517</td><td class="num">3.806.928</td></tr>
+<tr><td>Di&aacute;ria de UTI Adulto Geral</td><td>Hospital</td><td class="num">1.530</td><td class="num">3.606.949</td></tr>
+<tr><td>Consulta em Pronto Socorro</td><td>Hospital Unimed</td><td class="num">31.193</td><td class="num">2.628.738</td></tr>
+<tr><td>Consulta em Consult&oacute;rio</td><td>Unimed's - Estado</td><td class="num">21.593</td><td class="num">2.546.480</td></tr>
+<tr><td>RM Articular</td><td>Radiologia</td><td class="num">3.897</td><td class="num">2.525.110</td></tr>
+<tr><td>Di&aacute;ria de Quarto Coletivo 2 Leitos</td><td>Hospital Unimed</td><td class="num">3.558</td><td class="num">2.497.245</td></tr>
+<tr><td>Di&aacute;ria de Quarto Coletivo 2 Leitos</td><td>Hospital</td><td class="num">4.609</td><td class="num">2.339.579</td></tr>
+<tr><td>Keytruda 100mg</td><td>Hospital Unimed</td><td class="num">83</td><td class="num">2.237.327</td></tr>
+<tr><td>Di&aacute;ria Enfermaria Psiquiatria</td><td>Unimed's - Estado</td><td class="num">8.591</td><td class="num">2.229.602</td></tr>
+<tr><td>Materiais em Geral</td><td>Fornecedor PJ</td><td class="num">353</td><td class="num">2.003.476</td></tr>
+</tbody>
+</table>
+<div class="insight">
+  <div class="insight-label">O que os dados mostram</div>
+  <p>A Consulta em Consult&oacute;rio (Cooperados) &eacute; o procedimento de maior custo individual (R$ 20,2M), representando 7,4% do total. Taxa Gen&eacute;rica aparece em segundo e terceiro lugar (R$ 12,5M somados), refor&ccedil;ando a necessidade de detalhamento dessas rubricas.</p>
+</div>
+<h3>4.2. Distribui&ccedil;&atilde;o por Grupo de Faturamento</h3>
+<div class="chart-container">
+  <div class="chart-title">Distribui&ccedil;&atilde;o de Custos por Grupo de Faturamento</div>
+  <canvas id="chartGrupoFat"></canvas>
+</div>
+<table>
+<thead><tr><th>Grupo de Faturamento</th><th class="num">Registros</th><th class="num">Custo (R$)</th><th class="num">%</th></tr></thead>
+<tbody>
+<tr><td>SADT</td><td class="num">1.576.340</td><td class="num">53.480.013</td><td class="num">19,7%</td></tr>
+<tr><td>(sem classifica&ccedil;&atilde;o)</td><td class="num">181.977</td><td class="num">40.558.469</td><td class="num">14,9%</td></tr>
+<tr><td>Medicamentos</td><td class="num">402.481</td><td class="num">36.924.364</td><td class="num">13,6%</td></tr>
+<tr><td>Di&aacute;rias</td><td class="num">30.593</td><td class="num">26.494.132</td><td class="num">9,7%</td></tr>
+<tr><td>Consulta Eletiva</td><td class="num">244.153</td><td class="num">25.069.904</td><td class="num">9,2%</td></tr>
+<tr><td>HM</td><td class="num">186.260</td><td class="num">22.118.530</td><td class="num">8,1%</td></tr>
+<tr><td>Taxa Gen&eacute;rica</td><td class="num">8.462</td><td class="num">16.136.072</td><td class="num">5,9%</td></tr>
+<tr><td>Taxa de Sala</td><td class="num">54.357</td><td class="num">16.071.151</td><td class="num">5,9%</td></tr>
+<tr><td>Materiais</td><td class="num">476.058</td><td class="num">10.027.843</td><td class="num">3,7%</td></tr>
+<tr><td>Consulta em Pronto Socorro</td><td class="num">69.471</td><td class="num">8.070.881</td><td class="num">3,0%</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 5. SETORES -->
+<section id="setores">
+<div class="container">
+<h2>5. An&aacute;lise dos Setores de Maior Representatividade</h2>
+<h3>5.1. Varia&ccedil;&atilde;o Interanual por Setor (Jan-Out 2024 vs Jan-Out 2025)</h3>
+<div class="chart-container">
+  <div class="chart-title">Varia&ccedil;&atilde;o Interanual por Setor (Jan-Out 2024 vs Jan-Out 2025)</div>
+  <canvas id="chartVariacao"></canvas>
+</div>
+<table>
+<thead><tr><th>Setor</th><th class="num">2024 (R$ M)</th><th class="num">2025 (R$ M)</th><th class="num">Varia&ccedil;&atilde;o</th></tr></thead>
+<tbody>
+<tr><td>Unimed's - Estado</td><td class="num">28,4</td><td class="num">22,1</td><td class="num" style="color:#c0392b"><strong>-22,1%</strong></td></tr>
+<tr><td>Hospital Unimed</td><td class="num">20,9</td><td class="num">22,7</td><td class="num" style="color:var(--verde-unimed)">+8,6%</td></tr>
+<tr><td>Hospital</td><td class="num">13,9</td><td class="num">12,1</td><td class="num" style="color:#c0392b">-12,6%</td></tr>
+<tr><td>Cooperados</td><td class="num">13,4</td><td class="num">11,8</td><td class="num" style="color:#c0392b">-12,0%</td></tr>
+<tr><td>NAS - Ourinhos</td><td class="num">7,7</td><td class="num">9,6</td><td class="num" style="color:var(--verde-unimed)"><strong>+23,6%</strong></td></tr>
+<tr><td>CAMU-OURS</td><td class="num">1,5</td><td class="num">2,0</td><td class="num" style="color:var(--verde-unimed)"><strong>+34,9%</strong></td></tr>
+<tr><td>Unimed,S</td><td class="num">4,4</td><td class="num">5,5</td><td class="num" style="color:var(--verde-unimed)">+26,9%</td></tr>
+<tr><td>Laborat&oacute;rio</td><td class="num">5,3</td><td class="num">5,8</td><td class="num" style="color:var(--verde-unimed)">+8,5%</td></tr>
+</tbody>
+</table>
+<div class="insight">
+  <div class="insight-label">O que os dados mostram</div>
+  <p>O Interc&acirc;mbio Estadual apresenta queda de 22,1% (R$ -6,3M), enquanto o Hospital Pr&oacute;prio cresce 8,6% (R$ +1,8M). A Rede Pr&oacute;pria (NAS + CAMU) cresce significativamente: NAS +23,6% e CAMU +34,9%. Esse movimento sugere fortalecimento da rede local com redu&ccedil;&atilde;o da depend&ecirc;ncia do interc&acirc;mbio.</p>
+</div>
+<h3>5.2. Distribui&ccedil;&atilde;o por Tipo de Atendimento</h3>
+<div class="chart-container">
+  <div class="chart-title">Distribui&ccedil;&atilde;o por Tipo de Atendimento (Top 10)</div>
+  <canvas id="chartTipo"></canvas>
+</div>
+<table>
+<thead><tr><th>Tipo de Atendimento</th><th class="num">Registros</th><th class="num">Custo (R$)</th><th class="num">%</th></tr></thead>
+<tbody>
+<tr><td>Tratamento Quimioter&aacute;pico</td><td class="num">43.312</td><td class="num">31.190.150</td><td class="num">11,5%</td></tr>
+<tr><td>Proc. Ambulatorial Hospitalar</td><td class="num">440.042</td><td class="num">30.539.991</td><td class="num">11,2%</td></tr>
+<tr><td>Interna&ccedil;&atilde;o Cir&uacute;rgica QC</td><td class="num">190.639</td><td class="num">26.696.355</td><td class="num">9,8%</td></tr>
+<tr><td>Consulta</td><td class="num">251.937</td><td class="num">25.939.069</td><td class="num">9,5%</td></tr>
+<tr><td>180 Dias Car&ecirc;ncia</td><td class="num">232.329</td><td class="num">20.431.818</td><td class="num">7,5%</td></tr>
+<tr><td>Atendimento Domiciliar</td><td class="num">33.738</td><td class="num">17.174.551</td><td class="num">6,3%</td></tr>
+<tr><td>Exames Especiais</td><td class="num">208.638</td><td class="num">15.802.804</td><td class="num">5,8%</td></tr>
+<tr><td>Exames B&aacute;sicos</td><td class="num">1.105.576</td><td class="num">15.181.172</td><td class="num">5,6%</td></tr>
+<tr><td>Interna&ccedil;&atilde;o Cl&iacute;nica QC</td><td class="num">200.206</td><td class="num">14.320.473</td><td class="num">5,3%</td></tr>
+<tr><td>Interna&ccedil;&atilde;o Cl&iacute;nica Apartamento</td><td class="num">117.187</td><td class="num">10.280.332</td><td class="num">3,8%</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- 6. PONTOS CEGOS -->
+<section id="pontos-cegos">
+<div class="container">
+<h2>6. Pontos Cegos e Limita&ccedil;&otilde;es da An&aacute;lise</h2>
+<p>Dois pontos cegos, que somam <strong>R$ 56,7 milh&otilde;es (20,8% do custo total)</strong>, limitam a precis&atilde;o das an&aacute;lises.</p>
+<div class="chart-container">
+  <div class="chart-title">Pontos Cegos: Grupo N&atilde;o Informado + Taxa Gen&eacute;rica</div>
+  <canvas id="chartPontosCegos"></canvas>
+</div>
+<table>
+<thead><tr><th>Ponto Cego</th><th class="num">Custo Total</th><th class="num">% do Total</th></tr></thead>
+<tbody>
+<tr><td>Grupo de Faturamento N&atilde;o Informado</td><td class="num">R$ 40,6M</td><td class="num">14,9%</td></tr>
+<tr><td>Procedimento "Taxa Gen&eacute;rica"</td><td class="num">R$ 16,1M</td><td class="num">5,9%</td></tr>
+<tr style="font-weight:700;background:#eef4fa"><td>Total Pontos Cegos</td><td class="num">R$ 56,7M</td><td class="num">20,8%</td></tr>
+</tbody>
+</table>
+<div class="insight warn">
+  <div class="insight-label">Implica&ccedil;&atilde;o para a gest&atilde;o</div>
+  <p>O detalhamento desses lan&ccedil;amentos pode contribuir para maior precis&atilde;o nas an&aacute;lises de rentabilidade por servi&ccedil;o e por prestador.</p>
+</div>
+<div class="insight warn">
+  <div class="insight-label">Limita&ccedil;&atilde;o de dados cl&iacute;nicos</div>
+  <p>Este relat&oacute;rio baseia-se em dados administrativos e de faturamento. <strong>N&atilde;o foram disponibilizados dados cl&iacute;nicos como diagn&oacute;sticos (CID-10) ou resultados de exames.</strong></p>
+</div>
+<div class="insight warn">
+  <div class="insight-label">Limita&ccedil;&atilde;o temporal</div>
+  <p>Os dados referem-se &agrave; compet&ecirc;ncia de atendimento. Dezembro/2025 pode apresentar volume inferior aos demais meses devido ao ciclo natural de faturamento, uma vez que atendimentos realizados neste m&ecirc;s podem ainda n&atilde;o ter sido processados na data de extra&ccedil;&atilde;o dos dados.</p>
+</div>
+</div>
+</section>
+<!-- 7. TRILHAS -->
+<section id="trilhas">
+<div class="container">
+<h2>7. Trilhas para os Pr&oacute;ximos Eixos</h2>
+<table>
+<thead><tr><th>Eixo</th><th>Evid&ecirc;ncia deste Relat&oacute;rio</th><th>Pergunta de Decis&atilde;o</th></tr></thead>
+<tbody>
+<tr>
+  <td><strong>Eixo 02<br>Variabilidade</strong></td>
+  <td>Varia&ccedil;&atilde;o de pre&ccedil;os entre setores para os mesmos procedimentos, com destaque para terapias TEA/ABA e rubricas gen&eacute;ricas.</td>
+  <td>Onde est&atilde;o as maiores oportunidades de economia por meio da padroniza&ccedil;&atilde;o de pre&ccedil;os e protocolos com a rede credenciada?</td>
+</tr>
+<tr>
+  <td><strong>Eixo 03<br>Oportunidades e Leitura Integrada</strong></td>
+  <td>Queda de 22,1% no Interc&acirc;mbio Estadual, crescimento da Rede Pr&oacute;pria, e concentra&ccedil;&atilde;o de custos em reembolso com alto ticket m&eacute;dio.</td>
+  <td>Quais servi&ccedil;os podem ser internalizados ou reestruturados para otimizar custos? Qual o perfil dos benefici&aacute;rios que utilizam o interc&acirc;mbio?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- FOOTER -->
+<footer>
+<div class="footer-inner">
+    <div class="footer-top">
+        <div class="footer-logos">
+            <a href="https://www.unimedourinhos.com.br/" target="_blank" rel="noopener"><img src="../../assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="fl-unimed"></a>
+            <div class="fl-sep"></div>
+            <a href="https://icds.org.br/" target="_blank" rel="noopener"><img src="../../assets/icds_horizontal_negativo.png" alt="ICDS" class="fl-icds"></a>
+            <div class="fl-sep"></div>
+            <a href="https://axcare.app" target="_blank" rel="noopener"><img src="../../assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="fl-axia"></a>
+        </div>
+        <div class="footer-links">
+            <a href="https://axcare.app" target="_blank" rel="noopener">axcare.app</a>
+            <a href="https://grupocsv.com" target="_blank" rel="noopener">grupocsv.com</a>
+            <a href="https://icds.org.br" target="_blank" rel="noopener">icds.org.br</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-brand">
+            <span class="brand-name">AxiaCare&reg; &mdash; Grupo CSV</span>
+            <span class="brand-tagline">Cuidados em Sa&uacute;de com Valor</span>
+        </div>
+        <div class="footer-copy">&copy; 2026 Grupo CSV. Todos os direitos reservados.</div>
+    </div>
+    <div class="footer-spectra">
+        <a href="https://spectra.thera.tech" target="_blank" rel="noopener" class="spectra-sig">
+            <span class="spectra-sig-name">Spectra<span class="spectra-sig-tm">&trade;</span></span>
+            <span class="spectra-sig-dot">&bull;</span>
+            <span class="spectra-sig-tagline">Intelig&ecirc;ncia Cl&iacute;nica para Operadoras de Sa&uacute;de</span>
+        </a>
+    </div>
+</div>
+</footer>
+<!-- CHARTS -->
+<script>
+const AZUL='#1B5E9F',VERDE='#00A859',CIANO='#00A0E3',CINZA='#888888',AMARELO='#FFC107',AZUL_LIGHT='rgba(27,94,159,.55)',VERDE_LIGHT='rgba(0,168,89,.50)',CIANO_LIGHT='rgba(0,160,227,.50)',AZUL_ESCURO='#0D3B66',LARANJA='#E67E22',ROXO='#8E44AD',ROSA='#E74C8B';
+Chart.defaults.font.family='Roboto';Chart.defaults.font.size=12;Chart.defaults.color='#333';Chart.defaults.plugins.legend.labels.usePointStyle=true;Chart.defaults.plugins.legend.labels.padding=16;Chart.defaults.maintainAspectRatio=true;Chart.defaults.responsive=true;
+const isMobile=window.innerWidth<768,legendPos=isMobile?'bottom':'right',legendPosTop=isMobile?'bottom':'top';
+new Chart(document.getElementById('chartCamadas'),{type:'doughnut',data:{labels:['Rede Credenciada (29,0%)','Interc\u00e2mbio Estadual (20,6%)','Hospital Pr\u00f3prio (18,4%)','Ato Cooperado (10,6%)','Rede Pr\u00f3pria (8,6%)','Outros (6,5%)','Interc\u00e2mbio Nacional (4,2%)','Reembolso / Liminares (2,1%)'],datasets:[{data:[78.8,56.2,50.0,28.8,23.4,17.6,11.5,5.8],backgroundColor:[AZUL,CIANO,AZUL_ESCURO,LARANJA,VERDE,CINZA,ROXO,AMARELO]}]},options:{responsive:true,plugins:{legend:{position:legendPos},tooltip:{callbacks:{label:ctx=>ctx.label+': R$ '+ctx.parsed.toFixed(1)+'M'}}}}});
+const CINZA_D='rgba(180,180,180,.45)';
+new Chart(document.getElementById('chartTrimestral'),{type:'line',data:{labels:['1T24','2T24','3T24','4T24','1T25','2T25','3T25','4T25'],datasets:[{label:'Rede Credenciada',data:[10.2,11.6,10.4,8.7,9.8,10.6,10.6,6.9],borderColor:AZUL,backgroundColor:AZUL,borderWidth:2.5,pointRadius:4,tension:.3},{label:'Interc\u00e2mbio Estadual',data:[8.4,8.9,7.9,7.4,7.7,6.0,6.3,3.5],borderColor:CIANO,backgroundColor:CIANO,borderWidth:2.5,pointRadius:4,tension:.3},{label:'Hospital Pr\u00f3prio',data:[5.1,6.3,7.3,6.2,7.1,7.3,6.0,4.6],borderColor:AZUL_ESCURO,backgroundColor:AZUL_ESCURO,borderWidth:2.5,pointRadius:4,tension:.3},{label:'Rede Pr\u00f3pria',data:[2.3,2.9,3.0,2.7,3.6,3.3,3.5,2.1],borderColor:VERDE,backgroundColor:VERDE,borderWidth:2.5,pointRadius:4,tension:.3},{label:'Ato Cooperado',data:[3.8,4.2,4.2,3.4,3.5,3.5,3.7,2.6],borderColor:CINZA_D,backgroundColor:CINZA_D,borderWidth:1.5,pointRadius:2,borderDash:[4,3],tension:.3},{label:'Reembolso',data:[0.7,0.7,0.8,0.7,0.8,0.7,0.8,0.7],borderColor:CINZA_D,backgroundColor:CINZA_D,borderWidth:1.5,pointRadius:2,borderDash:[4,3],tension:.3},{label:'Outros',data:[2.1,2.1,2.4,2.1,1.9,2.5,2.4,2.1],borderColor:CINZA_D,backgroundColor:CINZA_D,borderWidth:1.5,pointRadius:2,borderDash:[4,3],tension:.3},{label:'Interc\u00e2mbio Nacional',data:[1.3,1.3,1.3,1.6,2.2,1.2,1.4,1.2],borderColor:CINZA_D,backgroundColor:CINZA_D,borderWidth:1.5,pointRadius:2,borderDash:[4,3],tension:.3}]},options:{responsive:true,interaction:{mode:'index',intersect:false},scales:{y:{title:{display:true,text:'R$ milh\u00f5es'},beginAtZero:true}},plugins:{legend:{position:legendPosTop,labels:{filter:function(item){return item.datasetIndex<4}}},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': R$ '+ctx.parsed.y.toFixed(1)+'M'}}}}});
+new Chart(document.getElementById('chartGrupoFat'),{type:'bar',data:{labels:['SADT','(sem classif.)','Medicamentos','Di\u00e1rias','Consulta Eletiva','HM','Taxa Gen\u00e9rica','Taxa de Sala','Materiais','Consulta PS'],datasets:[{label:'Custo (R$ milh\u00f5es)',data:[53.5,40.6,36.9,26.5,25.1,22.1,16.1,16.1,10.0,8.1],backgroundColor:[AZUL,CINZA,VERDE,AZUL_ESCURO,CIANO,LARANJA,AMARELO,AZUL_LIGHT,VERDE_LIGHT,CIANO_LIGHT]}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'R$ '+ctx.parsed.x.toFixed(1)+'M'}}},scales:{x:{title:{display:true,text:'R$ milh\u00f5es'}}}}});
+new Chart(document.getElementById('chartVariacao'),{type:'bar',data:{labels:["Unimed's Estado",'Hosp. Unimed','Hospital','Cooperados','NAS Ourinhos','CAMU-OURS','Unimed,S','Laborat\u00f3rio'],datasets:[{label:'2024 (Jan-Out)',data:[28.4,20.9,13.9,13.4,7.7,1.5,4.4,5.3],backgroundColor:AZUL_LIGHT},{label:'2025 (Jan-Out)',data:[22.1,22.7,12.1,11.8,9.6,2.0,5.5,5.8],backgroundColor:AZUL}]},options:{responsive:true,plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': R$ '+ctx.parsed.y.toFixed(1)+'M'}}},scales:{y:{title:{display:true,text:'R$ milh\u00f5es'}}}}});
+new Chart(document.getElementById('chartTipo'),{type:'bar',data:{labels:['Quimioterapia','Proc. Amb. Hosp.','Int. Cir\u00fargica QC','Consulta','180 Dias Car\u00eancia','Atend. Domiciliar','Exames Especiais','Exames B\u00e1sicos','Int. Cl\u00ednica QC','Int. Cl\u00ednica Apto'],datasets:[{label:'Custo (R$ milh\u00f5es)',data:[31.2,30.5,26.7,25.9,20.4,17.2,15.8,15.2,14.3,10.3],backgroundColor:[AZUL,CIANO,AZUL_ESCURO,VERDE,LARANJA,VERDE_LIGHT,AZUL_LIGHT,CIANO_LIGHT,CINZA,AMARELO]}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'R$ '+ctx.parsed.x.toFixed(1)+'M'}}},scales:{x:{title:{display:true,text:'R$ milh\u00f5es'}}}}});
+new Chart(document.getElementById('chartPontosCegos'),{type:'doughnut',data:{labels:['Grupo N\u00e3o Informado (R$ 40,6M)','Taxa Gen\u00e9rica (R$ 16,1M)','Demais custos (R$ 215,3M)'],datasets:[{data:[40.6,16.1,215.3],backgroundColor:[AMARELO,CINZA,AZUL]}]},options:{responsive:true,plugins:{legend:{position:legendPos},tooltip:{callbacks:{label:ctx=>ctx.label+' ('+(ctx.parsed/272.0*100).toFixed(1)+'%)'}}}}});
+</script>
+<!-- AUTH SCRIPT -->
+<script>
+const AUTH_HASH='83a40f6323d76084faabc155ce8dd7874f8c75dc1caac8b9bd2a6a2d57ce7d01',AUTH_KEY='axiacare_portal_auth';
+(function(){if(sessionStorage.getItem(AUTH_KEY)===AUTH_HASH)document.getElementById('authWall').classList.add('dismissed')})();
+async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function handleAuth(e){e.preventDefault();const i=document.getElementById('authInput'),er=document.getElementById('authError'),b=e.target.querySelector('.auth-btn'),bo=b.innerHTML;b.disabled=true;b.innerHTML='<span class="auth-spinner"></span> Acessando...';er.textContent='';const h=await sha256(i.value);if(h===AUTH_HASH){sessionStorage.setItem(AUTH_KEY,AUTH_HASH);document.getElementById('authWall').classList.add('dismissed')}else{i.classList.add('error');er.textContent='Senha incorreta.';setTimeout(()=>i.classList.remove('error'),500);i.value='';i.focus()}b.disabled=false;b.innerHTML=bo;return false}
+function togglePassword(){const i=document.getElementById('authInput'),ic=document.getElementById('eyeIcon');if(i.type==='password'){i.type='text';ic.innerHTML='<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'}else{i.type='password';ic.innerHTML='<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>'}}
+</script>
+<!-- PDF EXPORT -->
+<script>
+async function exportToPDF(){const btn=document.getElementById('btnDownloadPdf');btn.disabled=true;const bo=btn.innerHTML;btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Gerando...';const ov=document.createElement('div');ov.className='pdf-overlay';ov.innerHTML='<div class="pdf-spinner"></div><div class="pdf-status">Preparando</div><div class="pdf-substatus">Convertendo gr\u00e1ficos...</div><div class="pdf-progress-bar"><div class="pdf-progress-fill" id="pdfProgress"></div></div>';document.body.appendChild(ov);const st=ov.querySelector('.pdf-status'),su=ov.querySelector('.pdf-substatus'),pr=document.getElementById('pdfProgress');function up(p,s,u){if(pr)pr.style.width=p+'%';if(s&&st)st.textContent=s;if(u&&su)su.textContent=u}try{const{jsPDF}=window.jspdf;up(5,'Convertendo','Capturando canvas...');await new Promise(r=>setTimeout(r,100));const cs=document.querySelectorAll('canvas'),ci=[];for(let i=0;i<cs.length;i++){const c=cs[i],im=document.createElement('img');im.src=c.toDataURL('image/png',1.0);im.style.width='100%';im.style.height='auto';im.style.display='block';im.className='pdf-chart-img';ci.push({canvas:c,img:im,parent:c.parentNode});c.parentNode.insertBefore(im,c);c.style.display='none';up(5+Math.round((i+1)/cs.length*15),null,'Gr\u00e1fico '+(i+1)+' de '+cs.length)}up(25,'Preparando layout','Ajustando...');await new Promise(r=>setTimeout(r,200));const aw=document.querySelector('.auth-wall'),nv=document.querySelector('nav'),pb=document.getElementById('btnDownloadPdf');if(aw)aw.style.display='none';if(nv)nv.style.display='none';if(pb)pb.style.display='none';document.querySelectorAll('.kpi-tooltip,.camada-tooltip').forEach(t=>{t.style.display='none'});up(30,'Capturando','Renderizando...');await new Promise(r=>setTimeout(r,100));const ss=document.querySelectorAll('header,section,footer');const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});const pw=210,ph=297,mg=12,cw=pw-2*mg;let fp=true;for(let i=0;i<ss.length;i++){const s=ss[i];up(30+Math.round((i+1)/ss.length*55),null,'Se\u00e7\u00e3o '+(i+1)+' de '+ss.length);const sc=await html2canvas(s,{scale:2,useCORS:true,allowTaint:true,backgroundColor:'#ffffff',logging:false,windowWidth:1100});const id=sc.toDataURL('image/jpeg',.92),iw=cw,ih=(sc.height*cw)/sc.width;let yo=0;while(yo<ih){if(!fp)pdf.addPage();fp=false;const rh=ih-yo,sh=Math.min(rh,ph-2*mg),sy=(yo/ih)*sc.height,sH=(sh/ih)*sc.height;const sl=document.createElement('canvas');sl.width=sc.width;sl.height=sH;sl.getContext('2d').drawImage(sc,0,sy,sc.width,sH,0,0,sc.width,sH);const sd=sl.toDataURL('image/jpeg',.92),ah=(sH*cw)/sc.width;pdf.addImage(sd,'JPEG',mg,mg,iw,ah);yo+=sh}}up(90,'Finalizando','Rodap\u00e9...');const lh=pdf.internal.pageSize.getHeight();pdf.setFontSize(8);pdf.setTextColor(136,136,136);pdf.text('AxiaCare\u00AE \u2014 Grupo CSV | Cuidados em Sa\u00fade com Valor',pw/2,lh-8,{align:'center'});pdf.text('Gerado em '+new Date().toLocaleDateString('pt-BR')+' | v5.0',pw/2,lh-4,{align:'center'});const tp=pdf.internal.getNumberOfPages();for(let p=1;p<=tp;p++){pdf.setPage(p);pdf.setFontSize(8);pdf.setTextColor(180,180,180);pdf.text(p+' / '+tp,pw-mg,lh-4,{align:'right'})}up(95,'Salvando','PDF final...');await new Promise(r=>setTimeout(r,200));pdf.save('Eixo01_Analise_Rede_Assistencial_Unimed_Ourinhos.pdf');up(100,'Conclu\u00eddo','Download iniciado.');await new Promise(r=>setTimeout(r,800))}catch(e){console.error(e);if(st)st.textContent='Erro';if(su)su.textContent=e.message;await new Promise(r=>setTimeout(r,2000))}finally{document.querySelectorAll('.pdf-chart-img').forEach(im=>{const c=im.nextElementSibling;if(c&&c.tagName==='CANVAS')c.style.display='';im.remove()});document.querySelectorAll('canvas').forEach(c=>c.style.display='');const aw=document.querySelector('.auth-wall'),nv=document.querySelector('nav'),pb=document.getElementById('btnDownloadPdf');if(aw)aw.style.display='';if(nv)nv.style.display='';if(pb)pb.style.display='';document.querySelectorAll('.kpi-tooltip,.camada-tooltip').forEach(t=>{t.style.display=''});ov.remove();btn.disabled=false;btn.innerHTML=bo}}
+</script>
 </body>
 </html>

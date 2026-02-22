@@ -15,33 +15,70 @@
 
     <!-- OpenGraph -->
     <meta property="og:title" content="Unimed Ourinhos | Portal de Entregas AxiaCare&reg;">
-    <meta property="og:description" content="Entregas t&eacute;cnicas do projeto de consultoria em efici&ecirc;ncia assistencial e otimiza&ccedil;&atilde;o de custos.">
+    <meta property="og:description" content="Entregas t&eacute;cnicas do projeto de consultoria em efici&ecirc;ncia assistencial e otimiza&ccedil;&atilde;o de custos, conduzido pela AxiaCare (Grupo CSV) sob contrata&ccedil;&atilde;o do ICDS.">
     <meta property="og:image" content="https://unimed094.axcare.app/assets/og_unimed_ourinhos.png?v=3">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
     <meta property="og:url" content="https://unimed094.axcare.app">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="AxiaCare&reg; Portal de Entregas">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Unimed Ourinhos | Portal de Entregas AxiaCare&reg;">
+    <meta name="twitter:description" content="Entregas t&eacute;cnicas do projeto de consultoria em efici&ecirc;ncia assistencial e otimiza&ccedil;&atilde;o de custos.">
+    <meta name="twitter:image" content="https://unimed094.axcare.app/assets/og_unimed_ourinhos.png?v=3">
 
     <!-- Google Fonts: Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
+        /* ========================================
+           Design Tokens — AxiaCare Portal v8.0
+           ======================================== */
+
         :root {
             --azul-axiacare: #1B5E9F;
             --azul-escuro: #0D3B66;
             --azul-profundo: #081F3E;
+            --azul-medio: #1565C0;
             --teal: #7FBFB2;
+            --teal-hover: #6aada0;
+            --teal-light: rgba(127,191,178,0.10);
+            --teal-bg: rgba(127,191,178,0.06);
+            --verde-unimed: #00A859;
+            --verde-unimed-light: rgba(0,168,89,0.08);
+            --amarelo-aviso: #f59e0b;
+            --cinza-900: #111827;
+            --cinza-800: #1f2937;
+            --cinza-700: #374151;
             --cinza-600: #4b5563;
             --cinza-500: #6b7280;
             --cinza-400: #9ca3af;
+            --cinza-300: #d1d5db;
             --cinza-200: #e5e7eb;
+            --cinza-100: #f3f4f6;
             --cinza-50: #f9fafb;
             --branco: #ffffff;
+            --raio: 16px;
+            --raio-md: 12px;
+            --raio-sm: 10px;
+            --raio-xs: 6px;
+            --sombra-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --sombra-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.03);
+            --sombra-card-hover: 0 12px 40px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.04);
+            --sombra-card-active: 0 2px 8px rgba(0,0,0,0.05), 0 8px 32px rgba(13,59,102,0.08);
+            --sombra-xl: 0 20px 60px rgba(0,0,0,0.12);
+            --transicao: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transicao-rapida: 0.15s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { height: 100%; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -49,16 +86,16 @@
             color: var(--cinza-600);
             line-height: 1.65;
             -webkit-font-smoothing: antialiased;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ======== HEADER ======== */
+        /* ========================================
+           Header — Premium Hero v8.0
+           ======================================== */
+
         .header {
             background: linear-gradient(155deg, #04111F 0%, var(--azul-profundo) 25%, var(--azul-escuro) 55%, #14466b 100%);
             color: var(--branco);
-            padding: 32px 0;
             position: relative;
             overflow: hidden;
         }
@@ -66,20 +103,45 @@
         .header::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background:
-                radial-gradient(ellipse 800px 400px at 20% 50%, rgba(127,191,178,0.06), transparent),
-                radial-gradient(ellipse 600px 300px at 80% 30%, rgba(27,94,159,0.08), transparent);
+            top: -120px;
+            right: -80px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            border: 1px solid rgba(127,191,178,0.06);
             pointer-events: none;
         }
 
-        .header-inner {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0 24px;
+        .header::after {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -20px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            border: 1px solid rgba(127,191,178,0.04);
+            pointer-events: none;
+        }
+
+        .header-accent {
+            position: absolute;
+            bottom: -200px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(27,94,159,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .header-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 28px 48px;
+            max-width: 1200px;
+            margin: 0 auto;
             position: relative;
             z-index: 1;
         }
@@ -90,205 +152,1867 @@
             gap: 20px;
         }
 
-        .header-logo {
+        .header-left img.logo-unimed { height: 52px; object-fit: contain; }
+        .header-left img.logo-icds { height: 42px; object-fit: contain; }
+
+        .logo-sep {
+            width: 1px;
             height: 36px;
-            opacity: 0.95;
+            background: rgba(255,255,255,0.12);
+            flex-shrink: 0;
         }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-right img.logo-axia { height: 44px; object-fit: contain; opacity: 0.9; }
+
+        .header-badge {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--teal);
+            font-weight: 600;
+            padding: 7px 18px;
+            border: 1px solid rgba(127,191,178,0.2);
+            border-radius: 24px;
+            background: rgba(127,191,178,0.04);
+        }
+
+        .header-hero {
+            text-align: center;
+            padding: 24px 48px 72px;
+            max-width: 760px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-hero h1 {
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: -1.2px;
+            margin-bottom: 20px;
+            line-height: 1.15;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-hero .subtitle {
+            font-size: 15px;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.85;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header-hero .subtitle .hl-icds {
+            color: rgba(255,255,255,0.85);
+            font-weight: 600;
+        }
+
+        .header-hero .subtitle .hl-axia {
+            color: var(--teal);
+            font-weight: 600;
+        }
+
+        .header-hero .subtitle .hl-csv {
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+        }
+
+        .header-meta {
+            display: inline-flex;
+            gap: 24px;
+            margin-top: 32px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 10px 28px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 32px;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .header-meta span { white-space: nowrap; }
 
         .header-divider {
             width: 1px;
-            height: 28px;
-            background: rgba(255,255,255,0.15);
+            height: 14px;
+            background: rgba(255,255,255,0.25);
+            align-self: center;
         }
 
-        .header-text h1 {
-            font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            color: rgba(255,255,255,0.95);
+        /* ========================================
+           Main Container
+           ======================================== */
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 48px;
         }
 
-        .header-text p {
-            font-size: 12px;
-            font-weight: 300;
-            color: rgba(255,255,255,0.5);
-            margin-top: 2px;
+        /* ========================================
+           Notices — Elegant v8.0
+           ======================================== */
+
+        .notices {
+            margin-top: 40px;
+            margin-bottom: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .header-right-logo {
-            height: 28px;
-            opacity: 0.7;
+        .notice {
+            border-radius: var(--raio-md);
+            padding: 20px 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            font-size: 13.5px;
+            line-height: 1.7;
         }
 
-        /* ======== MAIN CONTENT ======== */
-        .main {
+        .notice-icon {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notice-info {
+            background: var(--branco);
+            border: 1px solid var(--cinza-200);
+            color: var(--cinza-600);
+            box-shadow: var(--sombra-sm);
+        }
+
+        .notice-info .notice-icon {
+            background: rgba(27,94,159,0.08);
+            color: var(--azul-axiacare);
+        }
+
+        .notice-warn {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+            color: #78350f;
+        }
+
+        .notice-warn .notice-icon {
+            background: rgba(245,158,11,0.12);
+            color: var(--amarelo-aviso);
+        }
+
+        .notice strong { font-weight: 600; }
+
+        /* ========================================
+           Timeline — Roadmap v8.0
+           ======================================== */
+
+        .timeline-section {
+            margin-bottom: 56px;
+        }
+
+        .timeline {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 18px;
+            left: calc(12.5% + 20px);
+            right: calc(12.5% + 20px);
+            height: 2px;
+            background: var(--cinza-200);
+            z-index: 0;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 33%;
+            background: linear-gradient(90deg, var(--teal), var(--azul-axiacare));
+            border-radius: 2px;
+        }
+
+        .tl-item {
             flex: 1;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 60px 24px;
+            position: relative;
+            z-index: 1;
         }
 
-        .card {
-            max-width: 580px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .icon-container {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 32px;
-            background: linear-gradient(135deg, rgba(13,59,102,0.06), rgba(127,191,178,0.08));
-            border-radius: 16px;
+        .tl-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .icon-container svg {
-            width: 28px;
-            height: 28px;
-            color: var(--azul-escuro);
-            opacity: 0.7;
-        }
-
-        .card h2 {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--azul-escuro);
-            margin-bottom: 16px;
-            letter-spacing: -0.3px;
-        }
-
-        .card p {
-            font-size: 15px;
-            line-height: 1.7;
-            color: var(--cinza-500);
-            margin-bottom: 12px;
-        }
-
-        .card p:last-of-type {
-            margin-bottom: 0;
-        }
-
-        .divider {
-            width: 48px;
-            height: 2px;
-            background: var(--teal);
-            margin: 28px auto;
-            border-radius: 1px;
-            opacity: 0.5;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(13,59,102,0.04);
-            border: 1px solid rgba(13,59,102,0.08);
-            border-radius: 8px;
             font-size: 13px;
-            color: var(--cinza-500);
-            margin-top: 28px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            transition: all var(--transicao);
+            position: relative;
         }
 
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--teal);
+        .tl-dot-active {
+            background: linear-gradient(135deg, var(--teal), var(--azul-axiacare));
+            color: var(--branco);
+            box-shadow: 0 0 0 4px rgba(127,191,178,0.15), 0 4px 12px rgba(27,94,159,0.2);
+        }
+
+        .tl-dot-progress {
+            background: linear-gradient(135deg, var(--azul-axiacare), var(--azul-medio));
+            color: var(--branco);
+            box-shadow: 0 0 0 4px rgba(27,94,159,0.1);
+        }
+
+        .tl-dot-pending {
+            background: var(--cinza-100);
+            color: var(--cinza-400);
+            border: 2px solid var(--cinza-200);
+        }
+
+        .tl-pulse {
+            position: absolute;
+            inset: -4px;
             border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
+            border: 2px solid var(--teal);
+            opacity: 0;
+            animation: tlPulse 2.5s ease-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
+        @keyframes tlPulse {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.5); }
         }
 
-        /* ======== FOOTER ======== */
-        .footer {
-            padding: 24px;
+        .tl-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--cinza-700);
             text-align: center;
-            border-top: 1px solid var(--cinza-200);
+            letter-spacing: 0.3px;
+            margin-bottom: 4px;
         }
 
-        .footer p {
+        .tl-title {
             font-size: 12px;
+            color: var(--cinza-500);
+            text-align: center;
+            line-height: 1.4;
+            max-width: 140px;
+        }
+
+        .tl-status {
+            margin-top: 8px;
+            font-size: 9.5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .tl-st-parcial {
+            background: rgba(127,191,178,0.12);
+            color: #0d7377;
+        }
+
+        .tl-st-dev {
+            background: rgba(27,94,159,0.08);
+            color: var(--azul-axiacare);
+        }
+
+        .tl-st-pending {
+            background: var(--cinza-100);
             color: var(--cinza-400);
         }
 
-        .footer a {
-            color: var(--azul-axiacare);
-            text-decoration: none;
+        /* ========================================
+           Section Headers — v8.0
+           ======================================== */
+
+        .section { margin-bottom: 48px; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
         }
 
-        /* ======== RESPONSIVE ======== */
-        @media (max-width: 640px) {
-            .header-inner { flex-direction: column; gap: 16px; text-align: center; }
-            .header-left { flex-direction: column; }
-            .header-divider { width: 28px; height: 1px; }
-            .header-right-logo { display: none; }
-            .card h2 { font-size: 19px; }
-            .card p { font-size: 14px; }
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--raio-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .section-icon svg { width: 20px; height: 20px; }
+
+        .si-relatorios { background: rgba(27,94,159,0.08); color: var(--azul-axiacare); }
+        .si-flashcards { background: rgba(127,191,178,0.12); color: #0d7377; }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--cinza-500);
+            font-weight: 600;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: var(--cinza-200);
+        }
+
+        /* ========================================
+           Eixo Cards — Premium v8.0
+           ======================================== */
+
+        .eixo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .eixo-card {
+            background: var(--branco);
+            border-radius: var(--raio);
+            overflow: hidden;
+            transition: all var(--transicao);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .eixo-card.active {
+            box-shadow: var(--sombra-card-active);
+            border-color: rgba(27,94,159,0.08);
+        }
+
+        .eixo-card.active:hover {
+            box-shadow: var(--sombra-card-hover);
+            transform: translateY(-4px);
+            border-color: rgba(27,94,159,0.12);
+        }
+
+        .eixo-card.disabled {
+            opacity: 0.45;
+            filter: grayscale(80%);
+            cursor: default;
+        }
+
+        .eixo-card.disabled:hover { opacity: 0.52; }
+
+        .eixo-card.in-progress {
+            opacity: 0.88;
+            filter: none;
+            cursor: default;
+            border-left: 4px solid var(--azul-axiacare);
+            background: linear-gradient(135deg, rgba(27,94,159,0.03) 0%, rgba(127,191,178,0.03) 100%);
+            box-shadow: 0 2px 12px rgba(27,94,159,0.08);
+        }
+
+        .eixo-card.in-progress:hover {
+            opacity: 0.94;
+            box-shadow: 0 4px 16px rgba(27,94,159,0.12);
+        }
+
+        .eixo-card.in-progress::before {
+            background: linear-gradient(180deg, var(--azul-axiacare), rgba(27,94,159,0.4));
+        }
+
+        .eixo-card-inner {
+            padding: 28px;
+            position: relative;
+        }
+
+        .eixo-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+        }
+
+        .eixo-card.active.eixo-01::before { background: linear-gradient(180deg, var(--teal), var(--azul-axiacare)); }
+        .eixo-card.disabled::before { background: var(--cinza-200); }
+
+        .eixo-top {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .eixo-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .eixo-icon svg { width: 26px; height: 26px; }
+
+        .i-01 { background: rgba(27,94,159,0.08); color: var(--azul-axiacare); }
+        .i-02 { background: rgba(127,191,178,0.1); color: #0d7377; }
+        .i-03 { background: rgba(0,168,89,0.08); color: var(--verde-unimed); }
+        .i-04 { background: rgba(245,158,11,0.08); color: #b45309; }
+
+        .eixo-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .eixo-num {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--cinza-400);
+            font-weight: 600;
+        }
+
+        .eixo-status {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .st-parcial { background: rgba(127,191,178,0.12); color: #0d7377; }
+        .st-dev { background: rgba(27,94,159,0.08); color: var(--azul-axiacare); }
+        .st-pending { background: var(--cinza-100); color: var(--cinza-400); }
+
+        .eixo-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--cinza-900);
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .eixo-desc {
+            font-size: 13.5px;
+            color: var(--cinza-500);
+            line-height: 1.65;
+        }
+
+        .eixo-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--cinza-100);
+        }
+
+        .eixo-tag {
+            font-size: 11px;
+            color: var(--cinza-400);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .eixo-link {
+            font-size: 13px;
+            color: var(--azul-axiacare);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 8px;
+            background: rgba(27,94,159,0.06);
+            transition: all var(--transicao);
+        }
+
+        .eixo-card.active:hover .eixo-link {
+            gap: 10px;
+            background: rgba(27,94,159,0.1);
+        }
+
+        .eixo-link svg { width: 14px; height: 14px; transition: transform var(--transicao); }
+        .eixo-card.active:hover .eixo-link svg { transform: translateX(2px); }
+
+        /* ========================================
+           Flash Cards Carousel — v8.0
+           ======================================== */
+
+        .fc-section-bg {
+            background: linear-gradient(180deg, var(--branco) 0%, #f0f7f6 30%, #f0f7f6 70%, var(--branco) 100%);
+            padding: 56px 0 64px;
+        }
+
+        .fc-intro {
+            font-size: 14px;
+            color: var(--cinza-500);
+            margin-bottom: 32px;
+            max-width: 640px;
+            line-height: 1.7;
+        }
+
+        /* Carousel Container */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--raio);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 0 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .fc-card {
+            background: var(--branco);
+            border-radius: var(--raio);
+            box-shadow: var(--sombra-card);
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all var(--transicao);
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            max-width: 340px;
+        }
+
+        .fc-card:hover {
+            box-shadow: var(--sombra-card-hover);
+            transform: translateY(-4px);
+            border-color: rgba(0,0,0,0.06);
+        }
+
+        .fc-thumb {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            background: var(--cinza-100);
+        }
+
+        .fc-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fc-card:hover .fc-thumb img { transform: scale(1.04); }
+
+        .fc-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(8,31,62,0.15) 0%, rgba(8,31,62,0.6) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity var(--transicao);
+        }
+
+        .fc-thumb:hover .fc-overlay { opacity: 1; }
+
+        .fc-overlay-btn {
+            background: rgba(255,255,255,0.95);
+            color: var(--azul-escuro);
+            border: none;
+            padding: 10px 22px;
+            border-radius: var(--raio-sm);
+            font-size: 12px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform var(--transicao-rapida);
+        }
+
+        .fc-overlay-btn:hover { transform: scale(1.03); }
+
+        .fc-body {
+            padding: 18px 20px 12px;
+            flex: 1;
+        }
+
+        .fc-body h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--cinza-900);
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .fc-body p {
+            font-size: 12.5px;
+            color: var(--cinza-500);
+            line-height: 1.6;
+        }
+
+        .fc-actions {
+            padding: 0 20px 18px;
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .fc-btn {
+            flex: 1;
+            padding: 9px 14px;
+            border-radius: var(--raio-xs);
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all var(--transicao);
+            border: none;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .fc-btn-view {
+            background: var(--cinza-50);
+            color: var(--azul-axiacare);
+            border: 1px solid var(--cinza-200);
+        }
+        .fc-btn-view:hover { background: var(--cinza-100); border-color: var(--cinza-300); }
+
+        .fc-btn-dl {
+            background: linear-gradient(135deg, var(--azul-axiacare), var(--azul-escuro));
+            color: var(--branco);
+        }
+        .fc-btn-dl:hover { opacity: 0.9; }
+
+        /* Carousel Navigation */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--branco);
+            border: 1px solid var(--cinza-200);
+            color: var(--cinza-700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all var(--transicao);
+            font-size: 18px;
+        }
+
+        .carousel-nav:hover {
+            background: var(--cinza-50);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            color: var(--azul-axiacare);
+        }
+
+        .carousel-nav.prev { left: 0; }
+        .carousel-nav.next { right: 0; }
+
+        /* Carousel Dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 28px;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cinza-300);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transicao);
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            background: var(--azul-axiacare);
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .carousel-dot:hover:not(.active) { background: var(--cinza-400); }
+
+        /* Carousel Progress Bar */
+        .carousel-progress {
+            display: flex;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .carousel-progress-bar {
+            width: 120px;
+            height: 2px;
+            background: var(--cinza-200);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .carousel-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--teal), var(--azul-axiacare));
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* ========================================
+           Lightbox — v8.0
+           ======================================== */
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(4,17,31,0.94);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            backdrop-filter: blur(8px);
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lb-wrap {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lb-wrap img {
+            max-width: 100%;
+            max-height: 76vh;
+            border-radius: var(--raio-sm);
+            box-shadow: 0 8px 48px rgba(0,0,0,0.5);
+        }
+
+        .lb-close {
+            position: absolute;
+            top: -48px;
+            right: 0;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.5);
+            font-size: 28px;
+            cursor: pointer;
+            transition: color var(--transicao);
+            padding: 8px;
+        }
+
+        .lb-close:hover { color: #fff; }
+
+        .lb-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transicao);
+            backdrop-filter: blur(8px);
+        }
+
+        .lb-nav:hover { background: rgba(255,255,255,0.15); }
+        .lb-nav.prev { left: -60px; }
+        .lb-nav.next { right: -60px; }
+
+        .lb-meta { margin-top: 20px; text-align: center; }
+        .lb-meta .lb-title { color: #fff; font-weight: 600; font-size: 15px; }
+
+        .lb-meta .lb-dl {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            background: var(--teal);
+            color: var(--azul-profundo);
+            padding: 10px 28px;
+            border-radius: var(--raio-xs);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            transition: background var(--transicao);
+        }
+
+        .lb-meta .lb-dl:hover { background: var(--teal-hover); }
+
+        .lb-meta .lb-counter {
+            margin-top: 8px;
+            color: rgba(255,255,255,0.45);
+            font-size: 11px;
+        }
+
+        /* ========================================
+           Footer Institucional — Premium v8.0
+           ======================================== */
+
+        .footer {
+            background: linear-gradient(160deg, #04111F 0%, var(--azul-profundo) 40%, var(--azul-escuro) 100%);
+            color: rgba(255,255,255,0.6);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 5%, var(--teal) 30%, var(--azul-axiacare) 50%, var(--teal) 70%, transparent 95%);
+            opacity: 0.6;
+        }
+
+        .footer-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 48px 48px 36px;
+        }
+
+        .footer-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .footer-logos img.fl-unimed { height: 48px; object-fit: contain; }
+        .footer-logos img.fl-icds { height: 38px; object-fit: contain; }
+        .footer-logos img.fl-axia { height: 40px; object-fit: contain; opacity: 0.85; }
+
+        .footer-logos .fl-sep {
+            width: 1px;
+            height: 32px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: color var(--transicao);
+        }
+
+        .footer-links a:hover { color: rgba(255,255,255,0.85); }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 28px;
+        }
+
+        .footer-brand { display: flex; flex-direction: column; gap: 2px; }
+        .brand-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.75); }
+        .brand-tagline { font-size: 11px; color: rgba(255,255,255,0.45); font-style: italic; }
+        .footer-copy { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+        /* Spectra Signature */
+        .spectra-sig {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+            transition: opacity var(--transicao);
+        }
+        .spectra-sig:hover { opacity: 1 !important; }
+        .spectra-sig-name {
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .spectra-sig-tm {
+            font-size: 0.6em;
+            vertical-align: super;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+        .spectra-sig-dot { opacity: 0.6; }
+        .spectra-sig-tagline {
+            font-weight: 400;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* Spectra no Auth */
+        .auth-spectra {
+            margin-top: 14px;
+            text-align: center;
+        }
+        .auth-spectra .spectra-sig {
+            font-size: 10px;
+            color: var(--cinza-500);
+            opacity: 0.8;
+            justify-content: center;
+        }
+        .auth-spectra .spectra-sig-name { color: var(--azul-axiacare); }
+        .auth-spectra .spectra-sig:hover { opacity: 1; }
+
+        /* Spectra no Footer */
+        .footer-spectra {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-spectra .spectra-sig {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            opacity: 1;
+            justify-content: center;
+        }
+        .footer-spectra .spectra-sig-name { color: var(--teal); opacity: 0.9; }
+        .footer-spectra .spectra-sig:hover .spectra-sig-name { opacity: 1; }
+
+        /* ========================================
+           Auth Overlay — v8.0
+           ======================================== */
+
+        .auth-wall {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .auth-wall.dismissed {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .auth-blur {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg, #001a33 0%, #000d1a 100%);
+            backdrop-filter: blur(8px);
+        }
+
+        .auth-card {
+            position: relative;
+            background: var(--branco);
+            border-radius: 20px;
+            padding: 48px 40px 36px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: var(--sombra-xl);
+            text-align: center;
+        }
+
+        .auth-logo {
+            height: 56px;
+            margin-bottom: 28px;
+        }
+
+        .auth-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--cinza-900);
+            margin-bottom: 6px;
+        }
+
+        .auth-subtitle {
+            font-size: 13px;
+            color: var(--cinza-400);
+            margin-bottom: 32px;
+        }
+
+        .auth-field {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 14px 48px 14px 18px;
+            border: 1.5px solid var(--cinza-200);
+            border-radius: var(--raio-sm);
+            font-size: 15px;
+            font-family: inherit;
+            color: var(--cinza-800);
+            background: var(--cinza-50);
+            transition: border-color var(--transicao), box-shadow var(--transicao);
+            outline: none;
+        }
+
+        .auth-input:focus {
+            border-color: var(--azul-axiacare);
+            box-shadow: 0 0 0 3px rgba(27,94,159,0.08);
+            background: var(--branco);
+        }
+
+        .auth-input.error {
+            border-color: #ef4444;
+            animation: authShake 0.4s ease;
+        }
+
+        @keyframes authShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .auth-toggle-pw {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--cinza-400);
+            cursor: pointer;
+            padding: 4px;
+            transition: color var(--transicao);
+        }
+
+        .auth-toggle-pw:hover { color: var(--cinza-600); }
+        .auth-toggle-pw svg { width: 20px; height: 20px; }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0052cc, #003d99);
+            color: var(--branco);
+            border: none;
+            border-radius: var(--raio-sm);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: opacity var(--transicao), box-shadow var(--transicao);
+            box-shadow: 0 2px 8px rgba(0,82,204,0.25);
+        }
+
+        .auth-btn:hover { opacity: 0.92; box-shadow: 0 4px 16px rgba(0,82,204,0.35); }
+        .auth-btn:disabled { opacity: 0.7; cursor: wait; }
+        .auth-spinner {
+          display: inline-block; width: 16px; height: 16px;
+          border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff;
+          border-radius: 50%; animation: authSpin 0.6s linear infinite;
+          vertical-align: middle; margin-right: 6px;
+        }
+        @keyframes authSpin { to { transform: rotate(360deg); } }
+
+        .auth-error-msg {
+            font-size: 12px;
+            color: #ef4444;
+            margin-top: 12px;
+            min-height: 18px;
+        }
+
+        .auth-footer-text {
+            margin-top: 24px;
+            font-size: 11px;
+            color: var(--cinza-400);
+            line-height: 1.6;
+        }
+
+        .auth-mailto {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            font-size: 11.5px;
+            color: var(--azul-axiacare);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .auth-mailto:hover { color: var(--azul-escuro); }
+        .auth-mailto svg { width: 14px; height: 14px; }
+
+        .auth-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .auth-logos img { opacity: 0.7; transition: opacity 0.3s ease; }
+        .auth-logos img:hover { opacity: 0.95; }
+        .auth-logos .auth-logo-icds { height: 28px; }
+        .auth-logos .auth-logo-axia { height: 30px; }
+
+        /* ========================================
+           Responsive — Mobile v8.0
+           ======================================== */
+
+        @media (max-width: 768px) {
+            .header-nav { flex-direction: column; gap: 14px; padding: 18px 24px; }
+            .header-left { gap: 14px; flex-wrap: wrap; justify-content: center; }
+            .header-left img.logo-unimed { height: 44px; }
+            .header-left img.logo-icds { height: 34px; }
+            .logo-sep { height: 28px; }
+            .header-right { gap: 12px; }
+            .header-right img.logo-axia { height: 36px; }
+            .header-hero { padding: 12px 24px 48px; }
+            .header-hero h1 { font-size: 28px; }
+            .header-hero .subtitle { font-size: 14px; line-height: 1.7; }
+            .header-meta { flex-direction: column; gap: 4px; padding: 8px 20px; }
+            .header-divider { display: none; }
+            .container { padding: 0 24px; }
+            .notices { margin-top: 24px; margin-bottom: 36px; }
+            .notice { padding: 16px 18px; font-size: 13px; }
+            .notice-icon { width: 32px; height: 32px; border-radius: 8px; }
+            .section-icon { width: 36px; height: 36px; }
+            .section-icon svg { width: 18px; height: 18px; }
+            .eixo-grid { grid-template-columns: 1fr; gap: 14px; }
+            .eixo-card-inner { padding: 24px; }
+            .eixo-desc { font-size: 13px; }
+            .fc-section-bg { padding: 40px 0 48px; }
+            .carousel-slide { padding: 0 16px; flex-direction: column; align-items: center; }
+            .fc-card { max-width: 100%; }
+            .fc-thumb { aspect-ratio: 3/4; }
+            .carousel-nav { display: none; }
+            .lb-nav.prev { left: 8px; }
+            .lb-nav.next { right: 8px; }
+            .lb-nav { width: 40px; height: 40px; font-size: 16px; }
+            .lb-close { top: -40px; }
+            .lb-wrap { max-width: 95vw; }
+            .lb-wrap img { max-height: 70vh; }
+            .footer-inner { padding: 36px 24px 28px; }
+            .footer-top { flex-direction: column; gap: 24px; text-align: center; }
+            .footer-logos { gap: 18px; flex-wrap: wrap; justify-content: center; }
+            .footer-logos img.fl-unimed { height: 40px; }
+            .footer-logos img.fl-icds { height: 32px; }
+            .footer-logos img.fl-axia { height: 34px; }
+            .footer-links { justify-content: center; gap: 20px; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+
+            /* Timeline mobile: vertical */
+            .timeline { flex-direction: column; padding: 0; gap: 0; }
+            .timeline-line { display: none; }
+            .tl-item {
+                flex-direction: row;
+                align-items: center;
+                gap: 16px;
+                padding: 12px 0;
+                position: relative;
+            }
+            .tl-item:not(:last-child)::after {
+                content: '';
+                position: absolute;
+                left: 18px;
+                top: 48px;
+                bottom: -12px;
+                width: 2px;
+                background: var(--cinza-200);
+            }
+            .tl-item.tl-active::after,
+            .tl-item.tl-progress::after {
+                background: linear-gradient(180deg, var(--teal), var(--cinza-200));
+            }
+            .tl-dot { margin-bottom: 0; flex-shrink: 0; }
+            .tl-content-mobile { text-align: left; }
+            .tl-label { text-align: left; }
+            .tl-title { text-align: left; max-width: none; }
+            .tl-status { margin-top: 4px; }
+        }
+
+        @media (max-width: 480px) {
+            .header-nav { padding: 16px 18px; }
+            .header-left img.logo-unimed { height: 40px; }
+            .header-left img.logo-icds { height: 30px; }
+            .header-right img.logo-axia { height: 30px; }
+            .logo-sep { height: 24px; }
+            .header-badge { font-size: 9px; padding: 5px 14px; }
+            .header-hero { padding: 8px 18px 36px; }
+            .header-hero h1 { font-size: 24px; }
+            .header-hero .subtitle { font-size: 13px; line-height: 1.65; }
+            .header-meta { font-size: 10px; }
+            .container { padding: 0 16px; }
+            .eixo-card-inner { padding: 20px; }
+            .eixo-title { font-size: 15px; }
+            .eixo-desc { font-size: 12.5px; line-height: 1.6; }
+            .eixo-icon { width: 48px; height: 48px; border-radius: 12px; }
+            .eixo-icon svg { width: 24px; height: 24px; }
+            .eixo-footer { flex-direction: column; gap: 10px; align-items: flex-start; }
+            .fc-section-bg { padding: 32px 0 40px; }
+            .fc-body { padding: 14px 16px 8px; }
+            .fc-body h4 { font-size: 13.5px; }
+            .fc-body p { font-size: 12px; }
+            .fc-actions { padding: 0 16px 16px; }
+            .fc-btn { padding: 10px 14px; font-size: 12px; min-height: 42px; }
+            .lightbox { padding: 12px; }
+            .lb-wrap { max-width: 100vw; }
+            .lb-wrap img { max-height: 65vh; border-radius: 8px; }
+            .lb-nav.prev { left: 4px; }
+            .lb-nav.next { right: 4px; }
+            .lb-nav { width: 36px; height: 36px; font-size: 15px; }
+            .lb-close { top: -36px; right: -4px; font-size: 24px; }
+            .lb-meta .lb-dl { padding: 10px 24px; font-size: 12px; min-height: 42px; }
+            .footer-inner { padding: 28px 18px 24px; }
+            .footer-logos img.fl-unimed { height: 36px; }
+            .footer-logos img.fl-icds { height: 28px; }
+            .footer-logos img.fl-axia { height: 28px; }
+            .footer-links { gap: 16px; flex-wrap: wrap; }
+            .footer-links a { font-size: 11px; }
+            .auth-card { padding: 36px 24px 28px; border-radius: 18px; margin: 0 16px; }
+            .auth-logo { height: 48px; }
+            .auth-title { font-size: 18px; }
+            .auth-subtitle { font-size: 12px; }
+            .auth-btn { min-height: 48px; font-size: 14px; }
+        }
+
+        @media (max-width: 360px) {
+            .header-nav { padding: 14px 14px; }
+            .header-left img.logo-unimed { height: 36px; }
+            .header-left img.logo-icds { height: 26px; }
+            .header-right img.logo-axia { height: 26px; }
+            .logo-sep { height: 20px; }
+            .header-badge { font-size: 8px; padding: 4px 10px; }
+            .header-hero h1 { font-size: 22px; }
+            .header-hero .subtitle { font-size: 12px; }
+            .container { padding: 0 14px; }
+            .eixo-card-inner { padding: 18px; }
+            .eixo-title { font-size: 14px; }
+            .fc-body h4 { font-size: 13px; }
+            .footer-logos img.fl-unimed { height: 32px; }
+            .footer-logos img.fl-icds { height: 24px; }
+            .footer-logos img.fl-axia { height: 24px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header class="header">
-        <div class="header-inner">
-            <div class="header-left">
-                <img src="assets/axiacare_horizontal_negativo.png" alt="AxiaCare" class="header-logo">
-                <div class="header-divider"></div>
-                <div class="header-text">
-                    <h1>Portal de Entregas</h1>
-                    <p>Unimed Ourinhos</p>
+    <!-- ====== AUTH OVERLAY ====== -->
+    <div class="auth-wall" id="authWall">
+        <div class="auth-blur"></div>
+        <div class="auth-card">
+            <img src="assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="auth-logo">
+            <div class="auth-title">Portal de Entregas</div>
+            <div class="auth-subtitle">Acesso restrito aos stakeholders do projeto</div>
+            <form id="authForm" onsubmit="return handleAuth(event)">
+                <div class="auth-field">
+                    <input type="password" class="auth-input" id="authInput" placeholder="Senha de acesso" autocomplete="off" autofocus>
+                    <button type="button" class="auth-toggle-pw" id="togglePw" onclick="togglePassword()" aria-label="Mostrar senha">
+                        <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
                 </div>
+                <button type="submit" class="auth-btn">Acessar</button>
+                <div class="auth-error-msg" id="authError"></div>
+            </form>
+            <a href="mailto:contato@grupocsv.com?subject=Solicita%C3%A7%C3%A3o%20de%20Acesso%20%E2%80%93%20Portal%20Unimed%20Ourinhos" class="auth-mailto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
+                Solicitar acesso
+            </a>
+            <div class="auth-footer-text">
+                Conte&uacute;do sob curadoria do respons&aacute;vel t&eacute;cnico Guilherme Thom&eacute; | CRM-MG 64193 | RQE 41538<br>
+                AxiaCare&reg; | Grupo CSV
             </div>
-            <img src="assets/icds_horizontal_negativo.png" alt="ICDS" class="header-right-logo">
+            <div class="auth-logos">
+                <a href="https://icds.org.br" target="_blank" rel="noopener"><img src="assets/icds_horizontal_positivo.png" alt="ICDS" class="auth-logo-icds"></a>
+                <a href="https://axcare.app" target="_blank" rel="noopener"><img src="assets/axiacare_horizontal.png" alt="AxiaCare" class="auth-logo-axia"></a>
+            </div>
+            <div class="auth-spectra">
+                <a href="https://spectra.thera.tech" target="_blank" rel="noopener" class="spectra-sig">
+                    <span class="spectra-sig-name">Spectra<span class="spectra-sig-tm">&trade;</span></span>
+                    <span class="spectra-sig-dot">&bull;</span>
+                    <span class="spectra-sig-tagline">Intelig&ecirc;ncia Cl&iacute;nica para Operadoras de Sa&uacute;de</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== HEADER ====== -->
+    <header class="header">
+        <div class="header-accent"></div>
+        <nav class="header-nav">
+            <div class="header-left">
+                <a href="https://www.unimedourinhos.com.br/" target="_blank" rel="noopener"><img src="assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="logo-unimed"></a>
+                <div class="logo-sep"></div>
+                <a href="https://icds.org.br/" target="_blank" rel="noopener"><img src="assets/icds_horizontal_negativo.png" alt="ICDS" class="logo-icds"></a>
+            </div>
+            <div class="header-right">
+                <a href="https://axcare.app" target="_blank" rel="noopener"><img src="assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="logo-axia"></a>
+                <div class="header-badge">Portal de Entregas</div>
+            </div>
+        </nav>
+        <div class="header-hero">
+            <h1>Unimed Ourinhos</h1>
+            <p class="subtitle">
+                Este portal re&uacute;ne as entregas t&eacute;cnicas do projeto conduzido pelo <span class="hl-icds">ICDS</span>, com apoio metodol&oacute;gico e anal&iacute;tico da <span class="hl-axia">AxiaCare&reg;</span>. O trabalho foca em an&aacute;lise estrat&eacute;gica da rede assistencial, efici&ecirc;ncia operacional e sustentabilidade financeira da cooperativa.
+            </p>
+            <div class="header-meta">
+                <span>Unimed Ourinhos Cooperativa de Trabalho M&eacute;dico</span>
+                <div class="header-divider"></div>
+                <span>Registro ANS 31.129-4</span>
+            </div>
         </div>
     </header>
 
-    <!-- MAIN -->
-    <main class="main">
-        <div class="card">
-            <div class="icon-container">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                </svg>
+    <!-- ====== MAIN ====== -->
+    <main class="container">
+
+        <!-- Notices -->
+        <div class="notices">
+            <div class="notice notice-info">
+                <span class="notice-icon">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                </span>
+                <div>Este portal &eacute; de acesso restrito e seu conte&uacute;do est&aacute; sob curadoria do respons&aacute;vel t&eacute;cnico do projeto. Os materiais destinam-se exclusivamente aos stakeholders da consultoria.</div>
+            </div>
+            <div class="notice notice-warn">
+                <span class="notice-icon">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                </span>
+                <div><strong>Entregas em andamento.</strong> Os documentos aqui disponibilizados s&atilde;o vers&otilde;es parciais, sujeitas a revis&atilde;o e complementa&ccedil;&atilde;o ao longo do projeto.</div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-section">
+            <div class="section-header">
+                <div class="section-icon" style="background:rgba(127,191,178,0.12);color:#0d7377;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <span class="section-label">Roadmap do Projeto</span>
+                <div class="section-line"></div>
             </div>
 
-            <h2>Revis&atilde;o T&eacute;cnica de Integridade</h2>
+            <div class="timeline">
+                <div class="timeline-line">
+                    <div class="timeline-progress"></div>
+                </div>
 
-            <p>
-                Este portal est&aacute; temporariamente em atualiza&ccedil;&atilde;o. Estamos conduzindo uma
-                revis&atilde;o t&eacute;cnica de integridade dos dados para assegurar que todas as
-                an&aacute;lises atendam aos padr&otilde;es de precis&atilde;o e governan&ccedil;a
-                exigidos pelo projeto.
-            </p>
+                <div class="tl-item tl-active">
+                    <div class="tl-dot tl-dot-active">
+                        <span class="tl-pulse"></span>
+                        1
+                    </div>
+                    <div class="tl-content-mobile">
+                        <div class="tl-label">Eixo 01</div>
+                        <div class="tl-title">Leitura da Rede Assistencial</div>
+                        <span class="tl-status tl-st-parcial">Entrega Parcial</span>
+                    </div>
+                </div>
 
-            <div class="divider"></div>
+                <div class="tl-item tl-progress">
+                    <div class="tl-dot tl-dot-progress">2</div>
+                    <div class="tl-content-mobile">
+                        <div class="tl-label">Eixo 02</div>
+                        <div class="tl-title">An&aacute;lise de Variabilidade</div>
+                        <span class="tl-status tl-st-dev">Em Desenvolvimento</span>
+                    </div>
+                </div>
 
-            <p>
-                Nosso compromisso &eacute; entregar informa&ccedil;&otilde;es confi&aacute;veis e
-                auditáveis. As entregas ser&atilde;o restabelecidas ap&oacute;s a conclus&atilde;o
-                do processo de valida&ccedil;&atilde;o.
-            </p>
+                <div class="tl-item">
+                    <div class="tl-dot tl-dot-pending">3</div>
+                    <div class="tl-content-mobile">
+                        <div class="tl-label">Eixo 03</div>
+                        <div class="tl-title">Oportunidades e Leitura Integrada</div>
+                        <span class="tl-status tl-st-pending">Pendente</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                Revis&atilde;o em andamento
+        <!-- Relat&oacute;rios T&eacute;cnicos -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-icon si-relatorios">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <span class="section-label">Relat&oacute;rios T&eacute;cnicos</span>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="eixo-grid">
+
+                <!-- Eixo 01 — ATIVO (Entrega Parcial) -->
+                <a href="entregas/eixo-01/index.html" class="eixo-card active eixo-01">
+                    <div class="eixo-card-inner">
+                        <div class="eixo-top">
+                            <div class="eixo-icon i-01">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="16.5"/><line x1="15.5" y1="7.5" x2="8.5" y2="16.5"/><line x1="6" y1="9" x2="6" y2="15"/><line x1="18" y1="9" x2="18" y2="15"/></svg>
+                            </div>
+                            <div class="eixo-badges">
+                                <span class="eixo-num">Eixo 01</span>
+                                <span class="eixo-status st-parcial">Entrega Parcial</span>
+                            </div>
+                        </div>
+                        <div class="eixo-title">Leitura da Rede Assistencial</div>
+                        <div class="eixo-desc">Painel anal&iacute;tico de custos da rede assistencial com mapeamento de prestadores, an&aacute;lise de concentra&ccedil;&atilde;o e distribui&ccedil;&atilde;o de despesas.</div>
+                        <div class="eixo-footer">
+                            <span class="eixo-tag">Atendimentos: Jan/2024 &ndash; Dez/2025</span>
+                            <span class="eixo-link">
+                                Acessar
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Eixo 02 — EM DESENVOLVIMENTO -->
+                <div class="eixo-card in-progress">
+                    <div class="eixo-card-inner">
+                        <div class="eixo-top">
+                            <div class="eixo-icon i-02">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="15" r="2"/><circle cx="12" cy="9" r="2"/><circle cx="17" cy="17" r="2"/><circle cx="9" cy="5" r="1.5"/><circle cx="16" cy="7" r="1.5"/><circle cx="5" cy="10" r="1"/><circle cx="19" cy="12" r="1"/></svg>
+                            </div>
+                            <div class="eixo-badges">
+                                <span class="eixo-num">Eixo 02</span>
+                                <span class="eixo-status st-dev">Em Desenvolvimento</span>
+                            </div>
+                        </div>
+                        <div class="eixo-title">An&aacute;lise de Variabilidade</div>
+                        <div class="eixo-desc">Estudo de variabilidade de custos entre prestadores e quantifica&ccedil;&atilde;o de oportunidades de economia por padroniza&ccedil;&atilde;o.</div>
+                        <div class="eixo-footer">
+                        
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Eixo 03 — Oportunidades e Leitura Integrada -->
+                <div class="eixo-card disabled">
+                    <div class="eixo-card-inner">
+                        <div class="eixo-top">
+                            <div class="eixo-icon i-03">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M7 8V6a5 5 0 0 1 10 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><circle cx="12" cy="16" r="1"/></svg>
+                            </div>
+                            <div class="eixo-badges">
+                                <span class="eixo-num">Eixo 03</span>
+                                <span class="eixo-status st-pending">Pendente</span>
+                            </div>
+                        </div>
+                        <div class="eixo-title">Oportunidades e Leitura Integrada</div>
+                        <div class="eixo-desc">Avalia&ccedil;&atilde;o de impacto financeiro da internaliza&ccedil;&atilde;o de servi&ccedil;os e an&aacute;lise integrada operadora-hospital com identifica&ccedil;&atilde;o de fuga de servi&ccedil;os.</div>
+                        <div class="eixo-footer">
+                        
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </main>
 
-    <!-- FOOTER -->
+    <!-- ====== FLASH CARDS CAROUSEL ====== -->
+    <div class="fc-section-bg">
+        <div class="container">
+            <div class="section" style="margin-bottom:0">
+                <div class="section-header">
+                    <div class="section-icon si-flashcards">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <span class="section-label">Flash Cards</span>
+                    <div class="section-line"></div>
+                </div>
+
+                <p class="fc-intro">Micro entregas visuais para acompanhamento din&acirc;mico do projeto. Cada flash card sintetiza um achado relevante da an&aacute;lise em andamento.</p>
+
+                <div class="carousel" id="fcCarousel">
+                    <button class="carousel-nav prev" onclick="carouselNav(-1)" aria-label="Anterior">&#8249;</button>
+                    <div class="carousel-track" id="carouselTrack">
+
+                        <!-- Slide 1: FC-01-001 -->
+                        <div class="carousel-slide">
+                            <div class="fc-card">
+                                <div class="fc-thumb" onclick="openLightbox(0)">
+                                    <img src="entregas/flash-cards/FC-01-001-v3.png" alt="Flash Card &mdash; An&aacute;lise da Rede" loading="lazy">
+                                    <div class="fc-overlay">
+                                        <button class="fc-overlay-btn">Visualizar em tela cheia</button>
+                                    </div>
+                                </div>
+                                <div class="fc-body">
+                                    <h4>An&aacute;lise da Rede Assistencial</h4>
+                                    <p>Vis&atilde;o geral da rede, distribui&ccedil;&atilde;o de custos e concentra&ccedil;&atilde;o por prestador.</p>
+                                </div>
+                                <div class="fc-actions">
+                                    <button class="fc-btn fc-btn-view" onclick="openLightbox(0)">Visualizar</button>
+                                    <a href="entregas/flash-cards/FC-01-001-v3.png" download class="fc-btn fc-btn-dl">Download</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: FC-01-002 -->
+                        <div class="carousel-slide">
+                            <div class="fc-card">
+                                <div class="fc-thumb" onclick="openLightbox(1)">
+                                    <img src="entregas/flash-cards/FC-01-002-v2.png" alt="Flash Card &mdash; Variabilidade de Pre&ccedil;os" loading="lazy">
+                                    <div class="fc-overlay">
+                                        <button class="fc-overlay-btn">Visualizar em tela cheia</button>
+                                    </div>
+                                </div>
+                                <div class="fc-body">
+                                    <h4>Variabilidade de Pre&ccedil;os entre Setores</h4>
+                                    <p>Nota de outlier identificado. Varia&ccedil;&otilde;es de at&eacute; 74,8x entre setores da mesma operadora.</p>
+                                </div>
+                                <div class="fc-actions">
+                                    <button class="fc-btn fc-btn-view" onclick="openLightbox(1)">Visualizar</button>
+                                    <a href="entregas/flash-cards/FC-01-002-v2.png" download class="fc-btn fc-btn-dl">Download</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3: FC-01-003 -->
+                        <div class="carousel-slide">
+                            <div class="fc-card">
+                                <div class="fc-thumb" onclick="openLightbox(2)">
+                                    <img src="entregas/flash-cards/FC-01-003-v3.png" alt="Flash Card &mdash; Pontos de Aten&ccedil;&atilde;o" loading="lazy">
+                                    <div class="fc-overlay">
+                                        <button class="fc-overlay-btn">Visualizar em tela cheia</button>
+                                    </div>
+                                </div>
+                                <div class="fc-body">
+                                    <h4>Pontos de Aten&ccedil;&atilde;o e Pr&oacute;ximos Eixos</h4>
+                                    <p>Limita&ccedil;&otilde;es da base de dados, achados para verifica&ccedil;&atilde;o e trilhas para os pr&oacute;ximos eixos.</p>
+                                </div>
+                                <div class="fc-actions">
+                                    <button class="fc-btn fc-btn-view" onclick="openLightbox(2)">Visualizar</button>
+                                    <a href="entregas/flash-cards/FC-01-003-v3.png" download class="fc-btn fc-btn-dl">Download</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button class="carousel-nav next" onclick="carouselNav(1)" aria-label="Pr&oacute;ximo">&#8250;</button>
+                </div>
+
+                <div class="carousel-dots" id="carouselDots">
+                    <button class="carousel-dot active" onclick="carouselGo(0)" aria-label="Slide 1"></button>
+                    <button class="carousel-dot" onclick="carouselGo(1)" aria-label="Slide 2"></button>
+                    <button class="carousel-dot" onclick="carouselGo(2)" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-progress">
+                    <div class="carousel-progress-bar">
+                        <div class="carousel-progress-fill" id="carouselProgress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== LIGHTBOX ====== -->
+    <div class="lightbox" id="lightbox">
+        <div class="lb-wrap">
+            <button class="lb-close" onclick="closeLightbox()">&times;</button>
+            <button class="lb-nav prev" onclick="navLightbox(-1)">&#8249;</button>
+            <img id="lb-img" src="" alt="">
+            <button class="lb-nav next" onclick="navLightbox(1)">&#8250;</button>
+            <div class="lb-meta">
+                <div class="lb-title" id="lb-title"></div>
+                <a class="lb-dl" id="lb-dl" href="" download>Download em alta resolu&ccedil;&atilde;o</a>
+                <div class="lb-counter" id="lb-counter"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== FOOTER INSTITUCIONAL ====== -->
     <footer class="footer">
-        <p>AxiaCare&reg; &mdash; Grupo CSV &middot; Cuidado em Sa&uacute;de com Valor, na pr&aacute;tica.</p>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-logos">
+                    <a href="https://www.unimedourinhos.com.br/" target="_blank" rel="noopener"><img src="assets/unimed_ourinhos_logo.png" alt="Unimed Ourinhos" class="fl-unimed"></a>
+                    <div class="fl-sep"></div>
+                    <a href="https://icds.org.br/" target="_blank" rel="noopener"><img src="assets/icds_horizontal_negativo.png" alt="ICDS" class="fl-icds"></a>
+                    <div class="fl-sep"></div>
+                    <a href="https://axcare.app" target="_blank" rel="noopener"><img src="assets/axiacare_horizontal_negativo.png" alt="AxiaCare&reg;" class="fl-axia"></a>
+                </div>
+                <div class="footer-links">
+                    <a href="https://axcare.app" target="_blank" rel="noopener">axcare.app</a>
+                    <a href="https://grupocsv.com" target="_blank" rel="noopener">grupocsv.com</a>
+                    <a href="https://icds.org.br" target="_blank" rel="noopener">icds.org.br</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-brand">
+                    <span class="brand-name">AxiaCare&reg; &mdash; Grupo CSV</span>
+                    <span class="brand-tagline">Cuidados em Sa&uacute;de com Valor</span>
+                </div>
+                <div class="footer-copy">&copy; 2026 Grupo CSV. Todos os direitos reservados.</div>
+            </div>
+            <div class="footer-spectra">
+                <a href="https://spectra.thera.tech" target="_blank" rel="noopener" class="spectra-sig">
+                    <span class="spectra-sig-name">Spectra<span class="spectra-sig-tm">&trade;</span></span>
+                    <span class="spectra-sig-dot">&bull;</span>
+                    <span class="spectra-sig-tagline">Intelig&ecirc;ncia Cl&iacute;nica para Operadoras de Sa&uacute;de</span>
+                </a>
+            </div>
+        </div>
     </footer>
 
+    <!-- ====== SCRIPTS ====== -->
+    <script>
+    /* ====== CAROUSEL ====== */
+    const totalSlides = 3;
+    let currentSlide = 0;
+    let autoPlayInterval = null;
+    let progressInterval = null;
+    const autoPlayDelay = 6000;
+    let progressElapsed = 0;
+
+    function carouselGo(idx) {
+        currentSlide = idx;
+        const track = document.getElementById('carouselTrack');
+        track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+
+        const dots = document.querySelectorAll('.carousel-dot');
+        dots.forEach(function(d, i) {
+            d.classList.toggle('active', i === currentSlide);
+        });
+
+        resetAutoPlay();
+    }
+
+    function carouselNav(dir) {
+        let next = (currentSlide + dir + totalSlides) % totalSlides;
+        carouselGo(next);
+    }
+
+    function startAutoPlay() {
+        progressElapsed = 0;
+        updateProgress();
+
+        progressInterval = setInterval(function() {
+            progressElapsed += 50;
+            updateProgress();
+        }, 50);
+
+        autoPlayInterval = setInterval(function() {
+            carouselNav(1);
+        }, autoPlayDelay);
+    }
+
+    function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        clearInterval(progressInterval);
+        progressElapsed = 0;
+        updateProgress();
+        startAutoPlay();
+    }
+
+    function updateProgress() {
+        var pct = (progressElapsed / autoPlayDelay) * 100;
+        var fill = document.getElementById('carouselProgress');
+        if (fill) fill.style.width = pct + '%';
+    }
+
+    /* Pause on hover */
+    var carousel = document.getElementById('fcCarousel');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', function() {
+            clearInterval(autoPlayInterval);
+            clearInterval(progressInterval);
+        });
+        carousel.addEventListener('mouseleave', function() {
+            startAutoPlay();
+        });
+    }
+
+    /* Touch swipe */
+    var touchStartX = 0;
+    var touchEndX = 0;
+
+    if (carousel) {
+        carousel.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            clearInterval(autoPlayInterval);
+            clearInterval(progressInterval);
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            var diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) { carouselNav(1); }
+                else { carouselNav(-1); }
+            } else {
+                startAutoPlay();
+            }
+        }, { passive: true });
+    }
+
+    /* Start carousel */
+    startAutoPlay();
+
+    /* ====== LIGHTBOX ====== */
+    const fcCards = [
+      { src: 'entregas/flash-cards/FC-01-001-v3.png', title: 'An\u00e1lise da Rede Assistencial' },
+      { src: 'entregas/flash-cards/FC-01-002-v2.png', title: 'Variabilidade de Pre\u00e7os entre Setores' },
+      { src: 'entregas/flash-cards/FC-01-003-v3.png', title: 'Pontos de Aten\u00e7\u00e3o e Pr\u00f3ximos Eixos' }
+    ];
+    let fcIdx = 0;
+
+    function openLightbox(i) {
+      fcIdx = i;
+      render();
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navLightbox(d) {
+      fcIdx = (fcIdx + d + fcCards.length) % fcCards.length;
+      render();
+    }
+
+    function render() {
+      const c = fcCards[fcIdx];
+      document.getElementById('lb-img').src = c.src;
+      document.getElementById('lb-title').textContent = c.title;
+      document.getElementById('lb-dl').href = c.src;
+      document.getElementById('lb-counter').textContent = (fcIdx + 1) + ' de ' + fcCards.length;
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navLightbox(-1);
+      if (e.key === 'ArrowRight') navLightbox(1);
+    });
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    /* ====== AUTH ====== */
+    const AUTH_HASH = '83a40f6323d76084faabc155ce8dd7874f8c75dc1caac8b9bd2a6a2d57ce7d01';
+    const AUTH_KEY = 'axiacare_portal_auth';
+
+    (function checkAuth() {
+      if (sessionStorage.getItem(AUTH_KEY) === AUTH_HASH) {
+        document.getElementById('authWall').classList.add('dismissed');
+      }
+    })();
+
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function handleAuth(e) {
+      e.preventDefault();
+      const input = document.getElementById('authInput');
+      const error = document.getElementById('authError');
+      const btn = e.target.querySelector('.auth-btn');
+      const btnOriginal = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="auth-spinner"></span> Acessando...';
+      error.textContent = '';
+
+      const hash = await sha256(input.value);
+
+      if (hash === AUTH_HASH) {
+        sessionStorage.setItem(AUTH_KEY, AUTH_HASH);
+        document.getElementById('authWall').classList.add('dismissed');
+      } else {
+        input.classList.add('error');
+        error.textContent = 'Senha incorreta.';
+        setTimeout(() => input.classList.remove('error'), 500);
+        input.value = '';
+        input.focus();
+      }
+      btn.disabled = false;
+      btn.innerHTML = btnOriginal;
+      return false;
+    }
+
+    /* ====== PASSWORD TOGGLE ====== */
+    function togglePassword() {
+      const input = document.getElementById('authInput');
+      const icon = document.getElementById('eyeIcon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+      } else {
+        input.type = 'password';
+        icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+      }
+    }
+    </script>
 </body>
 </html>
